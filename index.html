@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+  <link rel="stylesheet" type="text/css" href="css/modePane.css">
+  <link rel="stylesheet" href="css/bandPane.css">
+  <link rel="stylesheet" type="text/css" href="css/valuePane.css">
+  <link rel="stylesheet" type="text/css" href="css/colpick.css">
+  <link rel="stylesheet" type="text/css" href="css/colorPicker.css">
+	<style>
+    body{
+      padding-top:32px;
+    }
+		#test{
+			margin:20px 300px;
+			width:50px;
+			height:50px;
+			background-color:red;
+		}
+	</style>
+</head>
+<body>
+  <div class="color_picker">
+    <section class="mode_pane">
+      <span class="color_mode flat_color"></span>
+      <span class="color_mode linear_gradient"></span>
+      <span class="color_mode radial_gradient"></span>
+      <span class="color_mode pattern_fill"></span>
+      <span class="color_mode transparent_color"></span>
+    </section>
+    <section class="main_pane">
+      <div class="color_panel" style="background-color: rgb(0, 149, 255);">
+        <div class="color_panel_overlay1">
+            <div class="color_panel_overlay2">
+                <div class="colpick_selector_outer" style="left: 156px; top: 0px;">
+                    <div class="colpick_selector_inner"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="band_pane">
+        <div class="color_bands">
+          <div class="color_band">
+            <span id="color_band_select"></span>
+          </div>
+          <div class="opacity_band">
+            <span id="opacity_band_select"></span>
+          </div>
+        </div>
+        <div id="color_preview"></div>
+      </div>
+      <div class="value_pane">
+        <div class="color_value Hex_value">
+          <input type="text" maxlength="6" size="8" value="2253BB">
+          <label for="">Hex</label>
+        </div>
+        <div class="color_value r_value">
+          <input type="text" maxlength="6" size="3" value="34">
+          <label for="">R</label>
+        </div>
+        <div class="color_value g_value">
+          <input type="text" maxlength="6" size="3" value="83">
+          <label for="">G</label>
+        </div>
+        <div class="color_value b_value">
+          <input type="text" maxlength="6" size="3" value="187">
+          <label for="">B</label>
+        </div>
+        <div class="color_value a_value">
+          <input type="text" maxlength="6" size="3" value="100">
+          <label for="">A</label>
+        </div>
+      </div>
+    </section>
+    <section class="color_bar">
+      <div class="history_pane">
+        <div class="colpick_prev1 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev2 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev3 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev4 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev5 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev6 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div id="colpick_transparent" class="colpick_prev"></div>
+      </div>
+      <div id="colpick_submit" class="colpick_field">OK</div>
+    </section>
+  </div>
+	
+</div>
+
+	<div id="test"></div>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/colpick.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#test').colpick();
+		})
+	</script>
+</body>
+</html>

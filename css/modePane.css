@@ -1,0 +1,78 @@
+.mode_pane{
+  text-align: center;
+  width:100%;
+}
+.color_mode{
+  display:inline-block;
+  width:20px;
+  height:20px;
+  margin:0 4px;
+  border-radius: 10%;
+  border:1px solid #888;
+}
+.mode_pane .pattern_fill{
+}
+.flat_color{
+  margin-left: 0;
+  background-color:#CCC;
+  border-width:0;
+}
+.flat_color:hover{
+  background-color:#555;
+}
+.flat_color .active{
+  background-image: linear-gradient(to bottom, rgb(65,155,249), rgb(65,155,249));
+}
+.transparent_color{
+  background-image: 
+    linear-gradient(to bottom, rgba(65,155,249,0.5), rgba(65,155,249,0.5)),
+    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #555), color-stop(.25, transparent), to(transparent)),
+    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #555), color-stop(.25, transparent), to(transparent)),
+    -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #555)),
+    -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #555));
+}
+.transparent_color:hover{
+  background-color:rgba(0, 0, 0, 0.5);
+}
+.linear_gradient{
+  background: linear-gradient(to bottom, #EEE, #555);
+}
+.linear_gradient:hover{
+  background: linear-gradient(to bottom, #EEE, #000);
+}
+.radial_gradient{
+  background: radial-gradient(#FFF, #888, #333);
+}
+.radial_gradient:hover{
+  background: radial-gradient(#FFF, #888, #000);
+}
+.mode_pane .pattern_fill{
+    background-size: 6px 6px; 
+    margin-right: 0;
+}
+.pattern_fill{
+  background-image: 
+   /* horizontal */
+   -webkit-gradient(linear, 0 0, 0 100%, 
+    color-stop(.5, transparent), 
+    color-stop(.5, rgba(64, 64, 64, .5)), 
+    to(rgba(64, 64, 64, .5))),
+     /*vertical*/
+   -webkit-gradient(linear, 0 0, 100% 0, 
+    color-stop(.5, transparent), 
+    color-stop(.5, rgba(64, 64, 64, .5)),
+     to(rgba(64, 64, 64, .5)));
+}
+.pattern_fill:hover{
+  background-image: 
+   /* horizontal */
+   -webkit-gradient(linear, 0 0, 0 100%, 
+    color-stop(.5, transparent), 
+    color-stop(.5, rgba(0, 0, 0, .5)), 
+    to(rgba(0, 0, 0, .5))),
+   /*vertical*/
+   -webkit-gradient(linear, 0 0, 100% 0, 
+    color-stop(.5, transparent), 
+    color-stop(.5, rgba(0, 0, 0, .5)),
+     to(rgba(0, 0, 0, .5)));
+}
