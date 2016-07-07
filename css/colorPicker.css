@@ -166,19 +166,4 @@
   /* font-size:12px; */
   border-radius: 3px;
 }
-/* #transparent_value{
-  -webkit-appearance: none !important;
-  outline: none;
-  background-image: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
-}
-#transparent_value::-webkit-slider-thumb {
-    -webkit-appearance: none !important;
-    cursor: default;
-    top: 1px;
-    height: 10px;
-    width: 10px;
-    background: rgba(255,255,255,0.2);
-    border:1px solid white;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 -1px 1px black inset;
-} */
+

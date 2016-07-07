@@ -29,7 +29,7 @@
       <span class="color_mode pattern_fill"></span>
       <span class="color_mode transparent_color"></span>
     </section>
-    <section class="main_pane">
+    <section id="main_pane">
       <div class="color_panel" style="background-color: rgb(0, 149, 255);">
         <div class="color_panel_overlay1">
             <div class="color_panel_overlay2">
@@ -87,14 +87,12 @@
     </section>
   </div>
 	
-</div>
-
 	<div id="test"></div>
 	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/colpick.js"></script>
+  <script src="js/color-picker.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('#test').colpick();
+			$('#test').colorPick();
 		})
 	</script>
 </body>
