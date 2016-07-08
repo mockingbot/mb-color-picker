@@ -14,6 +14,7 @@
 	border-radius: 5px;
   padding:7px;
   user-select: none;
+  -webkit-user-select: none;
 }
 .main_pane{
   width: 100%;
