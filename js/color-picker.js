@@ -10,6 +10,7 @@
                 </div>
             </div>
         </div>
+        <span id="color_point"></span>
       </div>
       <div class="band_pane">
         <div class="color_bands">
@@ -48,48 +49,100 @@
     //initial flatPicker when flat mode is choosed
     init(options){
       this.initDom(options);
-      this.pane = $('#main_pane')
+      this.pane = $('#main_pane');
+      this.colorPanel = this.pane.find('.color_panel');
+      this.point = this.pane.find('#color_point');
+      //slide band      
       this.colorBand = this.pane.find('.color_band');
-      this.colorBandWidth = this.colorBand.width();
       this.opacityBand = this.pane.find('.opacity_band');
-      
+      //slide band
       this.colorBtn = $('#color_band_select');
-      this.colorBtnWidth = this.colorBtn.width();
       this.opacityBtn = $('#opacity_band_select');
 
+      this.btnWidth = this.colorBtn.width();
+      this.bandWidth = this.colorBand.width();
+      this.panelWidth = this.colorPanel.width();
+      this.panelHeight = this.colorPanel.height();
+
       this.initEvent();
-      this.renderColBand(options.colBandValue || 0);
+      this.state = {
+        colBandValue: options.colBandValue || 0,
+        opaBandValue: options.opaBandValue || 0,
+        panelLeft: options.panelLeft || 0,
+        panelTop: options.panelTop || 0
+      }
+      this.render();
     },
     initDom(){
       //create a dom node in memory rather than page by template
       var tpl = $(this.template);
       //do sth. on template by options
-      // tpl.find().html('123123123123')
       
       //fill tab content with new template
       $('#main_pane').html(tpl)
     },
     initEvent(){
-      var pane = $('#main_pane')
-      var col_select = pane.find('.color_band');
-      var opc_select = pane.find('#opacity_band_select');
-      this.colorBand.mousedown(this.downColBand.bind(this));
-      this.opacityBand.mousedown(this.downOpaBand.bind(this));
-      opc_select.mousedown(function(event) {
-        console.log("msg2")
+      // this.colorBand.mousedown(this.downColBand.bind(this));
+      this.colorBand.mousedown(this.downBand.bind(this, this.colorBand, 'colBandValue'));
+      this.opacityBand.mousedown(this.downBand.bind(this, this.opacityBand, 'opaBandValue'));
+      this.colorPanel.mousedown(this.downPanel.bind(this));
+    },
+    render(){
+      this.renderColBand();
+      this.renderOpaBand();
+      this.renderPanel();
+    },
+    renderColBand(){
+      var offsetX = this.state.colBandValue;
+      this.colorBtn.css('left', offsetX);
+      var percent = offsetX == 0 ? 100 : 360 - 360 * offsetX / (this.bandWidth - this.btnWidth);
+      console.log('color: ',percent)
+    },
+    renderOpaBand(){
+      var offsetX = this.state.opaBandValue;
+      // console.log(offsetX)
+      this.opacityBtn.css('left', offsetX);
+      var percent = offsetX == 0 ? 100 : 360 - 360 * offsetX / (this.bandWidth - this.btnWidth);
+      console.log('opacity: ',percent)
+    },
+    renderPanel(){
+      var offsetX = this.state.panelLeft;
+      var offsetY = this.state.panelTop;
+      this.point.css({
+        left: offsetX,
+        top: offsetY
+      });
+
+      console.log(offsetX, offsetY)
+    },
+    //event是最后一个参数
+    downBand(band, propName, e){
+      this.moveBand(band, propName, e)
+
+      $(document).mousemove(this.moveBand.bind(this, band, propName));
+      $(document).one('mouseup',function(){
+        $(document).off('mousemove');
+        /* 这里做持久化 */
+        // ....
       });
     },
-    renderColBand(offsetX){
-      // 入口判断,发生变化再render
-      // options里 关于色带,存left就可以了,内部再计算
-      if(offsetX != this.colBandValue){
-        this.colBandValue = offsetX;
-        this.colorBtn.css('left', offsetX);
-        var percent = 360 - 360 * offsetX / (this.colorBandWidth - this.colorBtnWidth);
-        console.log(percent)
+    moveBand(band, propName, e){
+      var pageX = e.pageX;
+      var left = band.offset().left;
+      //小于0, 则置0
+      var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
+      //大于band的宽度,则置为band的宽度
+      if(offsetX + this.btnWidth > this.bandWidth){
+        offsetX = this.bandWidth - this.btnWidth;
       }
-      
+      // console.log(offsetX)
+      //re-render if need
+      if(offsetX != this.state[propName]){
+        this.state[propName] = offsetX
+        this.render();  
+      }
     },
+  /*
     downColBand(e){
       $(document).mousemove(this.moveColBand.bind(this));
       $(document).one('mouseup',this.upColBand.bind(this));
@@ -97,20 +150,75 @@
     moveColBand(e){
       var pageX = e.pageX;
       var left = this.colorBand.offset().left;
-      var offsetX = pageX - left;
-      if(offsetX <= 0){
-        offsetX = 0;
-      }else if(offsetX + this.colorBtnWidth > this.colorBandWidth){
-        offsetX = this.colorBandWidth - this.colorBtnWidth;
+      //小于0, 则置0
+      var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
+      //大于band的宽度,则置为band的宽度
+      if(offsetX + this.btnWidth > this.bandWidth){
+        offsetX = this.bandWidth - this.btnWidth;
       }
-
-      this.renderColBand(offsetX);
+      console.log(offsetX)
+      //re-render if need
+      if(offsetX != this.state.colBandValue){
+        this.state.colBandValue = offsetX
+        this.render();  
+      }
     },
     upColBand(e){
       $(document).off('mousemove');
       console.log('cancel');
     },
-    downOpaBand(){},
+    downOpaBand(e){
+      $(document).mousemove(this.moveOpaBand.bind(this));
+      $(document).one('mouseup',this.upOpaBand.bind(this));
+    },
+    moveOpaBand(e){
+      var pageX = e.pageX;
+      var left = this.opacityBand.offset().left;
+      var offsetX = pageX - left;
+      if(offsetX <= 0){
+        offsetX = 0;
+      }else if(offsetX + this.opacityBtnWidth > this.opacityBandWidth){
+        offsetX = this.opacityBandWidth - this.opacityBtnWidth;
+      }
+      this.renderOpaBand(offsetX);
+    },
+    upOpaBand(e){
+      $(document).off('mousemove');
+      console.log('cancel');
+    },
+  */
+    downPanel(e){
+      this.movePanel(e)
+      $(document).mousemove(this.movePanel.bind(this));
+      $(document).one('mouseup',function(){
+        $(document).off('mousemove');
+        /* 这里做持久化 */
+        // ....
+      }.bind(this));
+    },
+    movePanel(e){
+      var pageX = e.pageX;
+      var pageY = e.pageY;
+      var left = this.colorPanel.offset().left;
+      var top = this.colorPanel.offset().top;
+      var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
+      var offsetY = (pageY - top) > 0 ? (pageY - top) : 0;
+      if(offsetX > this.panelWidth){
+        offsetX = this.panelWidth;
+      }
+      if(offsetY > this.panelHeight){
+        offsetY = this.panelHeight;
+      }
+      if(offsetX != this.state.panelLeft || offsetY != this.state.panelTop){
+        this.state.panelLeft = offsetX
+        this.state.panelTop = offsetY
+        this.render();
+      }
+    },
+    upPanel(e){
+      
+      console.log('cancel');
+    },
     //destroy flatPicker when other mode is choosed
     destroy(){
 
@@ -307,5 +415,3 @@
   };
   
 }(jQuery))
-  
-})

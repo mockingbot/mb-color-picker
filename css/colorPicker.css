@@ -21,12 +21,13 @@
 }
 /* .color_pane */
 .color_panel{
+  position:relative;
   width: 100%;
   height: 147px;
   margin:8px 0 4px;
   overflow: hidden;
   border: 1px solid #aaa;
-  cursor: crosshair;
+  /* cursor: crosshair; */
   border-radius:3px;
 }
 .color_panel_overlay1 {
@@ -52,6 +53,18 @@
   background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+/* the tiny circle to pick color */
+#color_point{
+  position:absolute;
+  width:8px;
+  height:8px;
+  margin:-4px;
+  box-shadow: 0 0 1px #000, 0 0 1px #000 inset;
+  border:1px solid #FFF;
+  border-radius:50%;
+  top:0;
+  left: 0;
 }
 .colpick_selector_outer {
   position: absolute;

@@ -26,7 +26,7 @@
 }
 #color_band_select, #opacity_band_select{
   position:absolute;
-  width:5px;
+  width:6px;
   height:100%;
   background-color:#FFF;
   border-radius:2px;
