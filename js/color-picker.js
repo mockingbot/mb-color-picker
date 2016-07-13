@@ -5,12 +5,9 @@
       <div class="color_panel" style="background-color: rgb(0, 149, 255);">
         <div class="color_panel_overlay1">
             <div class="color_panel_overlay2">
-                <div class="colpick_selector_outer" style="left: 156px; top: 0px;">
-                    <div class="colpick_selector_inner"></div>
-                </div>
+                <span id="color_point"></span>
             </div>
         </div>
-        <span id="color_point"></span>
       </div>
       <div class="band_pane">
         <div class="color_bands">
@@ -58,6 +55,7 @@
       //slide band
       this.colorBtn = $('#color_band_select');
       this.opacityBtn = $('#opacity_band_select');
+      this.preview = $('#color_preview')
 
       this.btnWidth = this.colorBtn.width();
       this.bandWidth = this.colorBand.width();
@@ -67,10 +65,11 @@
       this.initEvent();
       this.state = {
         colBandValue: options.colBandValue || 0,
-        opaBandValue: options.opaBandValue || 0,
-        panelLeft: options.panelLeft || 0,
+        opaBandValue: options.opaBandValue || 165,
+        panelLeft: options.panelLeft || 202,
         panelTop: options.panelTop || 0
       }
+      this.hsb = {};
       this.render();
     },
     initDom(){
@@ -95,15 +94,20 @@
     renderColBand(){
       var offsetX = this.state.colBandValue;
       this.colorBtn.css('left', offsetX);
-      var percent = offsetX == 0 ? 100 : 360 - 360 * offsetX / (this.bandWidth - this.btnWidth);
-      console.log('color: ',percent)
+      this.hsb.h = 360 - (offsetX * 360 * (1 / (this.bandWidth - this.btnWidth))) >> 0;
+      var panelColor = '#' + hsbToHex({
+        h: this.hsb.h,
+        s: 100,
+        b: 100
+      });
+      this.colorPanel.css('backgroundColor', panelColor);
+      // console.log('h: ',this.hsb.h)
     },
     renderOpaBand(){
       var offsetX = this.state.opaBandValue;
-      // console.log(offsetX)
       this.opacityBtn.css('left', offsetX);
-      var percent = offsetX == 0 ? 100 : 360 - 360 * offsetX / (this.bandWidth - this.btnWidth);
-      console.log('opacity: ',percent)
+      this.opacity = (offsetX * (1 / (this.bandWidth - this.btnWidth))).toFixed(2);
+      // console.log('opacity: ',this.opacity)
     },
     renderPanel(){
       var offsetX = this.state.panelLeft;
@@ -112,8 +116,15 @@
         left: offsetX,
         top: offsetY
       });
+      this.hsb.s = (offsetX * 100 * (1 / this.panelWidth)) >> 0;
+      this.hsb.b = 100 - (offsetY * 100 * (1 / this.panelHeight)) >> 0;
+      // console.log(this.hsb.s, this.hsb.b)
+      // console.log(hsbToRgb(this.hsb))
+      var rgb = hsbToRgb(this.hsb);
+      var rgba = 'rgba('+rgb.r+','+rgb.g+','+rgb.b+','+this.opacity+')';
+      console.log(rgba)
+      this.preview.css('backgroundColor', rgba)
 
-      console.log(offsetX, offsetY)
     },
     //event是最后一个参数
     downBand(band, propName, e){
@@ -316,6 +327,7 @@
       initEvent: function(){
         var modeBtns = $('.color_mode')
         var main_pane = $('#main_pane')
+        $(modeBtns[this.modeNum]).addClass('active')
         //bind click event on mode buttons
         modeBtns.each(function(modeNum, el) {
           

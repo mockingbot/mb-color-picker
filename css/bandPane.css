@@ -39,7 +39,7 @@
   background:linear-gradient(to right,transparent,#2253BB);
 }
 #opacity_band_select{
-  left:70px;
+  left:165px;
 }
 #color_preview{
   display:inline-block;
@@ -47,5 +47,8 @@
   height:100%;
   margin-left:2%;
   background-color:#3A5A8A;
+  border:1px solid #bbb;
   border-radius:4px;
+  background-size:10px;
+  background-image:-webkit-gradient(linear, 0 0, 0 100%,      color-stop(.5, transparent),      color-stop(.5, rgba(64, 64, 64, .5)),      to(rgba(64, 64, 64, .5))),      /*vertical*/    -webkit-gradient(linear, 0 0, 100% 0,      color-stop(.5, transparent),      color-stop(.5, rgba(64, 64, 64, .5)),      to(rgba(64, 64, 64, .5)))
 }
