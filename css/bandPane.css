@@ -41,14 +41,24 @@
 #opacity_band_select{
   left:165px;
 }
-#color_preview{
+.color_preview_layer{
   display:inline-block;
   width:26px;
   height:100%;
   margin-left:2%;
+  border:1px solid #b1b1b1;
+  border-radius:3px;
+  overflow:hidden;
+  background-repeat:repeat-y;
+  background-size:8px 16px;
+  background-position: 0px 8px, 8px 0px, 16px 8px;
+  background-image: linear-gradient(#FFF 50%, #D1D1D1 50%, #D1D1D1),
+                    linear-gradient(#FFF 50%, #D1D1D1 50%, #D1D1D1),
+                    linear-gradient(#FFF 50%, #D1D1D1 50%, #D1D1D1);
+}
+#color_preview{
+  width:100%;
+  height:100%;
   background-color:#3A5A8A;
-  border:1px solid #bbb;
-  border-radius:4px;
-  background-size:10px;
-  background-image:-webkit-gradient(linear, 0 0, 0 100%,      color-stop(.5, transparent),      color-stop(.5, rgba(64, 64, 64, .5)),      to(rgba(64, 64, 64, .5))),      /*vertical*/    -webkit-gradient(linear, 0 0, 100% 0,      color-stop(.5, transparent),      color-stop(.5, rgba(64, 64, 64, .5)),      to(rgba(64, 64, 64, .5)))
+  /* background-position:8px 8px; */
 }

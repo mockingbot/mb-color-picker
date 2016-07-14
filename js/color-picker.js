@@ -18,7 +18,9 @@
             <span id="opacity_band_select"></span>
           </div>
         </div>
-        <div id="color_preview"></div>
+        <div class="color_preview_layer">
+          <div id="color_preview"></div>
+        </div>
       </div>
       <div class="value_pane">
         <div class="color_value Hex_value">
