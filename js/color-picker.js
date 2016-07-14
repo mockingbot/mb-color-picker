@@ -1,280 +1,87 @@
 (function($){
   var mainHtml = `
-  <div class="color_picker">
-    <section class="mode_pane">
-      <span class="color_mode flat_color"></span>
-      <span class="color_mode linear_gradient"></span>
-      <span class="color_mode radial_gradient"></span>
-      <span class="color_mode pattern_fill"></span>
-      <span class="color_mode transparent_color"></span>
-    </section>
-    <section id="main_pane">
-      
-    </section>
-    <section class="color_bar">
-      <div class="history_pane">
-        <div class="colpick_prev1 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
-        <div class="colpick_prev2 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
-        <div class="colpick_prev3 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
-        <div class="colpick_prev4 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
-        <div class="colpick_prev5 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
-        <div class="colpick_prev6 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
-        <div id="colpick_transparent" class="colpick_prev"></div>
-      </div>
-      <div id="colpick_submit" class="colpick_field">OK</div>
-    </section>
-  </div>`;
+    <div class="color_picker">
+      <section class="mode_pane">
+        <span class="color_mode flat_color"></span>
+        <span class="color_mode linear_gradient"></span>
+        <span class="color_mode radial_gradient"></span>
+        <span class="color_mode pattern_fill"></span>
+        <span class="color_mode transparent_color"></span>
+      </section>
+      <section id="main_pane">
+        <div class="color_panel" style="background-color: rgb(0, 149, 255);">
+          <div class="color_panel_overlay1">
+              <div class="color_panel_overlay2">
+                  <span id="color_point"></span>
+              </div>
+          </div>
+        </div>
+        <div class="band_pane">
+          <div class="color_bands">
+            <div class="color_band">
+              <span id="color_band_select"></span>
+            </div>
+            <div class="opacity_band">
+              <span id="opacity_band_select"></span>
+            </div>
+          </div>
+          <div class="color_preview_layer">
+            <div id="color_preview"></div>
+          </div>
+        </div>
+        <div class="value_pane">
+          <div class="color_value Hex_value">
+            <input type="text" maxlength="6" size="7" value="2253BB">
+            <label for="">Hex</label>
+          </div>
+          <div class="color_value r_value">
+            <input type="text" maxlength="6" size="3" value="34">
+            <label for="">R</label>
+          </div>
+          <div class="color_value g_value">
+            <input type="text" maxlength="6" size="3" value="83">
+            <label for="">G</label>
+          </div>
+          <div class="color_value b_value">
+            <input type="text" maxlength="6" size="3" value="187">
+            <label for="">B</label>
+          </div>
+          <div class="color_value a_value">
+            <input type="text" maxlength="6" size="4" value="100">
+            <label for="">A</label>
+          </div>
+        </div>
+      </section>
+      <section class="color_bar">
+        <div class="history_pane">
+          <div class="colpick_prev1 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+          <div class="colpick_prev2 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+          <div class="colpick_prev3 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+          <div class="colpick_prev4 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+          <div class="colpick_prev5 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+          <div class="colpick_prev6 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+          <div id="colpick_transparent" class="colpick_prev"></div>
+        </div>
+        <div id="colpick_submit" class="colpick_field">OK</div>
+      </section>
+      <section class="color_show"></section>
+    </div>`;
 
   var flatPicker = {
-    template : `
-      <div class="color_panel" style="background-color: rgb(0, 149, 255);">
-        <div class="color_panel_overlay1">
-            <div class="color_panel_overlay2">
-                <span id="color_point"></span>
-            </div>
-        </div>
-      </div>
-      <div class="band_pane">
-        <div class="color_bands">
-          <div class="color_band">
-            <span id="color_band_select"></span>
-          </div>
-          <div class="opacity_band">
-            <span id="opacity_band_select"></span>
-          </div>
-        </div>
-        <div class="color_preview_layer">
-          <div id="color_preview"></div>
-        </div>
-      </div>
-      <div class="value_pane">
-        <div class="color_value Hex_value">
-          <input type="text" maxlength="6" size="7" value="2253BB">
-          <label for="">Hex</label>
-        </div>
-        <div class="color_value r_value">
-          <input type="text" maxlength="6" size="3" value="34">
-          <label for="">R</label>
-        </div>
-        <div class="color_value g_value">
-          <input type="text" maxlength="6" size="3" value="83">
-          <label for="">G</label>
-        </div>
-        <div class="color_value b_value">
-          <input type="text" maxlength="6" size="3" value="187">
-          <label for="">B</label>
-        </div>
-        <div class="color_value a_value">
-          <input type="text" maxlength="6" size="4" value="100">
-          <label for="">A</label>
-        </div>
-      </div>
-      <section class="color_show">123</section>
-    `,
     //initial flatPicker when flat mode is choosed
     init(options){
-      this.initDom(options);
-      this.pane = $('#main_pane');
-      this.colorPanel = this.pane.find('.color_panel');
-      this.point = this.pane.find('#color_point');
-      //slide band      
-      this.colorBand = this.pane.find('.color_band');
-      this.opacityBand = this.pane.find('.opacity_band');
-      //slide band
-      this.colorBtn = $('#color_band_select');
-      this.opacityBtn = $('#opacity_band_select');
-      this.preview = $('#color_preview');
-
-      this.hexBox = this.pane.find('.Hex_value input');
-      this.rBox = this.pane.find('.r_value input');
-      this.gBox = this.pane.find('.g_value input');
-      this.bBox = this.pane.find('.b_value input');
-      this.aBox = this.pane.find('.a_value input');
-      this.showPanel = this.pane.find('.color_show');
-
-      this.btnWidth = this.colorBtn.width();
-      this.bandWidth = this.colorBand.width();
-      this.panelWidth = this.colorPanel.width();
-      this.panelHeight = this.colorPanel.height();
-
-      this.initEvent();
       this.state = {
         colBandValue: options.colBandValue || 0,
         opaBandValue: options.opaBandValue || 165,
         panelLeft: options.panelLeft || 202,
         panelTop: options.panelTop || 0
       }
-      this.hsb = {};
-      this.render();
+      this.previewPanel = $('color_show');
     },
-    initDom(){
-      //create a dom node in memory rather than page by template
-      var tpl = $(this.template);
-      //do sth. on template by options
-      
-      //fill tab content with new template
-      $('#main_pane').html(tpl)
-    },
-    initEvent(){
-      // this.colorBand.mousedown(this.downColBand.bind(this));
-      this.colorBand.mousedown(this.downBand.bind(this, this.colorBand, 'colBandValue'));
-      this.opacityBand.mousedown(this.downBand.bind(this, this.opacityBand, 'opaBandValue'));
-      this.colorPanel.mousedown(this.downPanel.bind(this));
-    },
-    render(){
-      this.renderColBand();
-      this.renderOpaBand();
-      this.renderPanel();
-      this.renderBox();
-    },
-    renderBox(){
-      this.hexBox.val(this.hex)
-      this.rBox.val(this.rgb.r)
-      this.gBox.val(this.rgb.g)
-      this.bBox.val(this.rgb.b)
-      this.aBox.val(this.opacity)
-    },
-    renderColBand(){
-      var offsetX = this.state.colBandValue;
-      this.colorBtn.css('left', offsetX);
-      this.hsb.h = 360 - (offsetX * 360 * (1 / (this.bandWidth - this.btnWidth))) >> 0;
-      var panelColor = '#' + hsbToHex({
-        h: this.hsb.h,
-        s: 100,
-        b: 100
-      });
-      this.colorPanel.css('backgroundColor', panelColor);
-      // console.log('h: ',this.hsb.h)
-    },
-    renderOpaBand(){
-      var offsetX = this.state.opaBandValue;
-      this.opacityBtn.css('left', offsetX);
-      this.opacity = (offsetX * (1 / (this.bandWidth - this.btnWidth))).toFixed(2);
-      // console.log('opacity: ',this.opacity)
-    },
-    renderPanel(){
-      var offsetX = this.state.panelLeft;
-      var offsetY = this.state.panelTop;
-      this.point.css({
-        left: offsetX,
-        top: offsetY
-      });
-      this.hsb.s = (offsetX * 100 * (1 / this.panelWidth)) >> 0;
-      this.hsb.b = 100 - (offsetY * 100 * (1 / this.panelHeight)) >> 0;
-      var rgb = hsbToRgb(this.hsb);
-      var hex = rgbToHex(rgb);
-      var rgba = 'rgba('+rgb.r+','+rgb.g+','+rgb.b+','+this.opacity+')';
-      var gradient = `linear-gradient(to right, transparent, #${hex})`;
-      this.rgb = rgb;
-      this.hex = hex;
-      this.rgba = rgba;
-      this.opacityBand.css('backgroundImage', gradient)
-      this.preview.css('backgroundColor', rgba)
-      this.showPanel.css('backgroundColor', this.rgba);
-    },
-    //event是最后一个参数
-    downBand(band, propName, e){
-      this.moveBand(band, propName, e)
-
-      $(document).mousemove(this.moveBand.bind(this, band, propName));
-      $(document).one('mouseup',function(){
-        $(document).off('mousemove');
-        /* 这里做持久化 */
-        // ....
-      });
-    },
-    moveBand(band, propName, e){
-      var pageX = e.pageX;
-      var left = band.offset().left;
-      //小于0, 则置0
-      var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
-      //大于band的宽度,则置为band的宽度
-      if(offsetX + this.btnWidth > this.bandWidth){
-        offsetX = this.bandWidth - this.btnWidth;
-      }
-      // console.log(offsetX)
-      //re-render if need
-      if(offsetX != this.state[propName]){
-        this.state[propName] = offsetX
-        this.render();  
-      }
-    },
-  /*
-    downColBand(e){
-      $(document).mousemove(this.moveColBand.bind(this));
-      $(document).one('mouseup',this.upColBand.bind(this));
-    },
-    moveColBand(e){
-      var pageX = e.pageX;
-      var left = this.colorBand.offset().left;
-      //小于0, 则置0
-      var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
-      //大于band的宽度,则置为band的宽度
-      if(offsetX + this.btnWidth > this.bandWidth){
-        offsetX = this.bandWidth - this.btnWidth;
-      }
-      console.log(offsetX)
-      //re-render if need
-      if(offsetX != this.state.colBandValue){
-        this.state.colBandValue = offsetX
-        this.render();  
-      }
-    },
-    upColBand(e){
-      $(document).off('mousemove');
-      console.log('cancel');
-    },
-    downOpaBand(e){
-      $(document).mousemove(this.moveOpaBand.bind(this));
-      $(document).one('mouseup',this.upOpaBand.bind(this));
-    },
-    moveOpaBand(e){
-      var pageX = e.pageX;
-      var left = this.opacityBand.offset().left;
-      var offsetX = pageX - left;
-      if(offsetX <= 0){
-        offsetX = 0;
-      }else if(offsetX + this.opacityBtnWidth > this.opacityBandWidth){
-        offsetX = this.opacityBandWidth - this.opacityBtnWidth;
-      }
-      this.renderOpaBand(offsetX);
-    },
-    upOpaBand(e){
-      $(document).off('mousemove');
-      console.log('cancel');
-    },
-  */
-    downPanel(e){
-      this.movePanel(e)
-      $(document).mousemove(this.movePanel.bind(this));
-      $(document).one('mouseup',function(){
-        $(document).off('mousemove');
-        /* 这里做持久化 */
-        // ....
-      }.bind(this));
-    },
-    movePanel(e){
-      var pageX = e.pageX;
-      var pageY = e.pageY;
-      var left = this.colorPanel.offset().left;
-      var top = this.colorPanel.offset().top;
-      var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
-      var offsetY = (pageY - top) > 0 ? (pageY - top) : 0;
-      if(offsetX > this.panelWidth){
-        offsetX = this.panelWidth;
-      }
-      if(offsetY > this.panelHeight){
-        offsetY = this.panelHeight;
-      }
-      if(offsetX != this.state.panelLeft || offsetY != this.state.panelTop){
-        this.state.panelLeft = offsetX
-        this.state.panelTop = offsetY
-        this.render();
-      }
-    },
-    upPanel(e){
-      
-      console.log('cancel');
+    render(state){
+      console.log(state)
+      var cssValue = state.cssValue;
+      this.previewPanel.css('backgroundImage', cssValue);
     },
     //destroy flatPicker when other mode is choosed
     destroy(){
@@ -282,59 +89,79 @@
     }
   }
   var linearPicker = {
-    template : `
-      <div style="height:200px;font-size:14px;">
-        <span id="test2">22222</span>
-      </div>
+    bandtpl : `
+      <div class="linear_band">
+        <span class="linear_band_select"></span>
+        //这里要将dom与数据互转,注意数据与dom顺序可能不同,数据是升序
+      </div>`,
+    showtpl : `
+      <section class="color_show">
+      //这里的dom要做点击/拖动等复杂操作
+      </section>
     `,
     //initial linearPicker when linearPicker mode is choosed
     init(options){
-      this.initDom(options);
-      this.initEvent();
+      this.state = {
+        colBandValue: options.colBandValue || 0,
+        opaBandValue: options.opaBandValue || 165,
+        panelLeft: options.panelLeft || 202,
+        panelTop: options.panelTop || 0
+      }
+      this.hsb = {};
+      this.initDom();
+      this.render();
     },
     initDom(){
-      //create a dom node in memory rather than page by template
-      var tpl = $(this.template);
-      //do sth. on template by options
-      // tpl.find().html('123123123123'
-      
-      //fill tab content with new template
-      $('#main_pane').html(tpl)
+      this.band = $(this.bandtpl)
+      $('.mode_pane').after(this.band)
+      $('.color_show').html('我是线性渐变的内容')
     },
-    initEvent(){
-
+    render(state){
+      console.log(state)
+      // var cssValue = state.cssValue;
+      // this.previewPanel.css('backgroundImage', cssValue);
     },
-    //destroy linearPicker when other mode is choosed
+    //destroy flatPicker when other mode is choosed
     destroy(){
-
+      this.band.remove()
     }
   }
   var radialPicker = {
-    template : `
-      <div style="height:200px;font-size:14px;">
-        <span id="test3">3333</span>
-      </div>
+    radialtpl : `
+      <div class="linear_band">
+        <span class="linear_band_select"></span>
+        //这里要将dom与数据互转,注意数据与dom顺序可能不同,数据是升序
+      </div>`,
+    showtpl : `
+      <section class="color_show">
+      //这里的dom要做点击/拖动等复杂操作
+      </section>
     `,
-    //initial radialPicker when radialPicker mode is choosed
+    //initial linearPicker when linearPicker mode is choosed
     init(options){
-      this.initDom(options);
-      this.initEvent();
+      this.state = {
+        colBandValue: options.colBandValue || 0,
+        opaBandValue: options.opaBandValue || 165,
+        panelLeft: options.panelLeft || 202,
+        panelTop: options.panelTop || 0
+      }
+      this.hsb = {};
+      this.initDom();
+      this.render();
     },
     initDom(){
-      //create a dom node in memory rather than page by template
-      var tpl = $(this.template);
-      //do sth. on template by options
-      // tpl.find().html('123123123123'
-      
-      //fill tab content with new template
-      $('#main_pane').html(tpl)
+      this.band = $(this.radialtpl)
+      $('.mode_pane').after(this.band)
+      $('.color_show').html('我是线性渐变的内容')
     },
-    initEvent(){
-
+    render(state){
+      console.log(state)
+      // var cssValue = state.cssValue;
+      // this.previewPanel.css('backgroundImage', cssValue);
     },
-    //destroy radialPicker when other mode is choosed
+    //destroy flatPicker when other mode is choosed
     destroy(){
-
+      this.band.remove()
     }
   }
   var availableMode = [flatPicker, linearPicker, radialPicker];
@@ -344,45 +171,82 @@
       //render view by options
       init: function(options){
         //boundary treatment
-        var options = options || {};
-        this.shape = options.shape || {
-          type: 'rect',
-          width: 200,
-          height: 120
-        };
-        this.modeNum = options.modeNum || 0;
-        this.history = options.history || [
-          // flat
-          {
-
+        var options = Object.assign({}, {
+          modeNum: 0,
+          shape: {
+            type: 'rect',
+            width: 200,
+            height: 120
           },
-          // linear
-          {
-
-          },
-          // radial
-          {
-
+          history: {
+            flat: {
+              colBandValue: 0,
+              opaBandValue: 165,
+              panelLeft: 202,
+              panelTop: 0
+            },
+            linear: {
+              colBandValue: 0,
+              opaBandValue: 165,
+              panelLeft: 202,
+              panelTop: 0
+            },
+            radial: {
+              colBandValue: 0,
+              opaBandValue: 165,
+              panelLeft: 202,
+              panelTop: 0
+            }
           }
-        ]
+        }, options);
+        this.modeNum = options.modeNum;
+        this.shape = options.shape;
+        this.history = [options.history.flat, options.history.linear, options.history.radial];
         
+        //使用state存放当前mode将要使用的数据
+        this.state = this.history[this.modeNum]
         this.currentMode = availableMode[this.modeNum];
         this.initDom();
+        this.initTabEvent();
         this.initEvent();
+        this.hsb = {};
+        this.render();
+        this.currentMode.init(this.state);
       },
       initDom: function(){
         var colorPicker = $(mainHtml)
-        $(document.body).append(colorPicker)
-        this.currentMode.init(this.history[this.modeNum]);
-        var showPanel = $('.color_show');
+        this.colorPanel = colorPicker.find('.color_panel');
+        this.point = colorPicker.find('#color_point');
+        //slide band      
+        this.colorBand = colorPicker.find('.color_band');
+        this.opacityBand = colorPicker.find('.opacity_band');
+        //slide btn
+        this.colorBtn = colorPicker.find('#color_band_select');
+        this.opacityBtn = colorPicker.find('#opacity_band_select');
+        this.preview = colorPicker.find('#color_preview');
+
+        this.hexBox = colorPicker.find('.Hex_value input');
+        this.rBox = colorPicker.find('.r_value input');
+        this.gBox = colorPicker.find('.g_value input');
+        this.bBox = colorPicker.find('.b_value input');
+        this.aBox = colorPicker.find('.a_value input');
+        this.showPanel = colorPicker.find('.color_show');
+
+
         if(this.shape.type === 'rect'){
-          showPanel.css({
+          colorPicker.find('.color_show').css({
             width: this.shape.width,
             height: this.shape.height
-          });  
+          });
         }
+        $(document.body).append(colorPicker)
+        //元素的宽高要到添加到dom后再计算
+        this.btnWidth = this.colorBtn.width();
+        this.bandWidth = this.colorBand.width();
+        this.panelWidth = this.colorPanel.width();
+        this.panelHeight = this.colorPanel.height();
       },
-      initEvent: function(){
+      initTabEvent: function(){
         var modeBtns = $('.color_mode');
         var main_pane = $('#main_pane')
         $(modeBtns[this.modeNum]).addClass('active')
@@ -403,19 +267,132 @@
             this.modeNum = modeNum;
             this.currentMode = availableMode[modeNum];
             //init new mode
-            this.currentMode.init(this.history[modeNum]);
+            this.currentMode.init(this.state);
             
             // console.log(modeTabs[modeNum])
           }.bind(this));
 
         }.bind(this));
       },
+      initEvent(){
+        this.colorBand.mousedown(this.downBand.bind(this, this.colorBand, 'colBandValue'));
+        this.opacityBand.mousedown(this.downBand.bind(this, this.opacityBand, 'opaBandValue'));
+        this.colorPanel.mousedown(this.downPanel.bind(this));
+      },
+      render(){
+        this.renderColBand();
+        this.renderOpaBand();
+        this.renderPanel();
+        this.renderBox();
+        this.currentMode.render(this.state);
+      },
+      
+      renderColBand(){
+        var offsetX = this.state.colBandValue;
+        this.colorBtn.css('left', offsetX);
+        this.hsb.h = 360 - (offsetX * 360 * (1 / (this.bandWidth - this.btnWidth))) >> 0;
+        var panelColor = '#' + hsbToHex({
+          h: this.hsb.h,
+          s: 100,
+          b: 100
+        });
+        this.colorPanel.css('backgroundColor', panelColor);
+        // console.log('h: ',this.hsb.h)
+      },
+      renderOpaBand(){
+        var offsetX = this.state.opaBandValue;
+        this.opacityBtn.css('left', offsetX);
+        this.opacity = (offsetX * (1 / (this.bandWidth - this.btnWidth))).toFixed(2);
+        // console.log('opacity: ',this.opacity)
+      },
+      renderPanel(){
+        var offsetX = this.state.panelLeft;
+        var offsetY = this.state.panelTop;
+        this.point.css({
+          left: offsetX,
+          top: offsetY
+        });
+        this.hsb.s = (offsetX * 100 * (1 / this.panelWidth)) >> 0;
+        this.hsb.b = 100 - (offsetY * 100 * (1 / this.panelHeight)) >> 0;
+        var rgb = hsbToRgb(this.hsb);
+        var hex = rgbToHex(rgb);
+        var rgba = 'rgba('+rgb.r+','+rgb.g+','+rgb.b+','+this.opacity+')';
+        var gradient = `linear-gradient(to right, transparent, #${hex})`;
+        this.rgb = rgb;
+        this.hex = hex;
+        this.rgba = rgba;
+        console.log(this.opacityBand)
+        console.log(gradient)
+        this.opacityBand.css('backgroundImage', gradient)
+        console.log(rgba)
+        this.preview.css('backgroundColor', rgba)
+      },
+      renderBox(){
+        this.hexBox.val(this.hex)
+        this.rBox.val(this.rgb.r)
+        this.gBox.val(this.rgb.g)
+        this.bBox.val(this.rgb.b)
+        this.aBox.val(this.opacity)
+      },
+      //使用bind时event是最后一个参数
+      downBand(band, propName, e){
+        this.moveBand(band, propName, e)
+        $(document).mousemove(this.moveBand.bind(this, band, propName));
+        $(document).one('mouseup',function(){
+          $(document).off('mousemove');
+          /* 这里做持久化 */
+          // ....
+        });
+      },
+      moveBand(band, propName, e){
+        var pageX = e.pageX;
+        var left = band.offset().left;
+        //小于0, 则置0
+        var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
+        //大于band的宽度,则置为band的宽度
+        if(offsetX + this.btnWidth > this.bandWidth){
+          offsetX = this.bandWidth - this.btnWidth;
+        }
+        //re-render if need
+        if(offsetX != this.state[propName]){
+          this.state[propName] = offsetX;
+          this.render();
+        }
+      },
+      downPanel(e){
+        this.movePanel(e)
+        $(document).mousemove(this.movePanel.bind(this));
+        $(document).one('mouseup',function(){
+          $(document).off('mousemove');
+          /* 这里做持久化 */
+          // ....
+        }.bind(this));
+      },
+      movePanel(e){
+        var pageX = e.pageX;
+        var pageY = e.pageY;
+        var left = this.colorPanel.offset().left;
+        var top = this.colorPanel.offset().top;
+        var offsetX = (pageX - left) > 0 ? (pageX - left) : 0;
+        var offsetY = (pageY - top) > 0 ? (pageY - top) : 0;
+        if(offsetX > this.panelWidth){
+          offsetX = this.panelWidth;
+        }
+        if(offsetY > this.panelHeight){
+          offsetY = this.panelHeight;
+        }
+        if(offsetX != this.state.panelLeft || offsetY != this.state.panelTop){
+          this.state.panelLeft = offsetX
+          this.state.panelTop = offsetY
+          this.render();
+        }
+      },
     }
 	}
   
-  $.fn.colorPick = function(){
+  $.fn.colorPick = function(options){
     var picker = new colorPicker();
-    picker.init();
+    picker.init(options);
     return picker;
   }
 

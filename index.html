@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="css/valuePane.css">
   <link rel="stylesheet" type="text/css" href="css/colpick.css">
   <link rel="stylesheet" type="text/css" href="css/colorPicker.css">
+  <link rel="stylesheet" type="text/css" href="css/linearBand.css">
 	<style>
     body{
       padding-top:32px;
@@ -26,7 +27,36 @@
   <script src="js/color-picker.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('#test').colorPick();
+			// $('#test').colorPick();
+      $('#test').colorPick({
+        modeNum: 1,
+        shape: {
+          type: 'rect',
+          width: 200,
+          height: 120
+        },
+        history: {
+          flat: {
+            colBandValue: 0,
+            opaBandValue: 165,
+            // panelLeft: 202,
+            panelLeft: 20,
+            panelTop: 0
+          },
+          linear: {
+            colBandValue: 0,
+            opaBandValue: 165,
+            panelLeft: 202,
+            panelTop: 0
+          },
+          radial: {
+            colBandValue: 0,
+            opaBandValue: 165,
+            panelLeft: 202,
+            panelTop: 0
+          }
+        }
+      });
 		})
 	</script>
 </body>

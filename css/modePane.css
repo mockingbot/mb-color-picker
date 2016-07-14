@@ -1,6 +1,7 @@
 .mode_pane{
   text-align: center;
   width:100%;
+  margin-bottom:8px;
 }
 .color_mode{
   display:inline-block;
