@@ -69,23 +69,18 @@
 
   var flatPicker = {
     //initial flatPicker when flat mode is choosed
-    init(options){
-      this.state = {
-        colBandValue: options.colBandValue || 0,
-        opaBandValue: options.opaBandValue || 165,
-        panelLeft: options.panelLeft || 202,
-        panelTop: options.panelTop || 0
-      }
-      this.previewPanel = $('color_show');
+    init(caller){
+      this.uber = caller;
+      this.previewPanel = $('.color_show');
     },
-    render(state){
-      console.log(state)
-      var cssValue = state.cssValue;
+    render(){
+      var cssValue = this.uber.preview.css('backgroundImage');
       this.previewPanel.css('backgroundImage', cssValue);
     },
     //destroy flatPicker when other mode is choosed
     destroy(){
-
+      this.previewPanel = null;
+      this.user = null;
     }
   }
   var linearPicker = {
@@ -100,29 +95,23 @@
       </section>
     `,
     //initial linearPicker when linearPicker mode is choosed
-    init(options){
-      this.state = {
-        colBandValue: options.colBandValue || 0,
-        opaBandValue: options.opaBandValue || 165,
-        panelLeft: options.panelLeft || 202,
-        panelTop: options.panelTop || 0
-      }
-      this.hsb = {};
+    init(caller){
+      this.uber = caller;
       this.initDom();
-      this.render();
     },
     initDom(){
       this.band = $(this.bandtpl)
+      this.previewPanel = $('.color_show');
       $('.mode_pane').after(this.band)
       $('.color_show').html('我是线性渐变的内容')
     },
-    render(state){
-      console.log(state)
-      // var cssValue = state.cssValue;
-      // this.previewPanel.css('backgroundImage', cssValue);
+    render(){
+      var cssValue = '';
+      // console.log(this.uber.state)
+      this.previewPanel.css('backgroundImage', cssValue);
     },
-    //destroy flatPicker when other mode is choosed
     destroy(){
+      this.uber = null;
       this.band.remove()
     }
   }
@@ -155,7 +144,6 @@
       $('.color_show').html('我是线性渐变的内容')
     },
     render(state){
-      console.log(state)
       // var cssValue = state.cssValue;
       // this.previewPanel.css('backgroundImage', cssValue);
     },
@@ -164,6 +152,7 @@
       this.band.remove()
     }
   }
+  
   var availableMode = [flatPicker, linearPicker, radialPicker];
   
   var colorPicker = function(){
@@ -202,22 +191,21 @@
         this.modeNum = options.modeNum;
         this.shape = options.shape;
         this.history = [options.history.flat, options.history.linear, options.history.radial];
-        
+        this.initDom();
+        this.initTabEvent();
         //使用state存放当前mode将要使用的数据
         this.state = this.history[this.modeNum]
         this.currentMode = availableMode[this.modeNum];
-        this.initDom();
-        this.initTabEvent();
+        this.currentMode.init(this);
         this.initEvent();
         this.hsb = {};
         this.render();
-        this.currentMode.init(this.state);
       },
       initDom: function(){
         var colorPicker = $(mainHtml)
         this.colorPanel = colorPicker.find('.color_panel');
         this.point = colorPicker.find('#color_point');
-        //slide band      
+        //slide band
         this.colorBand = colorPicker.find('.color_band');
         this.opacityBand = colorPicker.find('.opacity_band');
         //slide btn
@@ -231,7 +219,6 @@
         this.bBox = colorPicker.find('.b_value input');
         this.aBox = colorPicker.find('.a_value input');
         this.showPanel = colorPicker.find('.color_show');
-
 
         if(this.shape.type === 'rect'){
           colorPicker.find('.color_show').css({
@@ -248,28 +235,30 @@
       },
       initTabEvent: function(){
         var modeBtns = $('.color_mode');
-        var main_pane = $('#main_pane')
         $(modeBtns[this.modeNum]).addClass('active')
         //bind click event on mode buttons
         modeBtns.each(function(modeNum, el) {
-          
-          $(el).on('click', function(event) {
+          $(el).on('click', function() {
             //change className of buttons
             modeBtns.each(function(index, el) {
               $(el).removeClass('active')
             });
             $(el).addClass('active')
-            
-            //changeMode
+            //save state into history
+            this.history[this.modeNum] = this.state;
             //destroy last mode
             this.currentMode.destroy();
             //change current mode
             this.modeNum = modeNum;
             this.currentMode = availableMode[modeNum];
-            //init new mode
-            this.currentMode.init(this.state);
             
-            // console.log(modeTabs[modeNum])
+            //init new mode
+            this.state = this.history[modeNum];
+            // console.log(modeNum)
+            // console.log(this.history)
+            this.currentMode.init(this);
+            this.render();
+            
           }.bind(this));
 
         }.bind(this));
@@ -280,13 +269,13 @@
         this.colorPanel.mousedown(this.downPanel.bind(this));
       },
       render(){
+        console.log(this.state)
         this.renderColBand();
         this.renderOpaBand();
         this.renderPanel();
         this.renderBox();
-        this.currentMode.render(this.state);
+        this.currentMode.render();
       },
-      
       renderColBand(){
         var offsetX = this.state.colBandValue;
         this.colorBtn.css('left', offsetX);
@@ -321,10 +310,7 @@
         this.rgb = rgb;
         this.hex = hex;
         this.rgba = rgba;
-        console.log(this.opacityBand)
-        console.log(gradient)
         this.opacityBand.css('backgroundImage', gradient)
-        console.log(rgba)
         this.preview.css('backgroundColor', rgba)
       },
       renderBox(){
@@ -395,7 +381,6 @@
     picker.init(options);
     return picker;
   }
-
   //Color space convertions
   var hexToRgb = function (hex) {
     var hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
