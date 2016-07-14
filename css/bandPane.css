@@ -36,7 +36,7 @@
   left:20px;
 }
 .opacity_band{
-  background:linear-gradient(to right,transparent,#2253BB);
+  /* background:linear-gradient(to right,transparent,#2253BB); */
 }
 #opacity_band_select{
   left:165px;

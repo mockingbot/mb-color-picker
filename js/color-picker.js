@@ -1,5 +1,30 @@
 (function($){
-  var mainHtml = '<div class="wrap"><section id="main_pane"></section></div>'
+  var mainHtml = `
+  <div class="color_picker">
+    <section class="mode_pane">
+      <span class="color_mode flat_color"></span>
+      <span class="color_mode linear_gradient"></span>
+      <span class="color_mode radial_gradient"></span>
+      <span class="color_mode pattern_fill"></span>
+      <span class="color_mode transparent_color"></span>
+    </section>
+    <section id="main_pane">
+      
+    </section>
+    <section class="color_bar">
+      <div class="history_pane">
+        <div class="colpick_prev1 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev2 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev3 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev4 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev5 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div class="colpick_prev6 colpick_prev" style="background-color: rgb(98, 0, 255);"></div>
+        <div id="colpick_transparent" class="colpick_prev"></div>
+      </div>
+      <div id="colpick_submit" class="colpick_field">OK</div>
+    </section>
+  </div>`;
+
   var flatPicker = {
     template : `
       <div class="color_panel" style="background-color: rgb(0, 149, 255);">
@@ -44,6 +69,7 @@
           <label for="">A</label>
         </div>
       </div>
+      <section class="color_show">123</section>
     `,
     //initial flatPicker when flat mode is choosed
     init(options){
@@ -57,13 +83,14 @@
       //slide band
       this.colorBtn = $('#color_band_select');
       this.opacityBtn = $('#opacity_band_select');
-      this.preview = $('#color_preview')
+      this.preview = $('#color_preview');
 
       this.hexBox = this.pane.find('.Hex_value input');
       this.rBox = this.pane.find('.r_value input');
       this.gBox = this.pane.find('.g_value input');
       this.bBox = this.pane.find('.b_value input');
       this.aBox = this.pane.find('.a_value input');
+      this.showPanel = this.pane.find('.color_show');
 
       this.btnWidth = this.colorBtn.width();
       this.bandWidth = this.colorBand.width();
@@ -101,8 +128,7 @@
       this.renderBox();
     },
     renderBox(){
-      var hex = rgbToHex(this.rgb);
-      this.hexBox.val(hex)
+      this.hexBox.val(this.hex)
       this.rBox.val(this.rgb.r)
       this.gBox.val(this.rgb.g)
       this.bBox.val(this.rgb.b)
@@ -135,12 +161,16 @@
       });
       this.hsb.s = (offsetX * 100 * (1 / this.panelWidth)) >> 0;
       this.hsb.b = 100 - (offsetY * 100 * (1 / this.panelHeight)) >> 0;
-      // console.log(this.hsb.s, this.hsb.b)
-      // console.log(hsbToRgb(this.hsb))
       var rgb = hsbToRgb(this.hsb);
-      this.rgb = rgb;
+      var hex = rgbToHex(rgb);
       var rgba = 'rgba('+rgb.r+','+rgb.g+','+rgb.b+','+this.opacity+')';
+      var gradient = `linear-gradient(to right, transparent, #${hex})`;
+      this.rgb = rgb;
+      this.hex = hex;
+      this.rgba = rgba;
+      this.opacityBand.css('backgroundImage', gradient)
       this.preview.css('backgroundColor', rgba)
+      this.showPanel.css('backgroundColor', this.rgba);
     },
     //event是最后一个参数
     downBand(band, propName, e){
@@ -315,6 +345,11 @@
       init: function(options){
         //boundary treatment
         var options = options || {};
+        this.shape = options.shape || {
+          type: 'rect',
+          width: 200,
+          height: 120
+        };
         this.modeNum = options.modeNum || 0;
         this.history = options.history || [
           // flat
@@ -339,9 +374,16 @@
         var colorPicker = $(mainHtml)
         $(document.body).append(colorPicker)
         this.currentMode.init(this.history[this.modeNum]);
+        var showPanel = $('.color_show');
+        if(this.shape.type === 'rect'){
+          showPanel.css({
+            width: this.shape.width,
+            height: this.shape.height
+          });  
+        }
       },
       initEvent: function(){
-        var modeBtns = $('.color_mode')
+        var modeBtns = $('.color_mode');
         var main_pane = $('#main_pane')
         $(modeBtns[this.modeNum]).addClass('active')
         //bind click event on mode buttons

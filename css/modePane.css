@@ -29,14 +29,20 @@
 .linear_gradient:hover{
   background: linear-gradient(to bottom, #FFF, #333);
 }
+.linear_gradient.active{
+  background: linear-gradient(to bottom, #FFF, rgb(65,155,249));
+}
 .radial_gradient{
-  background: radial-gradient(#FFF, #888, #333);
+  background: radial-gradient(#FFF, #838383);
 }
 .radial_gradient:hover{
-  background: radial-gradient(#FFF, #888, #000);
+  background: radial-gradient(#FFF, #282828);
+}
+.radial_gradient.active{
+  background: radial-gradient(#FFF, rgb(18,134,255));
 }
 .mode_pane .pattern_fill{
-    background-size: 6px 6px; 
+    background-size: 8px 8px; 
     margin-right: 0;
 }
 .pattern_fill{
