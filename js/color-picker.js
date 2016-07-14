@@ -24,7 +24,7 @@
       </div>
       <div class="value_pane">
         <div class="color_value Hex_value">
-          <input type="text" maxlength="6" size="8" value="2253BB">
+          <input type="text" maxlength="6" size="7" value="2253BB">
           <label for="">Hex</label>
         </div>
         <div class="color_value r_value">
@@ -40,7 +40,7 @@
           <label for="">B</label>
         </div>
         <div class="color_value a_value">
-          <input type="text" maxlength="6" size="3" value="100">
+          <input type="text" maxlength="6" size="4" value="100">
           <label for="">A</label>
         </div>
       </div>
@@ -58,6 +58,12 @@
       this.colorBtn = $('#color_band_select');
       this.opacityBtn = $('#opacity_band_select');
       this.preview = $('#color_preview')
+
+      this.hexBox = this.pane.find('.Hex_value input');
+      this.rBox = this.pane.find('.r_value input');
+      this.gBox = this.pane.find('.g_value input');
+      this.bBox = this.pane.find('.b_value input');
+      this.aBox = this.pane.find('.a_value input');
 
       this.btnWidth = this.colorBtn.width();
       this.bandWidth = this.colorBand.width();
@@ -92,6 +98,15 @@
       this.renderColBand();
       this.renderOpaBand();
       this.renderPanel();
+      this.renderBox();
+    },
+    renderBox(){
+      var hex = rgbToHex(this.rgb);
+      this.hexBox.val(hex)
+      this.rBox.val(this.rgb.r)
+      this.gBox.val(this.rgb.g)
+      this.bBox.val(this.rgb.b)
+      this.aBox.val(this.opacity)
     },
     renderColBand(){
       var offsetX = this.state.colBandValue;
@@ -123,10 +138,9 @@
       // console.log(this.hsb.s, this.hsb.b)
       // console.log(hsbToRgb(this.hsb))
       var rgb = hsbToRgb(this.hsb);
+      this.rgb = rgb;
       var rgba = 'rgba('+rgb.r+','+rgb.g+','+rgb.b+','+this.opacity+')';
-      console.log(rgba)
       this.preview.css('backgroundColor', rgba)
-
     },
     //event是最后一个参数
     downBand(band, propName, e){
