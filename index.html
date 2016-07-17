@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="css/linearBand.css">
 	<style>
     body{
-      padding-top:32px;
+      padding-top:100px;
     }
 		#test{
 			margin:20px 300px;
@@ -49,31 +49,50 @@
             panelLeft: 202,
             panelTop: 0,
             startPoint: {
-              top: 0,
-              left: 0,
+              x: 0,
+              y: 0,
             },
             endPoint: {
-              top: 100,
-              left: 100,
+              x: .1,
+              y: .4,
             },
             stop: [
               {
                 color: 'red',
+                pos: 0
+              },
+              // {
+              //   color: 'red',
+              //   pos: 0.7
+              // },
+              // {
+              //   color: 'pink',
+              //   pos: 0.4
+              // },
+              // {
+              //   color: 'pink',
+              //   pos: 0.8
+              // },
+              {
+                color: 'red',
+                pos: 0.2
               },
               {
-                color: 'blue',
-                pos: '30%'
+                color: 'white',
+                pos: 0.2
               },
               {
-                color: 'pink',
-                pos: '50%'
+                color: 'white',
+                pos: 0.5
               },
               {
-                color: 'blue',
-                pos: '80%'
-              },{
-                color: 'green'
-              }
+                color: 'red',
+                pos: 0.5
+              },
+              {
+                color: 'red',
+                pos: 1
+              },
             ]
           },
           radial: {

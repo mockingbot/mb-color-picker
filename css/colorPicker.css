@@ -182,6 +182,7 @@
 }
 .color_show{
   position:absolute;
+  box-sizing:content-box;
   top:0;
   left:100%;
   margin-left:10px;
