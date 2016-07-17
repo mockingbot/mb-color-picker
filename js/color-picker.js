@@ -154,7 +154,7 @@
       var cWidth = Math.abs(end.x - start.x) * width;
       var cHeight = Math.abs(end.y - start.y) * height;
       var c = Math.sqrt(Math.pow(cWidth, 2) + Math.pow(cHeight, 2))
-      var deg = getDegree(start, end, width, height) - 90
+      var deg = getDegree(start, end, width, height)
       // console.log(deg)
       container.css({
         left: start.x * 100 + '%',
@@ -204,34 +204,18 @@
       var width = this.previewWidth;
       var height = this.previewHeight;
       var deg = getDegree(start, end, width, height)
-      if(deg > 180) deg -= 180
+      // console.log(Math.atan2(80, 40)/ Math.PI * 180)
       console.log('旋转角度为: ',deg)
-      // deg = -221
-      var theta = 90 - deg;
-      console.log(theta)
-      // theta = 30
-      var linearStart = getLinearPercent(start.x, start.y, width, height, theta);
-      var linearEnd = getLinearPercent(end.x, end.y, width, height, theta);
+      var linearStart = getLinearPercent(start.x, start.y, width, height, deg);
+      var linearEnd = getLinearPercent(end.x, end.y, width, height, deg);
       console.log('渐变起止点: ',linearStart, linearEnd)
-      var preValue = `linear-gradient(${deg}deg,`
-      if(linearEnd > linearStart){
-        var linearWidth = linearEnd - linearStart
+      //渐变的角度是(90-渐变线与x轴正向夹角)
+      var preValue = `linear-gradient(${deg+90}deg,`
 
-        var num = stop.length;
-        for(var i = 0 ; i < num ; i ++){
-          var pos = linearStart + stop[i].pos * linearWidth
-          // console.log(pos)
-          preValue += `${stop[i].color} ${pos*100+'%'},`
-        }
-      }else{
-        var linearWidth = linearStart - linearEnd
-        console.log(linearWidth)
-        var num = stop.length;
-        // console.log(num - 1)
-        for(var i = num - 1 ; i >= 0 ; i --){
-          var pos = linearStart - stop[i].pos * linearWidth
-          preValue += `${stop[i].color} ${pos*100+'%'},`
-        }
+      var linearWidth = linearEnd - linearStart
+      for(var i = 0 ; i < stop.length ; i ++){
+        var pos = linearStart + stop[i].pos * linearWidth
+        preValue += `${stop[i].color} ${pos*100+'%'},`
       }
       
       console.log(preValue.replace(/,$/, ')'))
@@ -514,27 +498,37 @@
     //从(0,0)逆时针旋转到(deltaX, deltaY)的角度
     var deg = Math.atan2(deltaY * height, deltaX * width) / Math.PI * 180
     //弧度转角度
-    return Math.round(90 - deg)
+    return Math.round(deg)
   }
   //e.g. (0.2, -0.5, 100, 200, 45)
   var getLinearPercent = function(perX, perY, width, height, theta){
     console.log("====================")
-    console.log( Math.atan2(0,-2) / Math.PI * 180)
-    console.log(Math.atan2(30, 100) / Math.PI * 180)
     console.log(perX, perY, width, height, theta)
-
-    //把theta转到-90~90之间
-    theta = theta % 90;
-    // theta = theta % 90 > 0 ? theta % 90 : theta % 90 + 90
-    var posX = width * perX;
-    var posY = theta > 0 ? height * (1 - perY) : height * perY;
-    console.log('传入参数实际坐标: ',posX, posY)
-    
     console.log('theta: ',theta)
+    if(theta < -90){
+      // 左上
+      console.log(1)
+      var posX = width * (1 - perX);
+      var posY = height * (1 - perY);
+    }else if(theta < 0){
+      // 右上
+      console.log(2)
+      var posX = width * perX;
+      var posY = height * (1 - perY);
+    }else if(theta < 90){
+      // 右下
+      console.log(3)
+      var posX = width * perX;
+      var posY = height * perY;
+    }else{
+      // 左下
+      var posX = width * (1 - perX);
+      var posY = height * perY;
+    }
+    console.log('传入参数实际坐标: ',posX, posY)
     //求出夹角tan的绝对值
-    var tan = Math.tan(theta / 180 * Math.PI)
-    console.log('tan: ',tan)
-    
+    var tan = Math.abs(Math.tan(theta / 180 * Math.PI))
+    // console.log('tan: ',tan)
     //分子
     var molecular = posX + posY * tan;
     //分母
@@ -545,7 +539,7 @@
     // console.log(molecular / (1 + tan * tan))
     var result = molecular / denominator;
     console.log('渐变百分比点为: ',result)
-
+    console.log("====================")
     // console.log(result)
     return parseFloat(result.toFixed(2))
   }
