@@ -18,9 +18,8 @@
 }
 .linear_container{
   position:absolute;
-  height:3px;
   background-color:#FFF;
-  box-shadow: 0 0 2px #000;
+  box-shadow: 0 0 0px 1px #FFF,0 0 2px 1px #000;
   transform-origin:0 50%;
 }
 .linear_prev_point{
@@ -29,8 +28,7 @@
   border-radius:50%;
   width:10px;
   height:10px;
-  margin-top:-3px;
-  margin-left:-5px;
+  margin:-5px;
   background: #FFF;
   border:2px solid #FFF;
   box-shadow: 0 0 2px #000, inset 0 0 2px #000;

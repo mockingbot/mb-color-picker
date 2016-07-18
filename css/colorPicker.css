@@ -186,6 +186,6 @@
   top:0;
   left:100%;
   margin-left:10px;
-  border:1px solid #CCC;
+  box-shadow: 0 0 1px #CCC;
 }
 

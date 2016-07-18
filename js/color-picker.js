@@ -97,6 +97,8 @@
     //initial linearPicker when linearPicker mode is choosed
     init(caller){
       this.uber = caller;
+      this.state = caller.state;
+      this.nodeArr = [];
       this.initDom();
       this.initEvent();
     },
@@ -111,18 +113,8 @@
       this.initBand();
       this.initPoint();
     },
-    initEvent(){
-      this.band.on('click', function(event) {
-        event.preventDefault();
-        console.log("失焦")
-      });
-      this.band.on('dblclick', function(event) {
-        event.preventDefault();
-        console.log("新建断点")
-      });
-    },
     initBand(){
-      var state = this.uber.state;
+      var state = this.state;
       var start = state.startPoint;
       var end = state.endPoint;
       var stop = state.stop;
@@ -140,32 +132,15 @@
       }
     },
     initPoint(){
-      var state = this.uber.state;
+      var state = this.state;
       var start = state.startPoint;
       var end = state.endPoint;
       var stop = state.stop;
-
       var width = this.previewWidth;
       var height = this.previewHeight;
       
       this.previewPanel.html('')
       var container = $('<div class="linear_container"></div>')
-
-      var cWidth = Math.abs(end.x - start.x) * width;
-      var cHeight = Math.abs(end.y - start.y) * height;
-      var c = Math.sqrt(Math.pow(cWidth, 2) + Math.pow(cHeight, 2))
-      var deg = getDegree(start, end, width, height)
-      // console.log(deg)
-      container.css({
-        left: start.x * 100 + '%',
-        top: start.y * 100 + '%',
-        width: c,
-        transform: `rotate(${deg}deg)`
-      });
-      
-      //这里是否要先排序???
-      //这里可用纯字符串优化部分性能
-      
       for(var i = 0 ; i < stop.length ; i ++){
         var node = $('<span class="linear_prev_point"></span>')
         var me = stop[i]
@@ -174,8 +149,96 @@
           left: me.pos * 100 + '%',
         });
         container.append(node)
+        this.nodeArr.push(node)
       }
       this.previewPanel.append(container)
+      this.container = container;
+     
+      this.renderPoint();
+    },
+    renderPoint(){
+      var state = this.state;
+      var start = state.startPoint;
+      var end = state.endPoint;
+      var stop = state.stop;
+      var width = this.previewWidth;
+      var height = this.previewHeight;
+      
+      var container = this.container;
+      var deg = getDegree(start, end, width, height)
+
+      var cWidth = Math.abs(end.x - start.x) * width;
+      var cHeight = Math.abs(end.y - start.y) * height;
+
+      // var c = Math.round(Math.sqrt(Math.pow(cWidth, 2) + Math.pow(cHeight, 2)))
+      var c = Math.sqrt(Math.pow(cWidth, 2) + Math.pow(cHeight, 2))
+        // var c = Math.abs(cHeight / Math.sin(deg / 180 * Math.PI))
+      console.log(c)
+      // console.log(cHeight / Math.sin(deg / 180 * Math.PI))
+      console.log('=====')
+      // this.deg = deg
+      // console.log(deg)
+      container.css({
+        left: start.x * 100 + '%',
+        top: start.y * 100 + '%',
+        width: c,
+        transform: `rotate(${deg}deg)`
+      });
+      
+      // container.css({
+      //   left: start.x * width,
+      //   top: start.y * height,
+      //   width: c,
+      //   transform: `rotate(${deg}deg)`
+      // });
+    },
+    //移动的点, 当前渐进线与x轴正向的夹角, 事件对象
+    moveEndpoint(node, propName, e){
+      var container = this.container;
+      var pageX = e.pageX;
+      var pageY = e.pageY
+      var fromPoint = this.previewPanel.offset();
+      var fromX = fromPoint.left
+      var fromY = fromPoint.top
+      var left = (e.pageX - fromX) / this.previewWidth
+      var top = (e.pageY - fromY) / this.previewHeight
+      // this.state[propName].x = left
+      this.state[propName] = {
+        x: left,
+        y: top,
+      }
+      this.renderPoint();
+      this.previewPanel.css('backgroundImage', this.getPreCssValue());
+    },
+    initEvent(){
+      //为起止点添加事件
+      this.nodeArr[0].mousedown(function(e) {
+        // this.moveEndpoint(this.nodeArr[0], 'startPoint', e)
+        $(document).mousemove(this.moveEndpoint.bind(this, this.nodeArr[0], 'startPoint'));
+        $(document).one('mouseup',function(){
+          $(document).off('mousemove');
+        }.bind(this));
+      }.bind(this));;
+
+      this.nodeArr[this.nodeArr.length - 1].mousedown(function(e) {
+        // this.moveEndpoint(this.nodeArr[this.nodeArr.length - 1], 'endPoint', e)
+        $(document).mousemove(this.moveEndpoint.bind(this, this.nodeArr[this.nodeArr.length - 1], 'endPoint'));
+        $(document).one('mouseup',function(){
+          $(document).off('mousemove');
+        }.bind(this));
+      }.bind(this));;
+      //为起止点添加事件
+      
+      console.log()
+      console.log(this.nodeArr)
+      this.band.on('click', function(event) {
+        event.preventDefault();
+        console.log("失焦")
+      });
+      this.band.on('dblclick', function(event) {
+        event.preventDefault();
+        console.log("新建断点")
+      });
     },
     render(){
       // this.renderBand();
@@ -196,7 +259,7 @@
     },
     getPreCssValue(){
       //这块可以在render时一块加到this里
-      var state = this.uber.state;
+      var state = this.state;
       var start = state.startPoint;
       var end = state.endPoint;
       var stop = state.stop;
@@ -205,10 +268,10 @@
       var height = this.previewHeight;
       var deg = getDegree(start, end, width, height)
       // console.log(Math.atan2(80, 40)/ Math.PI * 180)
-      console.log('旋转角度为: ',deg)
+      // console.log('旋转角度为: ',deg)
       var linearStart = getLinearPercent(start.x, start.y, width, height, deg);
       var linearEnd = getLinearPercent(end.x, end.y, width, height, deg);
-      console.log('渐变起止点: ',linearStart, linearEnd)
+      // console.log('渐变起止点: ',linearStart, linearEnd)
       //渐变的角度是(90-渐变线与x轴正向夹角)
       var preValue = `linear-gradient(${deg+90}deg,`
 
@@ -218,7 +281,7 @@
         preValue += `${stop[i].color} ${pos*100+'%'},`
       }
       
-      console.log(preValue.replace(/,$/, ')'))
+      // console.log(preValue.replace(/,$/, ')'))
       return preValue.replace(/,$/, ')')
     },
     destroy(){
@@ -498,26 +561,24 @@
     //从(0,0)逆时针旋转到(deltaX, deltaY)的角度
     var deg = Math.atan2(deltaY * height, deltaX * width) / Math.PI * 180
     //弧度转角度
+    return deg
     return Math.round(deg)
   }
   //e.g. (0.2, -0.5, 100, 200, 45)
   var getLinearPercent = function(perX, perY, width, height, theta){
-    console.log("====================")
-    console.log(perX, perY, width, height, theta)
-    console.log('theta: ',theta)
+    // console.log("====================")
+    // console.log(perX, perY, width, height, theta)
+    // console.log('theta: ',theta)
     if(theta < -90){
       // 左上
-      console.log(1)
       var posX = width * (1 - perX);
       var posY = height * (1 - perY);
     }else if(theta < 0){
       // 右上
-      console.log(2)
       var posX = width * perX;
       var posY = height * (1 - perY);
     }else if(theta < 90){
       // 右下
-      console.log(3)
       var posX = width * perX;
       var posY = height * perY;
     }else{
@@ -525,7 +586,7 @@
       var posX = width * (1 - perX);
       var posY = height * perY;
     }
-    console.log('传入参数实际坐标: ',posX, posY)
+    // console.log('传入参数实际坐标: ',posX, posY)
     //求出夹角tan的绝对值
     var tan = Math.abs(Math.tan(theta / 180 * Math.PI))
     // console.log('tan: ',tan)
@@ -538,8 +599,8 @@
     // console.log(perY * height / sin)
     // console.log(molecular / (1 + tan * tan))
     var result = molecular / denominator;
-    console.log('渐变百分比点为: ',result)
-    console.log("====================")
+    // console.log('渐变百分比点为: ',result)
+    // console.log("====================")
     // console.log(result)
     return parseFloat(result.toFixed(2))
   }
