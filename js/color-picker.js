@@ -192,7 +192,7 @@
       //   transform: `rotate(${deg}deg)`
       // });
     },
-    //移动的点, 当前渐进线与x轴正向的夹角, 事件对象
+    //移动渐变线两端的点(移动的点, 当前渐进线与x轴正向的夹角, 事件对象)
     moveEndpoint(node, propName, e){
       var container = this.container;
       var pageX = e.pageX;
@@ -210,9 +210,33 @@
       this.renderPoint();
       this.previewPanel.css('backgroundImage', this.getPreCssValue());
     },
+    //移动渐变线中间的点(移动的点, 该点的序号 based 1, 事件对象)
+    movePlainPoint(index, node, e){
+      // console.log(node, index, e)
+      var container = this.container;
+      var a = (e.pageX - this.previewPanel.offset().left) / this.previewWidth
+      var b = this.state.startPoint.x
+      var left = (a - b) / (this.state.endPoint.x - this.state.startPoint.x)
+      if(left > 1){
+        left = 1
+      }else if(left < 0){
+        left = 0
+      }
+      node.css('left', left*100 + '%');
+      this.state.stop[index].pos = left;
+      this.renderPoint();
+      this.previewPanel.css('backgroundImage', this.getPreCssValue());
+    },
+    //this.nodeArr.length用的比较多,可以抽出来
     initEvent(){
       //为起止点添加事件
       this.nodeArr[0].mousedown(function(e) {
+        this.nodeArr.forEach((el, index) => {
+          $(el).removeClass('active');
+        })
+        $(this.nodeArr[0]).addClass('active')
+        this.currentPoint = 0;
+        this.uber.renderByHex(this.state.stop[0].color);
         // this.moveEndpoint(this.nodeArr[0], 'startPoint', e)
         $(document).mousemove(this.moveEndpoint.bind(this, this.nodeArr[0], 'startPoint'));
         $(document).one('mouseup',function(){
@@ -221,13 +245,32 @@
       }.bind(this));;
 
       this.nodeArr[this.nodeArr.length - 1].mousedown(function(e) {
+        this.nodeArr.forEach((el, index) => {
+          $(el).removeClass('active');
+        })
+        $(this.nodeArr[this.nodeArr.length - 1]).addClass('active')
+        this.uber.currentPoint = this.nodeArr.length - 1;
         // this.moveEndpoint(this.nodeArr[this.nodeArr.length - 1], 'endPoint', e)
         $(document).mousemove(this.moveEndpoint.bind(this, this.nodeArr[this.nodeArr.length - 1], 'endPoint'));
         $(document).one('mouseup',function(){
           $(document).off('mousemove');
         }.bind(this));
-      }.bind(this));;
-      //为起止点添加事件
+      }.bind(this));
+      //为中间点添加事件
+      for(let i = 1 ; i < this.nodeArr.length - 1 ; i ++){
+        let me = this.nodeArr[i];
+        me.mousedown(() => {
+          this.nodeArr.forEach((el, index) => {
+            $(el).removeClass('active');
+          })
+          me.addClass('active');
+          this.uber.currentPoint = i
+          $(document).mousemove(this.movePlainPoint.bind(this, i, me));
+          $(document).one('mouseup',function(){
+            $(document).off('mousemove');
+          })
+        });
+      }
       
       console.log()
       console.log(this.nodeArr)
@@ -414,8 +457,8 @@
         modeBtns.each(function(modeNum, el) {
           $(el).on('click', function() {
             //change className of buttons
-            modeBtns.each(function(index, el) {
-              $(el).removeClass('active')
+            modeBtns.each(function(index, elem) {
+              $(elem).removeClass('active')
             });
             $(el).addClass('active')
             //save state into history
@@ -438,9 +481,43 @@
         }.bind(this));
       },
       initEvent(){
+        this.hexBox.keydown(function(e) {
+          if(e.keyCode == 13){
+            var value = this.hexBox.val();
+            var result = '';
+            if(value.length === 6){
+              result = value
+            }else if(value.length === 3){
+              for(let i = 0 ; i < 3 ; i ++){
+                result += value[i] + value[i]
+              }
+            }
+            console.log(result)
+            this.renderByHex(result);
+            // this.state.colBandValue = hsb.h / 360 * (this.bandWidth - this.btnWidth)
+            // this.state.opaBandValue = (this.bandWidth - this.btnWidth)
+            // this.state.panelLeft = hsb.s / 100 * this.panelWidth
+            // this.state.panelTop = (100 - hsb.b) / 100 * this.panelHeight
+            // this.render();
+          }
+        }.bind(this))
+        // this.rBox = colorPicker.find('.r_value input');
+        // this.gBox = colorPicker.find('.g_value input');
+        // this.bBox = colorPicker.find('.b_value input');
+        // this.aBox = colorPicker.find('.a_value input');
+
         this.colorBand.mousedown(this.downBand.bind(this, this.colorBand, 'colBandValue'));
         this.opacityBand.mousedown(this.downBand.bind(this, this.opacityBand, 'opaBandValue'));
         this.colorPanel.mousedown(this.downPanel.bind(this));
+      },
+      renderByHex(hex){
+        console.log(hex)
+        var hsb = hexToHsb(hex)
+        this.state.colBandValue = (360 - hsb.h) / 360 * (this.bandWidth - this.btnWidth)
+        this.state.opaBandValue = (this.bandWidth - this.btnWidth)
+        this.state.panelLeft = hsb.s / 100 * this.panelWidth
+        this.state.panelTop = (100 - hsb.b) / 100 * this.panelHeight
+        this.render();
       },
       render(){
         // console.log(this.state)

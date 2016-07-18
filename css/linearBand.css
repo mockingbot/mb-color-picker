@@ -33,3 +33,11 @@
   border:2px solid #FFF;
   box-shadow: 0 0 2px #000, inset 0 0 2px #000;
 }
+.linear_prev_point.active{
+  width:14px;
+  height:14px;
+  margin:-7px;
+  background: #FFF;
+  border:2px solid #FFF;
+  box-shadow: 0 0 2px #000, inset 0 0 2px #000;
+}
