@@ -1,0 +1,35 @@
+.mb-colorpicker .ctrl-pane {
+
+}
+.mb-colorpicker .band-pane {
+  display: flex;
+}
+.mb-colorpicker .color-bands {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.mb-colorpicker .color-preview-bg {
+  width: 34px;
+  height: 34px;
+  margin-left: 10px;
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,0.20);
+  background-size: 16px;
+  background-position: 0 8px, 8px 16px;
+  background-clip: content-box;
+  background-image: linear-gradient(45deg, #C8C8C8 25%, transparent 26%, transparent 75%, #C8C8C8 75%, #C8C8C8),
+                    linear-gradient(45deg, #C8C8C8 25%, transparent 26%, transparent 75%, #C8C8C8 75%, #C8C8C8);
+}
+.mb-colorpicker .color-preview {
+  height: 100%;
+  opacity: 0.1;
+}
+
+.mb-colorpicker .value-pane {
+  display: flex;
+  justify-content: space-between;
+}

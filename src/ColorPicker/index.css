@@ -1,0 +1,32 @@
+.mb-colorpicker {
+  box-sizing: border-box;
+  position: relative;
+  width: 250px;
+  /* height: 330px; */
+  box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.10);
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.10);
+  font-size: 12px;
+  padding: 10px 12px;
+}
+.mb-colorpicker * {
+  box-sizing: border-box;
+}
+
+.mb-colorpicker .theme-pane {
+}
+.mb-colorpicker .canvas-pane {
+  margin: 10px 0;
+}
+.mb-colorpicker .value-pane {
+  margin: 14px 0;
+}
+.mb-colorpicker .color-hr {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid rgba(0,0,0,0.10);
+}
+.mb-colorpicker .history-pane {
+  padding-top: 10px;
+}

@@ -1,0 +1,9 @@
+.mb-colorpicker .theme-pane {
+  display: flex;
+  justify-content: space-between;
+}
+.mb-colorpicker .theme-pane .theme {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(0,0,0,0.10);
+}

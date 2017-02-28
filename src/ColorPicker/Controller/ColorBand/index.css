@@ -1,0 +1,24 @@
+.mb-colorpicker .color-bands .band {
+  position: relative;
+  height: 12px;
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.20);
+  cursor: pointer;
+  background-clip: content-box;
+}
+.mb-colorpicker .color-band {
+  background: linear-gradient(to left, #ff0000, #ff0080, #ff00ff, #8000ff, #0000ff, #0080ff, #00ffff, #00ff80, #00ff00, #80ff00, #ffff00, #ff8000, #ff0000);
+}
+.mb-colorpicker .opacity-band{
+  background: linear-gradient(to right, #FFF, transparent);
+}
+
+.mb-colorpicker .value-btn {
+  position:absolute;
+  width:6px;
+  height:100%;
+  background-color:#FFF;
+  border-radius:2px;
+  box-shadow:0 0 1px #000;
+  pointer-events: none;
+}

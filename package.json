@@ -1,0 +1,33 @@
+{
+  "name": "colorPicker",
+  "version": "1.0.0",
+  "description": "A sketch like color picker written by javascript",
+  "main": "colorPicker.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mockingbot/A-sketch-like-color-picker-in-javascript.git"
+  },
+  "keywords": [
+    "sketch",
+    "colorPicker"
+  ],
+  "author": "qinchangxi@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mockingbot/A-sketch-like-color-picker-in-javascript/issues"
+  },
+  "homepage": "https://github.com/mockingbot/A-sketch-like-color-picker-in-javascript",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.2"
+  }
+}

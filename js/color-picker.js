@@ -284,6 +284,7 @@
       });
     },
     render(){
+      this.currentPoint = 0;
       // this.renderBand();
       // this.renderPoint();
       // console.log(cssValue)
