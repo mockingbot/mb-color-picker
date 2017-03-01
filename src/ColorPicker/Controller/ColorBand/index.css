@@ -16,6 +16,7 @@
 .mb-colorpicker .value-btn {
   position:absolute;
   width:6px;
+  margin-left: -3px;
   height:100%;
   background-color:#FFF;
   border-radius:2px;

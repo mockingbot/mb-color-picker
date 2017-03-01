@@ -12,7 +12,7 @@ export default class Controller extends React.Component {
     this.props.handleChange({ opacityOffset })
   }
   render () {
-    const { color, colorOffset, opacityOffset } = this.props
+    const { rgb, color, colorOffset, opacityOffset } = this.props
     return (
       <section className="ctrl-pane">
         <div className="band-pane">
@@ -28,15 +28,15 @@ export default class Controller extends React.Component {
               handleChange={this.setOpacityOffset} />
           </div>
           <div className="color-preview-bg">
-            <div className="color-preview" style={{ backgroundColor: color }}></div>
+            <div className="color-preview" style={{ backgroundColor: color, opacity: parseInt(opacityOffset) / 100 }}></div>
           </div>
         </div>
         <div className="value-pane">
-          <ColorInput size="7" label="#" maxLength="6" value="2253BB" />
-          <ColorInput size="3" label="R" maxLength="3" value="34" />
-          <ColorInput size="3" label="G" maxLength="3" value="83" />
-          <ColorInput size="3" label="B" maxLength="3" value="187" />
-          <ColorInput size="3" label="A" maxLength="6" value="50" />
+          <ColorInput size="7" label="#" maxLength="6" value={color.slice(1)} />
+          <ColorInput size="3" label="R" maxLength="3" value={rgb.r} />
+          <ColorInput size="3" label="G" maxLength="3" value={rgb.g} />
+          <ColorInput size="3" label="B" maxLength="3" value={rgb.b} />
+          <ColorInput size="3" label="A" maxLength="6" value={parseInt(opacityOffset)} />
         </div>
       </section>
     )
@@ -44,7 +44,8 @@ export default class Controller extends React.Component {
 }
 
 Controller.propTypes = {
+  rgb: React.PropTypes.object,
   color: React.PropTypes.string,
-  colorOffset: React.PropTypes.num,
-  opacityOffset: React.PropTypes.num
+  colorOffset: React.PropTypes.string,
+  opacityOffset: React.PropTypes.string
 }

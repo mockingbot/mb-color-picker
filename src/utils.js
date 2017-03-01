@@ -1,5 +1,9 @@
 export {
-  rgb
+  hexToHsb,
+  hexToRgb,
+  hsbToHex,
+  hsbToRgb,
+  rgbToHex
 }
 function getDegree (start, end, width, height) {
   var deltaX = end.x - start.x;
@@ -51,14 +55,14 @@ function getLinearPercent (perX, perY, width, height, theta){
   return parseFloat(result.toFixed(2))
 }
 //Color space convertions
-var hexToRgb = function (hex) {
+function hexToRgb (hex) {
   var hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
   return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
 };
-var hexToHsb = function (hex) {
+function hexToHsb (hex) {
   return rgbToHsb(hexToRgb(hex));
 };
-var rgbToHsb = function (rgb) {
+function rgbToHsb (rgb) {
   var hsb = {h: 0, s: 0, b: 0};
   var min = Math.min(rgb.r, rgb.g, rgb.b);
   var max = Math.max(rgb.r, rgb.g, rgb.b);
@@ -76,7 +80,7 @@ var rgbToHsb = function (rgb) {
   hsb.b *= 100/255;
   return hsb;
 };
-var hsbToRgb = function (hsb) {
+function hsbToRgb (hsb) {
   var rgb = {};
   var h = hsb.h;
   var s = hsb.s*255/100;
@@ -98,19 +102,19 @@ var hsbToRgb = function (hsb) {
   }
   return {r:Math.round(rgb.r), g:Math.round(rgb.g), b:Math.round(rgb.b)};
 };
-var rgbToHex = function (rgb) {
+function rgbToHex (rgb) {
   var hex = [
     rgb.r.toString(16),
     rgb.g.toString(16),
     rgb.b.toString(16)
   ];
-  $.each(hex, function (nr, val) {
+  hex.map((val, nr) => {
     if (val.length == 1) {
       hex[nr] = '0' + val;
     }
-  });
+  })
   return hex.join('');
 };
-var hsbToHex = function (hsb) {
+function hsbToHex (hsb) {
   return rgbToHex(hsbToRgb(hsb));
 };

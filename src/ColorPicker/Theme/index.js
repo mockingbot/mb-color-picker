@@ -11,8 +11,8 @@ export default class Theme extends React.Component {
   render () {
     return (
       <section className="theme-pane">
-        {themes.map((t) => {
-          return <div className="theme" style={{backgroundColor: t}}></div>
+        {themes.map((t, i) => {
+          return <div key={i} className="theme" style={{backgroundColor: t}}></div>
         })}
       </section>
     )
