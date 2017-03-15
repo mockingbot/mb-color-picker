@@ -3,7 +3,8 @@ import React from 'react'
 import Theme from './Theme'
 import Canvas from './Canvas'
 import History from './History'
-import Controller from './Controller'
+import Bands from './Bands'
+import DashBoard from './DashBoard'
 
 import './index.css'
 import { hexToHsb, hsbToRgb, rgbToHex, hsbToHex } from '../utils'
@@ -11,7 +12,6 @@ import { hexToHsb, hsbToRgb, rgbToHex, hsbToHex } from '../utils'
 export default class ColorPicker extends React.Component {
   constructor (props) {
     super()
-    // TODO hsb => hsl
     const hsb = hexToHsb(props.color)
     console.log(props.color)
     console.log(hsb)
@@ -39,27 +39,22 @@ export default class ColorPicker extends React.Component {
     const canvasColor = '#' + hsbToHex({
       h: parseInt(colorOffset) * 360 / 100,
       s: 100,
-      b: 50
+      b: 100
     })
     this.hex = '#' + rgbToHex(rgb)
     this.opacity = parseInt(opacityOffset)
 
     return (
       <div className="mb-colorpicker">
-        <Theme />
-        <Canvas
-          top={canvasTop}
-          left={canvasLeft}
-          color={canvasColor}
-          handleChange={this.handleChange}
-        />
-        <Controller
-          rgb={rgb}
-          color={this.hex}
-          colorOffset={colorOffset}
-          opacityOffset={opacityOffset}
-          handleChange={this.handleChange}
-        />
+        <Theme themes={this.props.themes} />
+        <Canvas top={canvasTop} left={canvasLeft}
+          color={canvasColor} handleChange={this.handleChange}>
+        </Canvas>
+        <Bands
+          color={this.hex} colorOffset={colorOffset}
+          opacityOffset={opacityOffset} handleChange={this.handleChange}>
+        </Bands>
+        <DashBoard color={this.hex} rgb={rgb} alpha={this.opacity} />
         <span className="color-hr"/>
         <History />
       </div>
@@ -69,6 +64,7 @@ export default class ColorPicker extends React.Component {
 
 ColorPicker.propTypes = {
   color: React.PropTypes.string,
+  themes: React.PropTypes.array,
   opacity: React.PropTypes.number
 }
 ColorPicker.defaultProps = {

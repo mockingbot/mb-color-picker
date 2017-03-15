@@ -2,25 +2,21 @@ import React from 'react'
 
 import './index.css'
 
-const themes = []
-for (let i = 0 ; i < 9 ; i ++) {
-  themes.push('#' + (Math.random() * 0xFFFFFF >> 0).toString(16))
-}
-
 export default class Theme extends React.Component {
   render () {
+    const { themes } = this.props
     return (
       <section className="theme-pane">
-        {themes.map((t, i) => {
+        { themes.map((t, i) => {
           return <div key={i} className="theme" style={{backgroundColor: t}}></div>
-        })}
+        }) }
       </section>
     )
   }
 }
 
 Theme.propTypes = {
-  'a': React.PropTypes.string
+  themes: React.PropTypes.array
 }
 
 /* 以前写的渐变corner, 样式可以收藏起来

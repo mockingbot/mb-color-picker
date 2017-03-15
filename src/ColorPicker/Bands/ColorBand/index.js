@@ -35,12 +35,13 @@ export default class ColorBand extends React.Component {
   }
   render () {
     const { type, left, color } = this.props
+    const gradient = `linear-gradient(to right, transparent 0%, ${color} 100%)`
     return (
       <div
         ref="band"
         onMouseDown={this.handleDown}
-        style={{ backgroundColor: color }}
         className={`band ${CLASSNAME[type]}`}>
+        {type === 'opacity' && <div className="opacity-bg" style={{ backgroundImage: gradient }}></div>}
         <span className="value-btn" style={{ left }}></span>
       </div>
     )

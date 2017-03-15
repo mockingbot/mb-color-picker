@@ -1,8 +1,8 @@
 {
-  "name": "colorPicker",
-  "version": "1.0.0",
+  "name": "mb-color-picker",
+  "version": "0.0.1",
   "description": "A sketch like color picker written by javascript",
-  "main": "colorPicker.js",
+  "main": "src/ColorPicker/index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
