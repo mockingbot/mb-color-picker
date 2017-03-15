@@ -16,5 +16,5 @@ ReactDOM.render(
     onChange={(hex, opacity) => {
       /*console.log(hex, opacity)*/
     }}
-  />, document.getElementById('demo')
+  />, document.getElementById('root')
 )
