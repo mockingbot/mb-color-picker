@@ -1,20 +1,73 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
-import ColorPicker from './ColorPicker'
+import Theme from './Theme'
+import Canvas from './Canvas'
+import History from './History'
+import Bands from './Bands'
+import DashBoard from './DashBoard'
 
-const themes = []
-for (let i = 0 ; i < 9 ; i ++) {
-  themes.push('#' + (Math.random() * 0xFFFFFF >> 0).toString(16))
+import './index.css'
+import { hexToHsb, hsbToRgb, rgbToHex, hsbToHex } from './utils'
+
+export default class ColorPicker extends React.Component {
+  constructor (props) {
+    super()
+    const hsb = hexToHsb(props.color)
+    console.log(props.color)
+    console.log(hsb)
+    const opacity = props.opacity
+    this.state = {
+      colorOffset: hsb.h + '%',
+      canvasLeft: hsb.s + '%',
+      canvasTop: hsb.b + '%',
+      opacityOffset: opacity + '%',
+    }
+  }
+  handleChange = (state) => {
+    this.setState(state)
+  }
+  componentDidUpdate () {
+    this.props.onChange(this.hex, this.opacity)
+  }
+  render () {
+    const { canvasLeft, canvasTop, colorOffset, opacityOffset } = this.state
+    const rgb = hsbToRgb({
+      h: parseInt(colorOffset) * 360 / 100,
+      s: parseInt(canvasLeft),
+      b: 100 - parseInt(canvasTop)
+    })
+    const canvasColor = '#' + hsbToHex({
+      h: parseInt(colorOffset) * 360 / 100,
+      s: 100,
+      b: 100
+    })
+    this.hex = '#' + rgbToHex(rgb)
+    this.opacity = parseInt(opacityOffset)
+
+    return (
+      <div className="mb-colorpicker">
+        <Theme themes={this.props.themes} />
+        <Canvas top={canvasTop} left={canvasLeft}
+          color={canvasColor} handleChange={this.handleChange}>
+        </Canvas>
+        <Bands
+          color={this.hex} colorOffset={colorOffset}
+          opacityOffset={opacityOffset} handleChange={this.handleChange}>
+        </Bands>
+        <DashBoard color={this.hex} rgb={rgb} alpha={this.opacity} />
+        <span className="color-hr"/>
+        <History />
+      </div>
+    )
+  }
 }
 
-ReactDOM.render(
-  <ColorPicker
-    color={'#bec851'}
-    opacity={40}
-    themes={themes}
-    onChange={(hex, opacity) => {
-      /*console.log(hex, opacity)*/
-    }}
-  />, document.getElementById('root')
-)
+ColorPicker.propTypes = {
+  color: React.PropTypes.string,
+  themes: React.PropTypes.array,
+  opacity: React.PropTypes.number
+}
+ColorPicker.defaultProps = {
+  color: '#bec851',
+  opacity: 50
+}
