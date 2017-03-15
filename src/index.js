@@ -6,7 +6,7 @@ import History from './History'
 import Bands from './Bands'
 import DashBoard from './DashBoard'
 
-import './index.css'
+import './index.sass'
 import { hexToHsb, hsbToRgb, rgbToHex, hsbToHex } from './utils'
 
 export default class ColorPicker extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './index.css'
+import './index.sass'
 
 export default class Theme extends React.Component {
   render () {

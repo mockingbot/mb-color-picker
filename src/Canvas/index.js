@@ -1,6 +1,6 @@
 import React from 'react'
 import Circle from './Circle'
-import './index.css'
+import './index.sass'
 
 export default class Canvas extends React.Component {
   componentDidMount () {

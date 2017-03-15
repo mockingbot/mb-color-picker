@@ -1,5 +1,4 @@
 import React from 'react'
-import './index.css'
 
 export default class ColorInput extends React.Component {
   render () {

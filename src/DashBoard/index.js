@@ -1,8 +1,6 @@
 import React from 'react'
 import ColorInput from './ColorInput'
 
-import './index.css'
-
 export default class DashBoard extends React.Component {
   render () {
     const { color, rgb, alpha } = this.props

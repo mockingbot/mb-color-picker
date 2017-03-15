@@ -1,7 +1,7 @@
 {
   "name": "mb-color-picker",
-  "version": "0.0.1",
-  "description": "A sketch like color picker written by javascript",
+  "version": "0.0.2",
+  "description": "A color picker react component",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -20,22 +20,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mockingbot/A-sketch-like-color-picker-in-javascript.git"
+    "url": "git@github.com:mockingbot/mb-color-picker.git"
   },
   "author": "qinchangxi@gmail.com",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mockingbot/A-sketch-like-color-picker-in-javascript/issues"
-  },
   "homepage": "https://github.com/mockingbot/mb-color-picker",
   "peerDependencies": {
     "react": "^15.4.2"
   },
   "devDependencies": {
-    "nwb": "^0.15.6",
-    "react-dom": "^15.4.2",
     "eslint": "^3.17.1",
-    "eslint-plugin-react": "^6.10.0"
+    "eslint-plugin-react": "^6.10.0",
+    "nwb": "^0.15.6",
+    "nwb-sass": "^0.7.1",
+    "react-dom": "^15.4.2"
   },
   "keywords": [
     "react",

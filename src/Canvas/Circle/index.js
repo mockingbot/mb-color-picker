@@ -1,5 +1,5 @@
 import React from 'react'
-import './index.css'
+import './index.sass'
 
 export default class Circle extends React.Component {
   render () {
