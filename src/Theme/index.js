@@ -1,14 +1,14 @@
 import React from 'react'
 
-import './index.sass'
+import styles from './index.sass'
 
 export default class Theme extends React.Component {
   render () {
     const { themes } = this.props
     return (
-      <section className="theme-pane">
+      <section className={styles['theme-pane']}>
         { themes.map((t, i) => {
-          return <div key={i} className="theme" style={{backgroundColor: t}}></div>
+          return <div key={i} className={styles['theme']} style={{backgroundColor: t}}></div>
         }) }
       </section>
     )

@@ -6,7 +6,8 @@ import History from './History'
 import Bands from './Bands'
 import DashBoard from './DashBoard'
 
-import './index.sass'
+import styles from './index.sass'
+
 import { hexToHsb, hsbToRgb, rgbToHex, hsbToHex } from './utils'
 
 export default class ColorPicker extends React.Component {
@@ -45,7 +46,7 @@ export default class ColorPicker extends React.Component {
     this.opacity = parseInt(opacityOffset)
 
     return (
-      <div className="mb-colorpicker">
+      <div className={styles['colorpicker']}>
         <Theme themes={this.props.themes} />
         <Canvas top={canvasTop} left={canvasLeft}
           color={canvasColor} handleChange={this.handleChange}>
@@ -55,7 +56,7 @@ export default class ColorPicker extends React.Component {
           opacityOffset={opacityOffset} handleChange={this.handleChange}>
         </Bands>
         <DashBoard color={this.hex} rgb={rgb} alpha={this.opacity} />
-        <span className="color-hr"/>
+        <span className={styles['hr']}/>
         <History />
       </div>
     )

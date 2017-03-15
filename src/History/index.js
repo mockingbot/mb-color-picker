@@ -1,10 +1,10 @@
 import React from 'react'
-import './index.sass'
+import styles from './index.sass'
 
 export default class History extends React.Component {
   render () {
     return (
-      <div className="history-pane">
+      <div className={styles['history-pane']}>
         <span>最近使用的颜色</span>
         <div className="colpick_prev1 colpick_prev" style={{'backgroundColor': 'rgb(98, 0, 255)'}}></div>
         <div className="colpick_prev2 colpick_prev" style={{'backgroundColor': 'rgb(98, 0, 255)'}}></div>

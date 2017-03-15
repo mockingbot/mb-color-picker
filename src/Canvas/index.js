@@ -1,6 +1,6 @@
 import React from 'react'
 import Circle from './Circle'
-import './index.sass'
+import styles from './index.sass'
 
 export default class Canvas extends React.Component {
   componentDidMount () {
@@ -43,11 +43,11 @@ export default class Canvas extends React.Component {
     return (
       <section
         ref={(ref) => { this.canvas = ref }}
-        className="canvas-pane"
+        className={styles['canvas-pane']}
         style={{backgroundColor}}
         onMouseDown={this.handleDown}>
-        <div className="overlay-1"></div>
-        <div className="overlay-2"></div>
+        <div className={styles['overlay-1']}></div>
+        <div className={styles['overlay-2']}></div>
         <Circle {...{left, top}} />
       </section>
     )

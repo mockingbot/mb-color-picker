@@ -1,9 +1,9 @@
 import React from 'react'
-import './index.css'
+import styles from './index.sass'
 
 const CLASSNAME = {
-  color: 'color-band',
-  opacity: 'opacity-band'
+  color: styles['color-band'],
+  opacity: styles['opacity-band']
 }
 
 export default class ColorBand extends React.Component {
@@ -40,9 +40,9 @@ export default class ColorBand extends React.Component {
       <div
         ref="band"
         onMouseDown={this.handleDown}
-        className={`band ${CLASSNAME[type]}`}>
-        {type === 'opacity' && <div className="opacity-bg" style={{ backgroundImage: gradient }}></div>}
-        <span className="value-btn" style={{ left }}></span>
+        className={`${styles['band']} ${CLASSNAME[type]}`}>
+        {type === 'opacity' && <div className={styles['opacity-bg']} style={{ backgroundImage: gradient }}></div>}
+        <span className={styles['btn']} style={{ left }}></span>
       </div>
     )
   }

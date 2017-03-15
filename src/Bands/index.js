@@ -1,7 +1,7 @@
 import React from 'react'
 import ColorBand from './ColorBand'
 
-import './index.css'
+import styles from './index.sass'
 
 export default class Bands extends React.Component {
   setColorOffset = (colorOffset) => {
@@ -13,8 +13,8 @@ export default class Bands extends React.Component {
   render () {
     const { color, colorOffset, opacityOffset } = this.props
     return (
-      <section className="band-pane">
-        <div className="color-bands">
+      <section className={styles['band-pane']}>
+        <div className={styles['color-bands']}>
           <ColorBand
             type="color"
             left={colorOffset}
@@ -25,8 +25,8 @@ export default class Bands extends React.Component {
             left={opacityOffset}
             handleChange={this.setOpacityOffset} />
         </div>
-        <div className="color-preview-bg">
-          <div className="color-preview" style={{ backgroundColor: color, opacity: parseInt(opacityOffset) / 100 }}></div>
+        <div className={styles['preview-bg']}>
+          <div className={styles['preview']} style={{ backgroundColor: color, opacity: parseInt(opacityOffset) / 100 }}></div>
         </div>
       </section>
     )
