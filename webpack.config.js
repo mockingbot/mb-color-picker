@@ -2,6 +2,7 @@ var path = require('path')
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var info = require('./package.json')
 var outputPath = {
   development: __dirname,
   production: path.join(__dirname, './dist')
@@ -15,7 +16,8 @@ var config = {
   output: {
     path: outputPath[process.env.NODE_ENV],
     filename: '[name].js',
-    library: 'mbColorPicker'
+    library: info.name,
+    libraryTarget: 'umd'
   },
   resolve: {
     modules: [path.join(__dirname, './src'), 'node_modules'],
@@ -76,8 +78,18 @@ if (process.env.NODE_ENV === 'development') {
   }
 } else {
   config.externals = {
-    'react': 'React',
-    'react-dom': 'ReactDOM'
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom'
+   }
   }
 }
 
