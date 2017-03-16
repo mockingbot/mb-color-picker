@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import ColorPicker from '../../src'
+import ColorPicker from '../src'
 
 const themes = []
 for (let i = 0 ; i < 9 ; i ++) {
