@@ -8,3 +8,4 @@
 /umd
 npm-debug.log*
 *.tgz
+/example/dist
