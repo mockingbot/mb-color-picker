@@ -2,6 +2,7 @@
   "name": "mb-color-picker",
   "version": "0.0.5",
   "description": "A color picker react component",
+  "module": "src/index.js",
   "main": "dist/main.js",
   "style": "dist/styls.css",
   "files": [

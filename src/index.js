@@ -10,7 +10,7 @@ import styles from './index.sass'
 
 import { hexToHsb, hsbToRgb, rgbToHex, hsbToHex } from './utils'
 
-export default class ColorPicker extends React.Component {
+class ColorPicker extends React.Component {
   constructor (props) {
     super()
     const hsb = hexToHsb(props.color)
@@ -72,3 +72,7 @@ ColorPicker.defaultProps = {
   color: '#bec851',
   opacity: 50
 }
+
+export default ColorPicker
+
+module.exports = ColorPicker

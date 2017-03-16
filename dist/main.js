@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["react"], factory);
 	else if(typeof exports === 'object')
-		exports["mb-color-picker"] = factory(require("react"));
+		exports["ColorPicker"] = factory(require("react"));
 	else
-		root["mb-color-picker"] = factory(root["React"]);
+		root["ColorPicker"] = factory(root["React"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -84,26 +84,36 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ColorBand__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_sass__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ColorBand = __webpack_require__(8);
+
+var _ColorBand2 = _interopRequireDefault(_ColorBand);
+
+var _index = __webpack_require__(12);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
 
 var Bands = function (_React$Component) {
   _inherits(Bands, _React$Component);
@@ -134,64 +144,75 @@ var Bands = function (_React$Component) {
           colorOffset = _props.colorOffset,
           opacityOffset = _props.opacityOffset;
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         'section',
-        { className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['band-pane'] },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        { className: _index2.default['band-pane'] },
+        _react2.default.createElement(
           'div',
-          { className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['color-bands'] },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ColorBand__["a" /* default */], {
+          { className: _index2.default['color-bands'] },
+          _react2.default.createElement(_ColorBand2.default, {
             type: 'color',
             left: colorOffset,
             handleChange: this.setColorOffset }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ColorBand__["a" /* default */], {
+          _react2.default.createElement(_ColorBand2.default, {
             type: 'opacity',
             color: color,
             left: opacityOffset,
             handleChange: this.setOpacityOffset })
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        _react2.default.createElement(
           'div',
-          { className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['preview-bg'] },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['preview'], style: { backgroundColor: color, opacity: parseInt(opacityOffset) / 100 } })
+          { className: _index2.default['preview-bg'] },
+          _react2.default.createElement('div', { className: _index2.default['preview'], style: { backgroundColor: color, opacity: parseInt(opacityOffset) / 100 } })
         )
       );
     }
   }]);
 
   return Bands;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Bands;
+exports.default = Bands;
 
 
 Bands.propTypes = {
-  color: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
-  colorOffset: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
-  opacityOffset: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string
+  color: _react2.default.PropTypes.string,
+  colorOffset: _react2.default.PropTypes.string,
+  opacityOffset: _react2.default.PropTypes.string
 };
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Circle__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_sass__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Circle = __webpack_require__(9);
+
+var _Circle2 = _interopRequireDefault(_Circle);
+
+var _index = __webpack_require__(14);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
 
 var Canvas = function (_React$Component) {
   _inherits(Canvas, _React$Component);
@@ -256,53 +277,64 @@ var Canvas = function (_React$Component) {
           left = _props.left,
           top = _props.top;
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         'section',
         {
           ref: function ref(_ref2) {
             _this2.canvas = _ref2;
           },
-          className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['canvas-pane'],
+          className: _index2.default['canvas-pane'],
           style: { backgroundColor: backgroundColor },
           onMouseDown: this.handleDown },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['overlay-1'] }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['overlay-2'] }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Circle__["a" /* default */], { left: left, top: top })
+        _react2.default.createElement('div', { className: _index2.default['overlay-1'] }),
+        _react2.default.createElement('div', { className: _index2.default['overlay-2'] }),
+        _react2.default.createElement(_Circle2.default, { left: left, top: top })
       );
     }
   }]);
 
   return Canvas;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Canvas;
+exports.default = Canvas;
 
 
 Canvas.propTypes = {
-  changePosition: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func
+  changePosition: _react2.default.PropTypes.func
 };
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ColorInput__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_sass__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ColorInput = __webpack_require__(10);
+
+var _ColorInput2 = _interopRequireDefault(_ColorInput);
+
+var _index = __webpack_require__(15);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
 
 var DashBoard = function (_React$Component) {
   _inherits(DashBoard, _React$Component);
@@ -321,48 +353,57 @@ var DashBoard = function (_React$Component) {
           rgb = _props.rgb,
           alpha = _props.alpha;
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         'section',
-        { className: __WEBPACK_IMPORTED_MODULE_2__index_sass___default.a['value-pane'] },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ColorInput__["a" /* default */], { size: '7', label: '#', maxLength: '6', value: color.slice(1) }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ColorInput__["a" /* default */], { size: '3', label: 'R', maxLength: '3', value: rgb.r }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ColorInput__["a" /* default */], { size: '3', label: 'G', maxLength: '3', value: rgb.g }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ColorInput__["a" /* default */], { size: '3', label: 'B', maxLength: '3', value: rgb.b }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ColorInput__["a" /* default */], { size: '3', label: 'A', maxLength: '6', value: alpha })
+        { className: _index2.default['value-pane'] },
+        _react2.default.createElement(_ColorInput2.default, { size: '7', label: '#', maxLength: '6', value: color.slice(1) }),
+        _react2.default.createElement(_ColorInput2.default, { size: '3', label: 'R', maxLength: '3', value: rgb.r }),
+        _react2.default.createElement(_ColorInput2.default, { size: '3', label: 'G', maxLength: '3', value: rgb.g }),
+        _react2.default.createElement(_ColorInput2.default, { size: '3', label: 'B', maxLength: '3', value: rgb.b }),
+        _react2.default.createElement(_ColorInput2.default, { size: '3', label: 'A', maxLength: '6', value: alpha })
       );
     }
   }]);
 
   return DashBoard;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = DashBoard;
+exports.default = DashBoard;
 
 
 DashBoard.propTypes = {
-  rgb: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.object,
-  alpha: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.number
+  rgb: _react2.default.PropTypes.object,
+  alpha: _react2.default.PropTypes.number
 };
 
 /***/ }),
 /* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _index = __webpack_require__(16);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
 
 var History = function (_React$Component) {
   _inherits(History, _React$Component);
@@ -376,55 +417,63 @@ var History = function (_React$Component) {
   _createClass(History, [{
     key: 'render',
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         'div',
-        { className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['history-pane'] },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        { className: _index2.default['history-pane'] },
+        _react2.default.createElement(
           'span',
           null,
           '\u6700\u8FD1\u4F7F\u7528\u7684\u989C\u8272'
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev1 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev2 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev3 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev4 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev5 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev6 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'colpick_transparent', className: 'colpick_prev' })
+        _react2.default.createElement('div', { className: 'colpick_prev1 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
+        _react2.default.createElement('div', { className: 'colpick_prev2 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
+        _react2.default.createElement('div', { className: 'colpick_prev3 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
+        _react2.default.createElement('div', { className: 'colpick_prev4 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
+        _react2.default.createElement('div', { className: 'colpick_prev5 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
+        _react2.default.createElement('div', { className: 'colpick_prev6 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
+        _react2.default.createElement('div', { id: 'colpick_transparent', className: 'colpick_prev' })
       );
     }
   }]);
 
   return History;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = History;
+exports.default = History;
 
 
 History.propTypes = {
-  'a': __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string
+  'a': _react2.default.PropTypes.string
 };
 
 /***/ }),
 /* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _index = __webpack_require__(17);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
 
 var Theme = function (_React$Component) {
   _inherits(Theme, _React$Component);
@@ -440,24 +489,24 @@ var Theme = function (_React$Component) {
     value: function render() {
       var themes = this.props.themes;
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         'section',
-        { className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['theme-pane'] },
+        { className: _index2.default['theme-pane'] },
         themes.map(function (t, i) {
-          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { key: i, className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['theme'], style: { backgroundColor: t } });
+          return _react2.default.createElement('div', { key: i, className: _index2.default['theme'], style: { backgroundColor: t } });
         })
       );
     }
   }]);
 
   return Theme;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Theme;
+exports.default = Theme;
 
 
 Theme.propTypes = {
-  themes: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.array
+  themes: _react2.default.PropTypes.array
 };
 
 /* 以前写的渐变corner, 样式可以收藏起来
@@ -470,14 +519,19 @@ Theme.propTypes = {
 
 /***/ }),
 /* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return hexToHsb; });
-/* unused harmony export hexToRgb */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hsbToHex; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hsbToRgb; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return rgbToHex; });
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.hexToHsb = hexToHsb;
+exports.hexToRgb = hexToRgb;
+exports.hsbToHex = hsbToHex;
+exports.hsbToRgb = hsbToRgb;
+exports.rgbToHex = rgbToHex;
 
 function getDegree(start, end, width, height) {
   var deltaX = end.x - start.x;
@@ -604,14 +658,26 @@ module.exports = {"colorpicker":"colorpicker---2UGWl","hr":"hr---32Qms"};
 
 /***/ }),
 /* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _index = __webpack_require__(11);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -619,12 +685,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-
-
-
 var CLASSNAME = {
-  color: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['color-band'],
-  opacity: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['opacity-band']
+  color: _index2.default['color-band'],
+  opacity: _index2.default['opacity-band']
 };
 
 var ColorBand = function (_React$Component) {
@@ -678,42 +741,51 @@ var ColorBand = function (_React$Component) {
           color = _props.color;
 
       var gradient = 'linear-gradient(to right, transparent 0%, ' + color + ' 100%)';
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         'div',
         {
           ref: 'band',
           onMouseDown: this.handleDown,
-          className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['band'] + ' ' + CLASSNAME[type] },
-        type === 'opacity' && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['opacity-bg'], style: { backgroundImage: gradient } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['btn'], style: { left: left } })
+          className: _index2.default['band'] + ' ' + CLASSNAME[type] },
+        type === 'opacity' && _react2.default.createElement('div', { className: _index2.default['opacity-bg'], style: { backgroundImage: gradient } }),
+        _react2.default.createElement('span', { className: _index2.default['btn'], style: { left: left } })
       );
     }
   }]);
 
   return ColorBand;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = ColorBand;
+exports.default = ColorBand;
 
 /***/ }),
 /* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _index = __webpack_require__(13);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
 
 var Circle = function (_React$Component) {
   _inherits(Circle, _React$Component);
@@ -731,33 +803,41 @@ var Circle = function (_React$Component) {
           left = _props.left,
           top = _props.top;
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { style: { left: left, top: top }, className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['color-circle'] });
+      return _react2.default.createElement('span', { style: { left: left, top: top }, className: _index2.default['color-circle'] });
     }
   }]);
 
   return Circle;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Circle;
+exports.default = Circle;
 
 /***/ }),
 /* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
 
 var ColorInput = function (_React$Component) {
   _inherits(ColorInput, _React$Component);
@@ -777,27 +857,27 @@ var ColorInput = function (_React$Component) {
           size = _props.size,
           value = _props.value;
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         "div",
         { className: "color-input Hex_value" },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        _react2.default.createElement(
           "label",
           { htmlFor: "" },
           label
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", _extends({ type: "text" }, { maxLength: maxLength, size: size, value: value }))
+        _react2.default.createElement("input", _extends({ type: "text" }, { maxLength: maxLength, size: size, value: value }))
       );
     }
   }]);
 
   return ColorInput;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+}(_react2.default.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = ColorInput;
+exports.default = ColorInput;
 
 
 ColorInput.propTypes = {
-  'a': __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string
+  'a': _react2.default.PropTypes.string
 };
 
 /***/ }),
@@ -851,39 +931,54 @@ module.exports = {"theme-pane":"theme-pane---3dEuz","theme":"theme---6kD5D"};
 
 /***/ }),
 /* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Theme__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Canvas__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__History__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Bands__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DashBoard__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__index_sass__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__index_sass__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils__ = __webpack_require__(6);
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Theme = __webpack_require__(5);
+
+var _Theme2 = _interopRequireDefault(_Theme);
+
+var _Canvas = __webpack_require__(2);
+
+var _Canvas2 = _interopRequireDefault(_Canvas);
+
+var _History = __webpack_require__(4);
+
+var _History2 = _interopRequireDefault(_History);
+
+var _Bands = __webpack_require__(1);
+
+var _Bands2 = _interopRequireDefault(_Bands);
+
+var _DashBoard = __webpack_require__(3);
+
+var _DashBoard2 = _interopRequireDefault(_DashBoard);
+
+var _index = __webpack_require__(7);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _utils = __webpack_require__(6);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-
-
-
-
-
 
 var ColorPicker = function (_React$Component) {
   _inherits(ColorPicker, _React$Component);
@@ -897,7 +992,7 @@ var ColorPicker = function (_React$Component) {
       _this.setState(state);
     };
 
-    var hsb = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["a" /* hexToHsb */])(props.color);
+    var hsb = (0, _utils.hexToHsb)(props.color);
     console.log(props.color);
     console.log(hsb);
     var opacity = props.opacity;
@@ -924,50 +1019,52 @@ var ColorPicker = function (_React$Component) {
           colorOffset = _state.colorOffset,
           opacityOffset = _state.opacityOffset;
 
-      var rgb = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["b" /* hsbToRgb */])({
+      var rgb = (0, _utils.hsbToRgb)({
         h: parseInt(colorOffset) * 360 / 100,
         s: parseInt(canvasLeft),
         b: 100 - parseInt(canvasTop)
       });
-      var canvasColor = '#' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["c" /* hsbToHex */])({
+      var canvasColor = '#' + (0, _utils.hsbToHex)({
         h: parseInt(colorOffset) * 360 / 100,
         s: 100,
         b: 100
       });
-      this.hex = '#' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["d" /* rgbToHex */])(rgb);
+      this.hex = '#' + (0, _utils.rgbToHex)(rgb);
       this.opacity = parseInt(opacityOffset);
 
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return _react2.default.createElement(
         'div',
-        { className: __WEBPACK_IMPORTED_MODULE_6__index_sass___default.a['colorpicker'] },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Theme__["a" /* default */], { themes: this.props.themes }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Canvas__["a" /* default */], { top: canvasTop, left: canvasLeft,
+        { className: _index2.default['colorpicker'] },
+        _react2.default.createElement(_Theme2.default, { themes: this.props.themes }),
+        _react2.default.createElement(_Canvas2.default, { top: canvasTop, left: canvasLeft,
           color: canvasColor, handleChange: this.handleChange }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Bands__["a" /* default */], {
+        _react2.default.createElement(_Bands2.default, {
           color: this.hex, colorOffset: colorOffset,
           opacityOffset: opacityOffset, handleChange: this.handleChange }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__DashBoard__["a" /* default */], { color: this.hex, rgb: rgb, alpha: this.opacity }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: __WEBPACK_IMPORTED_MODULE_6__index_sass___default.a['hr'] }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__History__["a" /* default */], null)
+        _react2.default.createElement(_DashBoard2.default, { color: this.hex, rgb: rgb, alpha: this.opacity }),
+        _react2.default.createElement('span', { className: _index2.default['hr'] }),
+        _react2.default.createElement(_History2.default, null)
       );
     }
   }]);
 
   return ColorPicker;
-}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = ColorPicker;
-
+}(_react2.default.Component);
 
 ColorPicker.propTypes = {
-  color: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
-  themes: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.array,
-  opacity: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.number
+  color: _react2.default.PropTypes.string,
+  themes: _react2.default.PropTypes.array,
+  opacity: _react2.default.PropTypes.number
 };
 ColorPicker.defaultProps = {
   color: '#bec851',
   opacity: 50
 };
+
+exports.default = ColorPicker;
+
+
+module.exports = ColorPicker;
 
 /***/ })
 /******/ ]);
