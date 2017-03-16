@@ -1,4 +1,4 @@
-module.exports =
+var mbColorPicker =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -71,7 +71,7 @@ module.exports =
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = require("React");
+module.exports = React;
 
 /***/ }),
 /* 1 */

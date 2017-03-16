@@ -1,39 +1,24 @@
 var path = require('path')
-var webpack = require('webpack')
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-// var isProduction = process.env.NODE_ENV === 'production'
-var isExample = process.env.NODE_ENV === 'example'
 var outputPath = {
   development: __dirname,
-  production: path.join(__dirname, './dist'),
-  example: path.join(__dirname, './example/dist')
+  production: path.join(__dirname, './dist')
 }
 var entry = {
-  main: './src/index.js'
-}
-if (process.env.NODE_ENV === 'development') {
-  entry.example = './example/src/index.js'
-}
-if (process.env.NODE_ENV === 'example') {
-  entry.vendor = [
-    'react',
-    'react-dom'
-  ]
+  main: path.join(__dirname, './src')
 }
 
-module.exports = {
+var config = {
   entry: entry,
   output: {
     path: outputPath[process.env.NODE_ENV],
     filename: '[name].js',
-    library: 'mbColorPicker',
-    libraryTarget: isExample ? 'var' : 'commonjs2'
-    // publicPath: ''
+    library: 'mbColorPicker'
   },
   resolve: {
-    modules: [path.join(__dirname, './src'), path.join(__dirname, './node_modules')],
+    modules: [path.join(__dirname, './src'), 'node_modules'],
     extensions: ['.js']
   },
   module: {
@@ -65,47 +50,35 @@ module.exports = {
             }
           ]
         })
-      },
-      // {
-      //   test: require.resolve('react'),
-      //   use: [
-      //     {
-      //       loader: 'expose-loader',
-      //       options: 'React'
-      //     }
-      //   ]
-      // },
-      // {
-      //   test: require.resolve('react-dom'),
-      //   use: [
-      //     {
-      //       loader: 'expose-loader',
-      //       options: 'ReactDOM'
-      //     }
-      //   ]
-      // }
+      }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('style.css'),
-    // new HtmlWebpackPlugin(),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   entries: [
-    //     'react',
-    //     'react-dom'
-    //   ]
-    // })
-  ],
-  externals: {
+    new ExtractTextPlugin('style.css')
+  ]
+}
+
+if (process.env.NODE_ENV === 'development') {
+  config.entry = {
+    main: path.join(__dirname, './example')
+  }
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.join(__dirname, './example/index.html')
+    })
+  )
+
+  config.devServer = {
+    port: 3000,
+    historyApiFallback: true,
+    contentBase: path.join(__dirname, './example')
+  }
+} else {
+  config.externals = {
     'react': 'React',
     'react-dom': 'ReactDOM'
-  },
-  devServer: {
-    port: 3000,
-    inline: true,
-    historyApiFallback: {
-      index: './index.html'
-    }
   }
 }
+
+module.exports = config
