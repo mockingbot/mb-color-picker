@@ -1,39 +1,23 @@
 var path = require('path')
-var webpack = require('webpack')
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-// var isProduction = process.env.NODE_ENV === 'production'
-var isExample = process.env.NODE_ENV === 'example'
-var outputPath = {
-  development: __dirname,
-  production: path.join(__dirname, './dist'),
-  example: path.join(__dirname, './example/dist')
-}
+var info = require('./package.json')
+
 var entry = {
-  main: './src/index.js'
-}
-if (process.env.NODE_ENV === 'development') {
-  entry.example = './example/src/index.js'
-}
-if (process.env.NODE_ENV === 'example') {
-  entry.vendor = [
-    'react',
-    'react-dom'
-  ]
+  main: path.join(__dirname, './src')
 }
 
-module.exports = {
+var config = {
   entry: entry,
   output: {
-    path: outputPath[process.env.NODE_ENV],
+    path: path.join(__dirname, './dist'),
     filename: '[name].js',
-    library: 'mbColorPicker',
-    libraryTarget: isExample ? 'var' : 'commonjs2'
-    // publicPath: ''
+    library: info.name,
+    libraryTarget: 'umd'
   },
   resolve: {
-    modules: [path.join(__dirname, './src'), path.join(__dirname, './node_modules')],
+    modules: [path.join(__dirname, './src'), 'node_modules'],
     extensions: ['.js']
   },
   module: {
@@ -65,47 +49,50 @@ module.exports = {
             }
           ]
         })
-      },
-      // {
-      //   test: require.resolve('react'),
-      //   use: [
-      //     {
-      //       loader: 'expose-loader',
-      //       options: 'React'
-      //     }
-      //   ]
-      // },
-      // {
-      //   test: require.resolve('react-dom'),
-      //   use: [
-      //     {
-      //       loader: 'expose-loader',
-      //       options: 'ReactDOM'
-      //     }
-      //   ]
-      // }
+      }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('style.css'),
-    // new HtmlWebpackPlugin(),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   entries: [
-    //     'react',
-    //     'react-dom'
-    //   ]
-    // })
-  ],
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM'
-  },
-  devServer: {
+    new ExtractTextPlugin('style.css')
+  ]
+}
+
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'example') {
+  config.entry = {
+    main: path.join(__dirname, './example')
+  }
+
+  config.plugins.push(
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.join(__dirname, './example/index.html')
+    })
+  )
+}
+
+if (process.env.NODE_ENV === 'development') {
+  config.devServer = {
     port: 3000,
-    inline: true,
-    historyApiFallback: {
-      index: './index.html'
+    historyApiFallback: true,
+    contentBase: path.join(__dirname, './example')
+  }
+} else if (process.env.NODE_ENV === 'example') {
+  config.output.path = path.join(__dirname, './example/dist')
+} else {
+  config.externals = {
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom'
     }
   }
 }
+
+module.exports = config

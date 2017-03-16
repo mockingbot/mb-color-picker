@@ -1,5 +1,14 @@
-module.exports =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("react"));
+	else if(typeof define === 'function' && define.amd)
+		define(["react"], factory);
+	else if(typeof exports === 'object')
+		exports["mb-color-picker"] = factory(require("react"));
+	else
+		root["mb-color-picker"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -71,7 +80,7 @@ module.exports =
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = require("React");
+module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
 /***/ }),
 /* 1 */
@@ -962,3 +971,4 @@ ColorPicker.defaultProps = {
 
 /***/ })
 /******/ ]);
+});
