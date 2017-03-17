@@ -55,5 +55,8 @@ export default class Canvas extends React.Component {
 }
 
 Canvas.propTypes = {
-  changePosition: React.PropTypes.func
+  color: React.PropTypes.string,
+  left: React.PropTypes.string,
+  top: React.PropTypes.string,
+  handleChange: React.PropTypes.func
 }

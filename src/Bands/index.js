@@ -36,5 +36,6 @@ export default class Bands extends React.Component {
 Bands.propTypes = {
   color: React.PropTypes.string,
   colorOffset: React.PropTypes.string,
-  opacityOffset: React.PropTypes.string
+  opacityOffset: React.PropTypes.string,
+  handleChange: React.PropTypes.func
 }

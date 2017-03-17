@@ -1,6 +1,6 @@
 {
-  "name": "mb-color-picker",
-  "version": "0.0.5",
+  "name": "awesome-color-picker",
+  "version": "0.0.6",
   "description": "A color picker react component",
   "main": "dist/main.js",
   "style": "dist/styls.css",

@@ -8,54 +8,58 @@ import DashBoard from './DashBoard'
 
 import styles from './index.sass'
 
-import { hexToHsb, hsbToRgb, rgbToHex, hsbToHex } from './utils'
+import { hexToHsb, hexToRgb, hsbToHex } from './utils'
 
 export default class ColorPicker extends React.Component {
-  constructor (props) {
+  constructor ({ color, opacity }) {
     super()
-    const hsb = hexToHsb(props.color)
-    console.log(props.color)
-    console.log(hsb)
-    const opacity = props.opacity
-    this.state = {
-      colorOffset: hsb.h + '%',
-      canvasLeft: hsb.s + '%',
-      canvasTop: hsb.b + '%',
-      opacityOffset: opacity + '%',
-    }
+    this.setPosInfo(color, opacity)
+  }
+  setPosInfo (color, opacity = 100) {
+    const hsb = hexToHsb(color)
+    this.colorOffset = hsb.h + '%'
+    this.canvasLeft = hsb.s + '%'
+    this.canvasTop = 100 - hsb.b + '%'
+    this.opacityOffset = opacity + '%'
   }
   handleChange = (state) => {
-    this.setState(state)
-  }
-  componentDidUpdate () {
-    this.props.onChange(this.hex, this.opacity)
-  }
-  render () {
-    const { canvasLeft, canvasTop, colorOffset, opacityOffset } = this.state
-    const rgb = hsbToRgb({
+    Object.assign(this, state)
+    const { canvasLeft, canvasTop, colorOffset, opacityOffset } = this
+    // console.log(canvasLeft, canvasTop, colorOffset, opacityOffset)
+    const opacity = parseInt(opacityOffset)
+    const hex = '#' + hsbToHex({
       h: parseInt(colorOffset) * 360 / 100,
       s: parseInt(canvasLeft),
       b: 100 - parseInt(canvasTop)
     })
+    this.props.onChange(hex, opacity)
+  }
+  handleTheme = (color) => {
+    this.setPosInfo(color)
+    this.props.onChange(color, 100)
+  }
+  render () {
+    const { color, opacity, style, themes } = this.props
+    const { canvasLeft, canvasTop, colorOffset, opacityOffset } = this
+    // console.log(canvasLeft, canvasTop, colorOffset, opacityOffset)
+    const rgb = hexToRgb(color)
     const canvasColor = '#' + hsbToHex({
       h: parseInt(colorOffset) * 360 / 100,
       s: 100,
       b: 100
     })
-    this.hex = '#' + rgbToHex(rgb)
-    this.opacity = parseInt(opacityOffset)
 
     return (
-      <div className={styles['colorpicker']}>
-        <Theme themes={this.props.themes} />
+      <div className={styles['colorpicker']} style={style}>
+        <Theme themes={themes} handleTheme={this.handleTheme} />
         <Canvas top={canvasTop} left={canvasLeft}
           color={canvasColor} handleChange={this.handleChange}>
         </Canvas>
         <Bands
-          color={this.hex} colorOffset={colorOffset}
+          color={color} colorOffset={colorOffset}
           opacityOffset={opacityOffset} handleChange={this.handleChange}>
         </Bands>
-        <DashBoard color={this.hex} rgb={rgb} alpha={this.opacity} />
+        <DashBoard color={color} rgb={rgb} alpha={opacity} />
         <span className={styles['hr']}/>
         <History />
       </div>
@@ -66,9 +70,11 @@ export default class ColorPicker extends React.Component {
 ColorPicker.propTypes = {
   color: React.PropTypes.string,
   themes: React.PropTypes.array,
-  opacity: React.PropTypes.number
+  opacity: React.PropTypes.number,
+  onChange: React.PropTypes.func,
+  style: React.PropTypes.object
 }
 ColorPicker.defaultProps = {
-  color: '#bec851',
+  color: '#F55D54',
   opacity: 50
 }
