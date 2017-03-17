@@ -2,7 +2,6 @@ var path = require('path')
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var info = require('./package.json')
 
 var entry = {
   main: path.join(__dirname, './src')
@@ -13,7 +12,7 @@ var config = {
   output: {
     path: path.join(__dirname, './dist'),
     filename: '[name].js',
-    library: info.name,
+    library: 'ColorPicker',
     libraryTarget: 'umd'
   },
   resolve: {
