@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["react"], factory);
 	else if(typeof exports === 'object')
-		exports["mb-color-picker"] = factory(require("react"));
+		exports["ColorPicker"] = factory(require("react"));
 	else
-		root["mb-color-picker"] = factory(root["React"]);
+		root["ColorPicker"] = factory(root["React"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -16,9 +16,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -90,43 +90,35 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ColorBand__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_sass__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
 
 
 var Bands = function (_React$Component) {
-  _inherits(Bands, _React$Component);
+  babelHelpers.inherits(Bands, _React$Component);
 
   function Bands() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, Bands);
+    babelHelpers.classCallCheck(this, Bands);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Bands.__proto__ || Object.getPrototypeOf(Bands)).call.apply(_ref, [this].concat(args))), _this), _this.setColorOffset = function (colorOffset) {
+    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = Bands.__proto__ || Object.getPrototypeOf(Bands)).call.apply(_ref, [this].concat(args))), _this), _this.setColorOffset = function (colorOffset) {
       _this.props.handleChange({ colorOffset: colorOffset });
     }, _this.setOpacityOffset = function (opacityOffset) {
       _this.props.handleChange({ opacityOffset: opacityOffset });
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(Bands, [{
+  babelHelpers.createClass(Bands, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -158,17 +150,17 @@ var Bands = function (_React$Component) {
       );
     }
   }]);
-
   return Bands;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Bands;
+/* harmony default export */ __webpack_exports__["a"] = (Bands);
 
 
 Bands.propTypes = {
   color: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
   colorOffset: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
-  opacityOffset: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string
+  opacityOffset: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
+  handleChange: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func
 };
 
 /***/ }),
@@ -179,35 +171,27 @@ Bands.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Circle__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_sass__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
 
 var Canvas = function (_React$Component) {
-  _inherits(Canvas, _React$Component);
+  babelHelpers.inherits(Canvas, _React$Component);
 
   function Canvas() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, Canvas);
+    babelHelpers.classCallCheck(this, Canvas);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Canvas.__proto__ || Object.getPrototypeOf(Canvas)).call.apply(_ref, [this].concat(args))), _this), _this.handleDown = function (e) {
+    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = Canvas.__proto__ || Object.getPrototypeOf(Canvas)).call.apply(_ref, [this].concat(args))), _this), _this.handleDown = function (e) {
       _this.mousedown = true;
       _this.updatePosition(e.nativeEvent);
       document.addEventListener('mousemove', _this.updatePosition);
@@ -230,10 +214,10 @@ var Canvas = function (_React$Component) {
       _this.mouseDown = false;
       document.removeEventListener('mousemove', _this.updatePosition);
       document.removeEventListener('mouseup', _this.detachEvent);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(Canvas, [{
+  babelHelpers.createClass(Canvas, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       /*
@@ -271,15 +255,17 @@ var Canvas = function (_React$Component) {
       );
     }
   }]);
-
   return Canvas;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Canvas;
+/* harmony default export */ __webpack_exports__["a"] = (Canvas);
 
 
 Canvas.propTypes = {
-  changePosition: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func
+  color: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
+  left: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
+  top: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
+  handleChange: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func
 };
 
 /***/ }),
@@ -290,30 +276,21 @@ Canvas.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ColorInput__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_sass__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
 
 var DashBoard = function (_React$Component) {
-  _inherits(DashBoard, _React$Component);
+  babelHelpers.inherits(DashBoard, _React$Component);
 
   function DashBoard() {
-    _classCallCheck(this, DashBoard);
-
-    return _possibleConstructorReturn(this, (DashBoard.__proto__ || Object.getPrototypeOf(DashBoard)).apply(this, arguments));
+    babelHelpers.classCallCheck(this, DashBoard);
+    return babelHelpers.possibleConstructorReturn(this, (DashBoard.__proto__ || Object.getPrototypeOf(DashBoard)).apply(this, arguments));
   }
 
-  _createClass(DashBoard, [{
+  babelHelpers.createClass(DashBoard, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -332,11 +309,10 @@ var DashBoard = function (_React$Component) {
       );
     }
   }]);
-
   return DashBoard;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = DashBoard;
+/* harmony default export */ __webpack_exports__["a"] = (DashBoard);
 
 
 DashBoard.propTypes = {
@@ -351,29 +327,20 @@ DashBoard.propTypes = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
 var History = function (_React$Component) {
-  _inherits(History, _React$Component);
+  babelHelpers.inherits(History, _React$Component);
 
   function History() {
-    _classCallCheck(this, History);
-
-    return _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).apply(this, arguments));
+    babelHelpers.classCallCheck(this, History);
+    return babelHelpers.possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).apply(this, arguments));
   }
 
-  _createClass(History, [{
+  babelHelpers.createClass(History, [{
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -383,22 +350,14 @@ var History = function (_React$Component) {
           'span',
           null,
           '\u6700\u8FD1\u4F7F\u7528\u7684\u989C\u8272'
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev1 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev2 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev3 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev4 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev5 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'colpick_prev6 colpick_prev', style: { 'backgroundColor': 'rgb(98, 0, 255)' } }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'colpick_transparent', className: 'colpick_prev' })
+        )
       );
     }
   }]);
-
   return History;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = History;
+/* harmony default export */ __webpack_exports__["a"] = (History);
 
 
 History.propTypes = {
@@ -412,52 +371,64 @@ History.propTypes = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
 
 var Theme = function (_React$Component) {
-  _inherits(Theme, _React$Component);
+  babelHelpers.inherits(Theme, _React$Component);
 
   function Theme() {
-    _classCallCheck(this, Theme);
+    var _ref;
 
-    return _possibleConstructorReturn(this, (Theme.__proto__ || Object.getPrototypeOf(Theme)).apply(this, arguments));
+    var _temp, _this, _ret;
+
+    babelHelpers.classCallCheck(this, Theme);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = Theme.__proto__ || Object.getPrototypeOf(Theme)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function (e) {
+      var color = e.currentTarget.dataset.color;
+      var handleTheme = _this.props.handleTheme;
+
+      handleTheme(color);
+    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(Theme, [{
+  babelHelpers.createClass(Theme, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var themes = this.props.themes;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'section',
         { className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['theme-pane'] },
-        themes.map(function (t, i) {
-          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { key: i, className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['theme'], style: { backgroundColor: t } });
+        themes.map(function (color, i) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', {
+            key: i,
+            'data-color': color,
+            onClick: _this2.handleClick,
+            className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['theme'] + ' ' + (i === 0 && __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['transparent']),
+            style: { backgroundColor: color } });
         })
       );
     }
   }]);
-
   return Theme;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Theme;
+/* harmony default export */ __webpack_exports__["a"] = (Theme);
 
 
 Theme.propTypes = {
-  themes: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.array
+  themes: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.array,
+  handleTheme: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func
 };
 
 /* 以前写的渐变corner, 样式可以收藏起来
@@ -474,10 +445,10 @@ Theme.propTypes = {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return hexToHsb; });
-/* unused harmony export hexToRgb */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hexToRgb; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return hsbToHex; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return hsbToRgb; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return rgbToHex; });
+/* unused harmony export hsbToRgb */
+/* unused harmony export rgbToHex */
 
 function getDegree(start, end, width, height) {
   var deltaX = end.x - start.x;
@@ -609,16 +580,8 @@ module.exports = {"colorpicker":"colorpicker---2UGWl","hr":"hr---32Qms"};
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
@@ -628,20 +591,20 @@ var CLASSNAME = {
 };
 
 var ColorBand = function (_React$Component) {
-  _inherits(ColorBand, _React$Component);
+  babelHelpers.inherits(ColorBand, _React$Component);
 
   function ColorBand() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, ColorBand);
+    babelHelpers.classCallCheck(this, ColorBand);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ColorBand.__proto__ || Object.getPrototypeOf(ColorBand)).call.apply(_ref, [this].concat(args))), _this), _this.handleDown = function (e) {
+    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = ColorBand.__proto__ || Object.getPrototypeOf(ColorBand)).call.apply(_ref, [this].concat(args))), _this), _this.handleDown = function (e) {
       _this.mouseDown = true;
       _this.updatePosition(e.nativeEvent);
       document.addEventListener('mousemove', _this.updatePosition);
@@ -655,10 +618,10 @@ var ColorBand = function (_React$Component) {
       _this.mouseDown = false;
       document.removeEventListener('mousemove', _this.updatePosition);
       document.removeEventListener('mouseup', _this.detachEvent);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(ColorBand, [{
+  babelHelpers.createClass(ColorBand, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       /*
@@ -689,11 +652,10 @@ var ColorBand = function (_React$Component) {
       );
     }
   }]);
-
   return ColorBand;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = ColorBand;
+/* harmony default export */ __webpack_exports__["a"] = (ColorBand);
 
 /***/ }),
 /* 9 */
@@ -702,29 +664,20 @@ var ColorBand = function (_React$Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__index_sass__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
 var Circle = function (_React$Component) {
-  _inherits(Circle, _React$Component);
+  babelHelpers.inherits(Circle, _React$Component);
 
   function Circle() {
-    _classCallCheck(this, Circle);
-
-    return _possibleConstructorReturn(this, (Circle.__proto__ || Object.getPrototypeOf(Circle)).apply(this, arguments));
+    babelHelpers.classCallCheck(this, Circle);
+    return babelHelpers.possibleConstructorReturn(this, (Circle.__proto__ || Object.getPrototypeOf(Circle)).apply(this, arguments));
   }
 
-  _createClass(Circle, [{
+  babelHelpers.createClass(Circle, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
@@ -734,11 +687,10 @@ var Circle = function (_React$Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { style: { left: left, top: top }, className: __WEBPACK_IMPORTED_MODULE_1__index_sass___default.a['color-circle'] });
     }
   }]);
-
   return Circle;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = Circle;
+/* harmony default export */ __webpack_exports__["a"] = (Circle);
 
 /***/ }),
 /* 10 */
@@ -747,28 +699,17 @@ var Circle = function (_React$Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 var ColorInput = function (_React$Component) {
-  _inherits(ColorInput, _React$Component);
+  babelHelpers.inherits(ColorInput, _React$Component);
 
   function ColorInput() {
-    _classCallCheck(this, ColorInput);
-
-    return _possibleConstructorReturn(this, (ColorInput.__proto__ || Object.getPrototypeOf(ColorInput)).apply(this, arguments));
+    babelHelpers.classCallCheck(this, ColorInput);
+    return babelHelpers.possibleConstructorReturn(this, (ColorInput.__proto__ || Object.getPrototypeOf(ColorInput)).apply(this, arguments));
   }
 
-  _createClass(ColorInput, [{
+  babelHelpers.createClass(ColorInput, [{
     key: "render",
     value: function render() {
       var _props = this.props,
@@ -785,15 +726,14 @@ var ColorInput = function (_React$Component) {
           { htmlFor: "" },
           label
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", _extends({ type: "text" }, { maxLength: maxLength, size: size, value: value }))
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", babelHelpers.extends({ type: "text" }, { maxLength: maxLength, size: size, value: value }))
       );
     }
   }]);
-
   return ColorInput;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = ColorInput;
+/* harmony default export */ __webpack_exports__["a"] = (ColorInput);
 
 
 ColorInput.propTypes = {
@@ -802,55 +742,6 @@ ColorInput.propTypes = {
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"band":"band---tIwdX","color-band":"color-band---3j0WD","opacity-band":"opacity-band---1VYiO","opacity-bg":"opacity-bg---1A_56","btn":"btn---29Uqb"};
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"band-pane":"band-pane---1Dr2l","color-bands":"color-bands---2ngL5","preview-bg":"preview-bg---2XthN","preview":"preview---3Rn8S"};
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"color-circle":"color-circle---1qshT"};
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"canvas-pane":"canvas-pane---UK9or","overlay-1":"overlay-1---2SLYl","overlay-2":"overlay-2---1ldfF"};
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"value-pane":"value-pane---dGpJ1"};
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"history-pane":"history-pane---1btk9"};
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-module.exports = {"theme-pane":"theme-pane---3dEuz","theme":"theme---6kD5D"};
-
-/***/ }),
-/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -865,14 +756,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__index_sass__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__index_sass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__utils__ = __webpack_require__(6);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
@@ -886,88 +769,160 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var ColorPicker = function (_React$Component) {
-  _inherits(ColorPicker, _React$Component);
+  babelHelpers.inherits(ColorPicker, _React$Component);
 
-  function ColorPicker(props) {
-    _classCallCheck(this, ColorPicker);
+  function ColorPicker(_ref) {
+    var color = _ref.color,
+        opacity = _ref.opacity;
+    babelHelpers.classCallCheck(this, ColorPicker);
 
-    var _this = _possibleConstructorReturn(this, (ColorPicker.__proto__ || Object.getPrototypeOf(ColorPicker)).call(this));
+    var _this = babelHelpers.possibleConstructorReturn(this, (ColorPicker.__proto__ || Object.getPrototypeOf(ColorPicker)).call(this));
 
-    _this.handleChange = function (state) {
-      _this.setState(state);
-    };
+    _initialiseProps.call(_this);
 
-    var hsb = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["a" /* hexToHsb */])(props.color);
-    console.log(props.color);
-    console.log(hsb);
-    var opacity = props.opacity;
-    _this.state = {
-      colorOffset: hsb.h + '%',
-      canvasLeft: hsb.s + '%',
-      canvasTop: hsb.b + '%',
-      opacityOffset: opacity + '%'
-    };
+    _this.setPosInfo(color, opacity);
     return _this;
   }
 
-  _createClass(ColorPicker, [{
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      this.props.onChange(this.hex, this.opacity);
+  babelHelpers.createClass(ColorPicker, [{
+    key: 'setPosInfo',
+    value: function setPosInfo(color) {
+      var opacity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+
+      var hsb = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["a" /* hexToHsb */])(color);
+      this.colorOffset = hsb.h + '%';
+      this.canvasLeft = hsb.s + '%';
+      this.canvasTop = 100 - hsb.b + '%';
+      this.opacityOffset = opacity + '%';
     }
   }, {
     key: 'render',
     value: function render() {
-      var _state = this.state,
-          canvasLeft = _state.canvasLeft,
-          canvasTop = _state.canvasTop,
-          colorOffset = _state.colorOffset,
-          opacityOffset = _state.opacityOffset;
+      var _props = this.props,
+          color = _props.color,
+          opacity = _props.opacity,
+          style = _props.style,
+          themes = _props.themes;
+      var canvasLeft = this.canvasLeft,
+          canvasTop = this.canvasTop,
+          colorOffset = this.colorOffset,
+          opacityOffset = this.opacityOffset;
+      // console.log(canvasLeft, canvasTop, colorOffset, opacityOffset)
 
-      var rgb = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["b" /* hsbToRgb */])({
-        h: parseInt(colorOffset) * 360 / 100,
-        s: parseInt(canvasLeft),
-        b: 100 - parseInt(canvasTop)
-      });
+      var rgb = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["b" /* hexToRgb */])(color);
       var canvasColor = '#' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["c" /* hsbToHex */])({
         h: parseInt(colorOffset) * 360 / 100,
         s: 100,
         b: 100
       });
-      this.hex = '#' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["d" /* rgbToHex */])(rgb);
-      this.opacity = parseInt(opacityOffset);
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: __WEBPACK_IMPORTED_MODULE_6__index_sass___default.a['colorpicker'] },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Theme__["a" /* default */], { themes: this.props.themes }),
+        { className: __WEBPACK_IMPORTED_MODULE_6__index_sass___default.a['colorpicker'], style: style },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Theme__["a" /* default */], { themes: themes, handleTheme: this.handleTheme }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Canvas__["a" /* default */], { top: canvasTop, left: canvasLeft,
           color: canvasColor, handleChange: this.handleChange }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Bands__["a" /* default */], {
-          color: this.hex, colorOffset: colorOffset,
+          color: color, colorOffset: colorOffset,
           opacityOffset: opacityOffset, handleChange: this.handleChange }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__DashBoard__["a" /* default */], { color: this.hex, rgb: rgb, alpha: this.opacity }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__DashBoard__["a" /* default */], { color: color, rgb: rgb, alpha: opacity }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: __WEBPACK_IMPORTED_MODULE_6__index_sass___default.a['hr'] }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__History__["a" /* default */], null)
       );
     }
   }]);
-
   return ColorPicker;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = ColorPicker;
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.handleChange = function (state) {
+    Object.assign(_this2, state);
+    var canvasLeft = _this2.canvasLeft,
+        canvasTop = _this2.canvasTop,
+        colorOffset = _this2.colorOffset,
+        opacityOffset = _this2.opacityOffset;
+    // console.log(canvasLeft, canvasTop, colorOffset, opacityOffset)
+
+    var opacity = parseInt(opacityOffset);
+    var hex = '#' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7__utils__["c" /* hsbToHex */])({
+      h: parseInt(colorOffset) * 360 / 100,
+      s: parseInt(canvasLeft),
+      b: 100 - parseInt(canvasTop)
+    });
+    _this2.props.onChange(hex, opacity);
+  };
+
+  this.handleTheme = function (color) {
+    _this2.setPosInfo(color);
+    _this2.props.onChange(color, 100);
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ColorPicker);
 
 
 ColorPicker.propTypes = {
   color: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
   themes: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.array,
-  opacity: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.number
+  opacity: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.number,
+  onChange: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func,
+  style: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.object
 };
 ColorPicker.defaultProps = {
-  color: '#bec851',
+  color: '#F55D54',
   opacity: 50
 };
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"band":"band---tIwdX","color-band":"color-band---3j0WD","opacity-band":"opacity-band---1VYiO","opacity-bg":"opacity-bg---1A_56","btn":"btn---29Uqb"};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"band-pane":"band-pane---1Dr2l","color-bands":"color-bands---2ngL5","preview-bg":"preview-bg---2XthN","preview":"preview---3Rn8S"};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"color-circle":"color-circle---1qshT"};
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"canvas-pane":"canvas-pane---UK9or","overlay-1":"overlay-1---2SLYl","overlay-2":"overlay-2---1ldfF"};
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"value-pane":"value-pane---dGpJ1"};
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"history-pane":"history-pane---1btk9"};
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"theme-pane":"theme-pane---3dEuz","theme":"theme---6kD5D","transparent":"transparent---3voyn"};
 
 /***/ })
 /******/ ]);
