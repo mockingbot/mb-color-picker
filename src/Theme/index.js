@@ -18,7 +18,7 @@ export default class Theme extends React.Component {
               key={i}
               data-color={color}
               onClick={this.handleClick}
-              className={`${styles['theme']} ${i===0 &&styles['transparent']}`}
+              className={`${styles['theme']} ${i===0 && styles['transparent']}`}
               style={{backgroundColor: color}}>
             </div>
           )
