@@ -1,42 +1,38 @@
-import React from 'react'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import styles from './index.sass'
+import './index.css'
 
-export default class Theme extends React.Component {
-  handleClick = (e) => {
+
+export default class Theme extends Component {
+
+  handleClick = e => {
     const { color } = e.currentTarget.dataset
-    const { handleTheme } = this.props
-    handleTheme(color)
+    this.props.handleSelect(color)
   }
+
   render () {
     const { themes } = this.props
     return (
-      <section className={styles['theme-pane']}>
-        { themes.map((color, i) => {
-          return (
-            <div
+      <ul className="theme-palette">
+        {
+          themes.map((color, i) => (
+            <li
               key={i}
+              className={`theme-palette-color${color === 'transparent' ? ' transparent' : ''}`}
+              style={{ backgroundColor: color }}
               data-color={color}
               onClick={this.handleClick}
-              className={`${styles['theme']} ${i===0 &&styles['transparent']}`}
-              style={{backgroundColor: color}}>
-            </div>
-          )
-        }) }
-      </section>
+            />
+          ))
+        }
+      </ul>
     )
   }
 }
 
 Theme.propTypes = {
-  themes: React.PropTypes.array,
-  handleTheme: React.PropTypes.func
+  themes: PropTypes.array,
+  onClose: PropTypes.func,
+  handleSelect: PropTypes.func
 }
-
-/* 以前写的渐变corner, 样式可以收藏起来
-  <span className="color_mode flat_color"></span>
-  <span className="color_mode linear_gradient"></span>
-  <span className="color_mode radial_gradient"></span>
-  <span className="color_mode pattern_fill"></span>
-  <span className="color_mode transparent_color"></span>
-*/

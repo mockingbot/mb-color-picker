@@ -1,80 +1,239 @@
-import React from 'react'
+import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
+
+import Icon from '@ibot/ibot/lib/icon'
 
 import Theme from './Theme'
-import Canvas from './Canvas'
-import History from './History'
-import Bands from './Bands'
-import DashBoard from './DashBoard'
+import CustomColors from './CustomColors'
+import HSVPicker from './HSVPicker'
+import RGBInput from './RGBInput'
+import HexInput from './HexInput'
+import AlphaInput from './AlphaInput'
 
-import styles from './index.sass'
+import { hex2rgbaStr, rgb2hex, hsv2rgb, formatHex } from './utils/color'
+import { stopReactEventPropagation } from './utils/DOM'
 
-import { hexToHsb, hexToRgb, hsbToHex } from './utils'
+import '!style-loader!css-loader!@ibot/ibot/lib/icon/style/index.css'
+import './index.css'
 
-export default class ColorPicker extends React.Component {
-  constructor ({ color, opacity }) {
-    super()
-    this.setPosInfo(color, opacity)
+const DUMB_FUNC = () => null
+
+
+export default class ColorPicker extends PureComponent {
+  static propTypes = {
+    color: PropTypes.string,
+    onChange: PropTypes.func,
+    onContinouslyChange: PropTypes.func,
+    applyDidMountSideEffect: PropTypes.func,
+    applyWillUnmountSideEffect: PropTypes.func,
+    themeColors: PropTypes.array,
+    customColors: PropTypes.array,
+    customColorsHeaderText: PropTypes.string,
+    onDragStart: PropTypes.func,
+    onClose: PropTypes.func,
+    headerText: PropTypes.string,
   }
-  setPosInfo (color, opacity = 100) {
-    const hsb = hexToHsb(color)
-    this.colorOffset = hsb.h + '%'
-    this.canvasLeft = hsb.s + '%'
-    this.canvasTop = 100 - hsb.b + '%'
-    this.opacityOffset = opacity + '%'
+
+  static defaultProps = {
+    applyDidMountSideEffect: DUMB_FUNC,
+    applyWillUnmountSideEffect: DUMB_FUNC,
+    headerText: 'Color Picker',
   }
-  handleChange = (state) => {
-    Object.assign(this, state)
-    const { canvasLeft, canvasTop, colorOffset, opacityOffset } = this
-    // console.log(canvasLeft, canvasTop, colorOffset, opacityOffset)
-    const opacity = parseInt(opacityOffset)
-    const hex = '#' + hsbToHex({
-      h: parseInt(colorOffset) * 360 / 100,
-      s: parseInt(canvasLeft),
-      b: 100 - parseInt(canvasTop)
-    })
-    this.props.onChange(hex, opacity)
+
+  state = {
+    hex: null,
+    alpha: null
   }
-  handleTheme = (color) => {
-    this.setPosInfo(color)
-    this.props.onChange(color, 100)
+
+  static getDerivedStateFromProps (props, state) {
+    const { hex, alpha } = parseColor(props.color)
+
+    if (hex.toLowerCase() === state.props && alpha === state.alpha) {
+      return null
+    } else {
+      return {
+        hex,
+        alpha,
+      }
+    }
   }
-  render () {
-    const { color, opacity, style, themes } = this.props
-    const { canvasLeft, canvasTop, colorOffset, opacityOffset } = this
-    // console.log(canvasLeft, canvasTop, colorOffset, opacityOffset)
-    const rgb = hexToRgb(color)
-    const canvasColor = '#' + hsbToHex({
-      h: parseInt(colorOffset) * 360 / 100,
-      s: 100,
-      b: 100
-    })
+
+  setContainerRef = ref => this.$container = ref
+
+  componentDidMount() {
+    this.props.applyDidMountSideEffect(this.$container)
+  }
+
+  componentWillUnmount () {
+    this.props.applyWillUnmountSideEffect(this.$container)
+  }
+
+  handleDragStart = e => {
+    e.preventDefault()
+    if (this.props.onDragStart) {
+      this.props.onDragStart(e)
+    }
+  }
+
+  handleClose = e => this.props.onClose(e)
+
+  handleChange = (hex, alpha) => {
+    const { hex: propsHex, alpha: propsAlpha } = parseColor(this.props.color)
+
+    if (hex === propsHex && alpha === propsAlpha) return // same color gets no pop up
+
+    if (hex === 'transparent') {
+      this.props.onChange('transparent')
+    } else {
+      this.props.onChange(hex2rgbaStr(hex, propsHex === 'transparent' ? 1 : alpha))
+    }
+  }
+
+  handleColorChangeFromExternal = color => {
+    const { hex, alpha } = parseColor(color)
+    this.handleChange(hex, alpha)
+  }
+
+  handleHsvChange = hsv => {
+    const hex = rgb2hex(hsv2rgb(hsv))
+    this.handleChange(hex, this.state.alpha)
+  }
+
+  handleHsvDragChange = hsv => {
+    const { onContinouslyChange } = this.props
+
+    if (!onContinouslyChange) {
+      this.handleHsvChange(hsv)
+    } else {
+      const hex = rgb2hex(hsv2rgb(hsv))
+      const color = hex2rgbaStr(hex, this.state.alpha)
+      onContinouslyChange(color)
+    }
+  }
+
+  handleRgbChange = rgb => {
+    const hex = rgb2hex(rgb)
+    const changeFromTransparent = this.state.hex === 'transparent'
+    this.handleChange(hex, changeFromTransparent ? 1 : this.state.alpha)
+  }
+
+  handleHexChange = hexValue => {
+    const hex = `#${hexValue}`
+    const changeFromTransparent = this.state.hex === 'transparent'
+    this.handleChange(hex, changeFromTransparent ? 1 : this.state.alpha)
+  }
+
+  handleChangeAlpha = a => this.handleChange(this.state.hex, a)
+
+  handleDragChangeAlpha = a => {
+    const { onContinouslyChange } = this.props
+
+    if (!onContinouslyChange) {
+      this.handleChangeAlpha(a)
+    } else {
+      onContinouslyChange(hex2rgbaStr(this.state.hex, a))
+    }
+  }
+
+  render() {
+    const { themeColors, customColors, onClose, customColorsHeaderText } = this.props
+    const { hex, alpha } = this.state
+
+    const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
 
     return (
-      <div className={styles['colorpicker']} style={style}>
-        <Theme themes={themes} handleTheme={this.handleTheme} />
-        <Canvas top={canvasTop} left={canvasLeft}
-          color={canvasColor} handleChange={this.handleChange}>
-        </Canvas>
-        <Bands
-          color={color} colorOffset={colorOffset}
-          opacityOffset={opacityOffset} handleChange={this.handleChange}>
-        </Bands>
-        <DashBoard color={color} rgb={rgb} alpha={opacity} />
-        <span className={styles['hr']}/>
-        <History />
+      <div
+        className="--mb--color-picker"
+        ref={this.setContainerRef}
+        onMouseDown={stopReactEventPropagation}
+        onClick={stopReactEventPropagation}
+      >
+
+        <header className="color-picker-header" onMouseDown={this.handleDragStart}>
+          <div className="header-text">{this.props.headerText}</div>
+          {
+            onClose &&
+            <Icon type="dora" name="times" onMouseDown={this.handleClose} />
+          }
+        </header>
+
+        <div className="color-picker-body">
+          {
+            themeColors &&
+            <Theme themes={themeColors} handleSelect={this.handleColorChangeFromExternal} />
+          }
+
+          <HSVPicker
+            hex={hex}
+            alpha={alpha}
+            handleEyedropperChange={this.props.onChange}
+            handleDragChange={this.handleHsvDragChange}
+            handleChange={this.handleHsvChange}
+            handleDragChangeAlpha={this.handleDragChangeAlpha}
+            handleChangeAlpha={this.handleChangeAlpha} />
+
+          <div className="input-section">
+            <HexInput
+              hexValue={hexValue}
+              handleChange={this.handleHexChange} />
+
+            <RGBInput
+              hex={hex}
+              handleChange={this.handleRgbChange} />
+
+            <AlphaInput
+              a={parseInt(alpha*100)}
+              handleChangeAlpha={this.handleChangeAlpha}
+            />
+          </div>
+
+          {
+            customColors &&
+            <CustomColors
+              customColors={customColors}
+              customColorsHeaderText={customColorsHeaderText}
+              handleSelect={this.handleColorChangeFromExternal}
+            />
+          }
+        </div>
       </div>
     )
   }
 }
 
-ColorPicker.propTypes = {
-  color: React.PropTypes.string,
-  themes: React.PropTypes.array,
-  opacity: React.PropTypes.number,
-  onChange: React.PropTypes.func,
-  style: React.PropTypes.object
+export const parseColor = c => {
+  const color = c.trim().toLowerCase() // keep lower cases hex in the component
+
+  if (color.match(/transparent/)) {
+    return {
+      hex: 'transparent',
+      alpha: 0
+    }
+  } else if (color.match(/^#[0-9a-f]{6}$|^#[0-9a-f]{3}$/)) {
+    return {
+      hex: formatHex(color),
+      alpha: 1
+    }
+  } else if (color.match(/^rgba\((.*)\)$/)) {
+    const rgbaExtractor = /^rgba\((.*)\)$/
+    const rgbaStr = rgbaExtractor.exec(color)[1]
+
+    const [ r, g, b, a ] = rgbaStr.split(',').map(i => i.trim())
+
+    return {
+      hex: rgb2hex({
+        r: parseInt(r),
+        g: parseInt(g),
+        b: parseInt(b),
+      }),
+      alpha: !a ? 1 : parseFloat(a)
+    }
+  } else {
+    return DEFAULT_COLOR
+  }
 }
-ColorPicker.defaultProps = {
-  color: '#F55D54',
-  opacity: 50
+
+const DEFAULT_COLOR = {
+  hex: '#000000',
+  alpha: 1
 }

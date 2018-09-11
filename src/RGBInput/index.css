@@ -1,0 +1,49 @@
+:root {
+  --label-tc: #8d9ea7;
+  --input-bg: #f6f7f8;
+  --input-tc: #415058;
+  --input-bc: #f2f2f3;
+}
+
+.--mb--color-picker {
+  .color-input {
+    width: 36px;
+
+    span {
+      display: block;
+      line-height: 12px;
+      margin-top: 4px;
+      color: var(--label-tc);
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      height: 22px;
+      padding: 0 4px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-bc);
+      border-radius: 2px;
+      color: var(--input-tc);
+      align-self: stretch;
+      line-height: 1;
+      overflow: hidden;
+      transition: 0.2s ease-out;
+      transition-property: border, box-shadow;
+
+      &:hover {
+        border-color: #1e98ea;
+      }
+
+      &:focus {
+        border-color: #1e98ea;
+        box-shadow: 0 0 6px 0 rgba(30, 152, 234, 0.5);
+      }
+
+      &.invalid {
+        border-color: #e84030;
+        box-shadow: 0 0 6px 0 rgba(232, 64, 48, 0.5);
+      }
+    }
+  }
+}

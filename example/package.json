@@ -1,0 +1,19 @@
+{
+  "name": "mb-react-color-picker-example",
+  "homepage": "https://mockingbot.github.io/mb-color-picker",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "^1.1.4",
+    "mb-color-picker": "link:.."
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
