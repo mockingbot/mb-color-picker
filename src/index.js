@@ -32,6 +32,7 @@ export default class ColorPicker extends PureComponent {
     onDragStart: PropTypes.func,
     onClose: PropTypes.func,
     headerText: PropTypes.string,
+    onEyedropperClick: PropTypes.func,
   }
 
   static defaultProps = {
@@ -134,7 +135,7 @@ export default class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { themeColors, customColors, onClose, customColorsHeaderText } = this.props
+    const { themeColors, customColors, onClose, customColorsHeaderText, onEyedropperClick } = this.props
     const { hex, alpha } = this.state
 
     const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
@@ -164,11 +165,12 @@ export default class ColorPicker extends PureComponent {
           <HSVPicker
             hex={hex}
             alpha={alpha}
-            handleEyedropperChange={this.props.onChange}
+            handleEyedropperClick={this.props.onEyedropperClick}
             handleDragChange={this.handleHsvDragChange}
             handleChange={this.handleHsvChange}
             handleDragChangeAlpha={this.handleDragChangeAlpha}
-            handleChangeAlpha={this.handleChangeAlpha} />
+            handleChangeAlpha={this.handleChangeAlpha}
+          />
 
           <div className="input-section">
             <HexInput

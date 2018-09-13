@@ -227,6 +227,7 @@ export default class HSVPicker extends PureComponent {
   }
 
   render() {
+    const { handleEyedropperClick } = this.props
     const { h, s, v, a } = this.state
     const baseHue = this._getBaseHue(h)
     const SVPointerStyle = this._getSVPointerStyle(s, v)
@@ -249,9 +250,11 @@ export default class HSVPicker extends PureComponent {
         </section>
 
         <div className="row">
-          <a className="eyedropper-icon" onClick={this.handleClickEyedropper}>
-            <Icon type="dora" name="tube" />
-          </a>
+          { handleEyedropperClick &&
+            <a className="eyedropper-icon" onClick={handleEyedropperClick}>
+              <Icon type="dora" name="tube" />
+            </a>
+          }
 
           <div className="h-a-bands">
             <div
@@ -293,5 +296,6 @@ HSVPicker.propTypes = {
   handleChange: PropTypes.func,
   handleDragChange: PropTypes.func,
   handleChangeAlpha: PropTypes.func,
-  handleDragChangeAlpha: PropTypes.func
+  handleDragChangeAlpha: PropTypes.func,
+  handleEyedropperClick: PropTypes.func,
 }
