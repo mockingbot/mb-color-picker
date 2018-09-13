@@ -16,6 +16,7 @@ export default class HSVPicker extends PureComponent {
     h: null,
     s: null,
     v: null,
+    hex: null,
     a: null,
     // changingFromInside: this value indicates that color changes from inside
     // component, which we choose not to accept changes from outside, cause when
@@ -24,14 +25,14 @@ export default class HSVPicker extends PureComponent {
     changingFromInside: false
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(props, state) {
     let newState = null
 
-    if (!prevState.changingFromInside && nextProps.hex !== prevState.hex && nextProps.hex !== 'transparent') {
-      newState = { ...newState, ...rgb2hsv(hex2rgb(nextProps.hex)) }
+    if (!state.changingFromInside && props.hex !== state.hex && props.hex !== 'transparent') {
+      newState = { ...newState, ...rgb2hsv(hex2rgb(props.hex)) }
     }
 
-    if (nextProps.alpha !== prevState.a) newState = { ...newState, a: nextProps.alpha }
+    if (props.alpha !== state.a) newState = { ...newState, a: props.alpha }
 
     return newState
   }
@@ -88,12 +89,15 @@ export default class HSVPicker extends PureComponent {
 
     const { s, v } = this._getSVValue(e.clientX, e.clientY)
     const { h } = this.state
+    const hex = rgb2hex(hsv2rgb({ h, s, v }))
+
     this.setState({
       h, s, v,
+      hex,
       changingFromInside: true
     })
 
-    this.props.handleChange({ h, s, v })
+    this.props.handleChange(hex)
 
     const onMouseMove = e => {
       e.stopPropagation()
@@ -104,10 +108,11 @@ export default class HSVPicker extends PureComponent {
 
       const { s, v } = this._getSVValue(e.clientX, e.clientY)
       const { h } = this.state
+      const hex = rgb2hex(hsv2rgb({ h, s, v }))
 
-      this.setState({ h, s, v })
+      this.setState({ h, s, v, hex })
 
-      this.props.handleDragChange({ h, s, v })
+      this.props.handleDragChange(hex)
     }
 
     const onMouseUp = e => {
@@ -118,9 +123,10 @@ export default class HSVPicker extends PureComponent {
 
       const { s, v } = this._getSVValue(e.clientX, e.clientY)
       const { h } = this.state
+      const hex = rgb2hex(hsv2rgb({ h, s, v }))
 
-      this.setState({ h, s, v })
-      this.props.handleDragChange({ h, s, v })
+      this.setState({ h, s, v, hex })
+      this.props.handleDragChange(hex)
 
       this.setState({ changingFromInside: false })
     }
@@ -135,12 +141,14 @@ export default class HSVPicker extends PureComponent {
 
     const { h } = this._getHValue(e.clientX)
     const { s, v } = this.state
+    const hex = rgb2hex(hsv2rgb({ h, s, v }))
     this.setState({
       h, s, v,
+      hex,
       changingFromInside: true
     })
 
-    this.props.handleChange({ h, s, v })
+    this.props.handleChange(hex)
 
     const onMouseMove = e => {
       e.stopPropagation()
@@ -151,10 +159,11 @@ export default class HSVPicker extends PureComponent {
 
       const { h } = this._getHValue(e.clientX)
       const { s, v } = this.state
+      const hex = rgb2hex(hsv2rgb({ h, s, v }))
 
-      this.setState({ h, s, v })
+      this.setState({ h, s, v, hex })
 
-      this.props.handleDragChange({ h, s, v })
+      this.props.handleDragChange(hex)
     }
 
     const onMouseUp = e => {
@@ -165,9 +174,10 @@ export default class HSVPicker extends PureComponent {
 
       const { h } = this._getHValue(e.clientX)
       const { s, v } = this.state
+      const hex = rgb2hex(hsv2rgb({ h, s, v }))
 
-      this.setState({ h, s, v })
-      this.props.handleDragChange({ h, s, v })
+      this.setState({ h, s, v, hex })
+      this.props.handleDragChange(hex)
 
       this.setState({ changingFromInside: false })
     }

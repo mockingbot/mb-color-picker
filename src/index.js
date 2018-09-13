@@ -10,7 +10,7 @@ import RGBInput from './RGBInput'
 import HexInput from './HexInput'
 import AlphaInput from './AlphaInput'
 
-import { hex2rgbaStr, rgb2hex, hsv2rgb, formatHex } from './utils/color'
+import { hex2rgbaStr, rgb2hex, formatHex } from './utils/color'
 import { stopReactEventPropagation } from './utils/DOM'
 
 import '!style-loader!css-loader!@ibot/ibot/lib/icon/style/index.css'
@@ -94,18 +94,16 @@ export default class ColorPicker extends PureComponent {
     this.handleChange(hex, alpha)
   }
 
-  handleHsvChange = hsv => {
-    const hex = rgb2hex(hsv2rgb(hsv))
+  handleHsvChange = hex => {
     this.handleChange(hex, this.state.alpha)
   }
 
-  handleHsvDragChange = hsv => {
+  handleHsvDragChange = hex => {
     const { onContinouslyChange } = this.props
 
     if (!onContinouslyChange) {
-      this.handleHsvChange(hsv)
+      this.handleHsvChange(hex)
     } else {
-      const hex = rgb2hex(hsv2rgb(hsv))
       const color = hex2rgbaStr(hex, this.state.alpha)
       onContinouslyChange(color)
     }
