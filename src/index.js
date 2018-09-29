@@ -13,7 +13,6 @@ import AlphaInput from './AlphaInput'
 import { hex2rgbaStr, rgb2hex, formatHex } from './utils/color'
 import { stopReactEventPropagation } from './utils/DOM'
 
-import '!style-loader!css-loader!@ibot/ibot/lib/icon/style/index.css'
 import './index.css'
 
 const DUMB_FUNC = () => null

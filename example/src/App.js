@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import ColorPicker, { parseColor } from 'mb-color-picker'
 
+// NOTE: if you need to use @ibot icons, you should import this file in your project
+import '@ibot/ibot/lib/icon/style/index.css'
+
 const DEFAULT_COLOR = '#1D83BB'
 
 const THEME_COLORS = [
