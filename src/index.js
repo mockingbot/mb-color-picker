@@ -202,6 +202,7 @@ export default class ColorPicker extends PureComponent {
 
 export const parseColor = c => {
   const color = c.trim().toLowerCase() // keep lower cases hex in the component
+  const rgbaExtractor = /^rgba?\((.*)\)$/
 
   if (color.match(/transparent/)) {
     return {
@@ -213,8 +214,7 @@ export const parseColor = c => {
       hex: formatHex(color),
       alpha: 1
     }
-  } else if (color.match(/^rgba\((.*)\)$/)) {
-    const rgbaExtractor = /^rgba\((.*)\)$/
+  } else if (color.match(rgbaExtractor)) {
     const rgbaStr = rgbaExtractor.exec(color)[1]
 
     const [ r, g, b, a ] = rgbaStr.split(',').map(i => i.trim())
