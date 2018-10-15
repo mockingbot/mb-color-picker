@@ -4,6 +4,7 @@ import ColorPicker, { parseColor } from 'mb-color-picker'
 
 // NOTE: if you need to use @ibot icons, you should import this file in your project
 import '@ibot/ibot/lib/icon/style/index.css'
+import { Icon } from '@ibot/ibot'
 
 const DEFAULT_COLOR = '#1D83BB'
 
@@ -124,9 +125,30 @@ export default class App extends Component {
               applyDidMountSideEffect={this.centerColorPicker}
               applyWillUnmountSideEffect={this.addLastColorToHistory}
               onDragStart={this.handleDragStart}
-            />
+            >
+              <SystemColorPicker />
+            </ColorPicker>
           </div>
         }
+      </div>
+    )
+  }
+}
+
+class SystemColorPicker extends React.Component {
+  handleSystem = e => this.props.handleChange(e.target.value, this.props.alpha)
+
+  render() {
+    const { hex } = this.props
+    return (
+      <div className="system-color-picker-wrapper">
+        <Icon type="dora" name="tube" />
+        <input
+          className="system-color-picker"
+          type="color"
+          value={hex}
+          onChange={this.handleSystem}
+        />
       </div>
     )
   }

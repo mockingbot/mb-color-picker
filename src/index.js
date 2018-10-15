@@ -31,7 +31,7 @@ export default class ColorPicker extends PureComponent {
     onDragStart: PropTypes.func,
     onClose: PropTypes.func,
     headerText: PropTypes.string,
-    onEyedropperClick: PropTypes.func,
+    children: PropTypes.node,
   }
 
   static defaultProps = {
@@ -133,11 +133,23 @@ export default class ColorPicker extends PureComponent {
     }
   }
 
+  genOutsideColorPicker = () => {
+    const passedOutsideColorPicker = this.props.children
+    return React.cloneElement(passedOutsideColorPicker, {
+      hex: this.state.hex,
+      alpha: this.state.alpha,
+      handleChange: this.handleChange
+    })
+  }
+
   render() {
-    const { themeColors, customColors, onClose, customColorsHeaderText, onEyedropperClick } = this.props
+    const { themeColors, customColors, onClose, customColorsHeaderText } = this.props
     const { hex, alpha } = this.state
 
     const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
+
+    let outsideColorPicker
+    if (this.props.children) outsideColorPicker = this.genOutsideColorPicker()
 
     return (
       <div
@@ -164,21 +176,24 @@ export default class ColorPicker extends PureComponent {
           <HSVPicker
             hex={hex}
             alpha={alpha}
-            handleEyedropperClick={this.props.onEyedropperClick}
             handleDragChange={this.handleHsvDragChange}
             handleChange={this.handleHsvChange}
             handleDragChangeAlpha={this.handleDragChangeAlpha}
             handleChangeAlpha={this.handleChangeAlpha}
-          />
+          >
+            { outsideColorPicker }
+          </HSVPicker>
 
           <div className="input-section">
             <HexInput
               hexValue={hexValue}
-              handleChange={this.handleHexChange} />
+              handleChange={this.handleHexChange}
+            />
 
             <RGBInput
               hex={hex}
-              handleChange={this.handleRgbChange} />
+              handleChange={this.handleRgbChange}
+            />
 
             <AlphaInput
               a={parseInt(alpha*100)}

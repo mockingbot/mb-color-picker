@@ -62,7 +62,7 @@
       align-items: center;
     }
 
-    .eyedropper-icon {
+    .outside-color-picker-btn {
       width: 24px;
       height: 24px;
       margin-right: 8px;
@@ -73,11 +73,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
-      .icon {
-        font-size: 14px;
-        color: #415058;
-      }
     }
 
     .h-a-bands {

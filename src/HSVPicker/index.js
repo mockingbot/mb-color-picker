@@ -29,7 +29,11 @@ export default class HSVPicker extends PureComponent {
     let newState = null
 
     if (!state.changingFromInside && props.hex !== state.hex && props.hex !== 'transparent') {
-      newState = { ...newState, ...rgb2hsv(hex2rgb(props.hex)) }
+      newState = {
+        ...newState,
+        hex: props.hex,
+        ...rgb2hsv(hex2rgb(props.hex))
+      }
     }
 
     if (props.alpha !== state.a) newState = { ...newState, a: props.alpha }
@@ -227,8 +231,7 @@ export default class HSVPicker extends PureComponent {
   }
 
   render() {
-    const { handleEyedropperClick } = this.props
-    const { h, s, v, a } = this.state
+    const { hex, h, s, v, a } = this.state
     const baseHue = this._getBaseHue(h)
     const SVPointerStyle = this._getSVPointerStyle(s, v)
     const HPointerStyle = this._getHPointerStyle(h)
@@ -250,10 +253,10 @@ export default class HSVPicker extends PureComponent {
         </section>
 
         <div className="row">
-          { handleEyedropperClick &&
-            <a className="eyedropper-icon" onClick={handleEyedropperClick}>
-              <Icon type="dora" name="tube" />
-            </a>
+          { this.props.children &&
+            <div className="outside-color-picker-btn">
+              { this.props.children }
+            </div>
           }
 
           <div className="h-a-bands">
@@ -297,5 +300,5 @@ HSVPicker.propTypes = {
   handleDragChange: PropTypes.func,
   handleChangeAlpha: PropTypes.func,
   handleDragChangeAlpha: PropTypes.func,
-  handleEyedropperClick: PropTypes.func,
+  children: PropTypes.node,
 }
