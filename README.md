@@ -69,12 +69,6 @@ class ColorPicker extends React.component {
       /*
         header text for color picker, defaults to 'Color Picker'.
       */
-    onEyedropperClick: PropTypes.string,
-      /*
-        if a function is passed, a eyedropper icon will appear on the color
-        picker. Clicking on it will let the function get called, where you can
-        manage color picking from outside.
-      */
   }
 
   render () {
@@ -109,6 +103,8 @@ class Example extends Component {
   }
 }
 ```
+
+Also, you can wrap a custom color picker element, for example, a eyedropper color picker, into the `<ColorPicker>` as its child, to enhance the color picker. The custom color picker will receive `hex`, `alpha`, `handleChange` as props to interchange color with the `<ColorPicker>`. You can check the usage in `/example/src/App.js`
 
 
 ## Demo
