@@ -19,18 +19,9 @@
       &.transparent {
         position: relative;
         overflow: hidden;
-        background: white !important;
-
-        &::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 200%;
-          border-top: 3px solid #eb5648;
-          transform-origin: 0 0;
-          transform: rotate(-45deg) translate(-50%, -50%);
-        }
+        background-image: linear-gradient(45deg, #ccc 26%, transparent 26%), linear-gradient(-45deg, #ccc 26%, transparent 26%), linear-gradient(45deg, transparent 73%, #ccc 73%), linear-gradient(-45deg, transparent 73%, #ccc 73%);
+        background-size: 6px 6px;
+        background-position: 0 0, 0 3px, 3px -3px, -3px 0;
       }
     }
   }
