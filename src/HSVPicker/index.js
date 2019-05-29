@@ -116,7 +116,7 @@ export default class HSVPicker extends PureComponent {
 
       this.setState({ h, s, v, hex })
 
-      this.props.handleDragChange(hex)
+      this.props.handleDragMoveChange(hex)
     }
 
     const onMouseUp = e => {
@@ -167,7 +167,7 @@ export default class HSVPicker extends PureComponent {
 
       this.setState({ h, s, v, hex })
 
-      this.props.handleDragChange(hex)
+      this.props.handleDragMoveChange(hex)
     }
 
     const onMouseUp = e => {
@@ -221,7 +221,7 @@ export default class HSVPicker extends PureComponent {
       const { a } = this._getAValue(e.clientX)
 
       this.setState({ a })
-      this.props.handleDragChangeAlpha(a)
+      this.props.handleChangeAlpha(a)
 
       this.setState({ changingFromInside: false })
     }
@@ -298,6 +298,7 @@ HSVPicker.propTypes = {
   hex: PropTypes.string,
   handleChange: PropTypes.func,
   handleDragChange: PropTypes.func,
+  handleDragMoveChange: PropTypes.func,
   handleChangeAlpha: PropTypes.func,
   handleDragChangeAlpha: PropTypes.func,
   children: PropTypes.node,

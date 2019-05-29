@@ -40,22 +40,27 @@ export default class ColorPicker extends PureComponent {
     headerText: 'Color Picker',
   }
 
-  state = {
-    hex: null,
-    alpha: null
-  }
 
-  static getDerivedStateFromProps (props, state) {
+  constructor(props) {
+    super(props);
     const { hex, alpha } = parseColor(props.color)
 
-    if (hex.toLowerCase() === state.props && alpha === state.alpha) {
-      return null
-    } else {
-      return {
-        hex,
-        alpha,
-      }
+    this.state = {
+      hex,
+      alpha
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.color !== this.props.color) {
+      this.setPropsColorToState(this.props.color)
+    }
+  }
+
+  setPropsColorToState = color => {
+    const { hex, alpha } = parseColor(color)
+
+    this.setState({ hex, alpha })
   }
 
   setContainerRef = ref => this.$container = ref
@@ -109,6 +114,10 @@ export default class ColorPicker extends PureComponent {
     }
   }
 
+  handleHsvDragMoveChange = hex => {
+    this.setState({ hex })
+  }
+
   handleRgbChange = rgb => {
     const hex = rgb2hex(rgb)
     const changeFromTransparent = this.state.hex === 'transparent'
@@ -127,7 +136,7 @@ export default class ColorPicker extends PureComponent {
     const { onContinouslyChange } = this.props
 
     if (!onContinouslyChange) {
-      this.handleChangeAlpha(a)
+      this.setState({ alpha: a })
     } else {
       onContinouslyChange(hex2rgbaStr(this.state.hex, a))
     }
@@ -176,7 +185,8 @@ export default class ColorPicker extends PureComponent {
           <HSVPicker
             hex={hex}
             alpha={alpha}
-            handleDragChange={this.handleHsvDragChange}
+            handleDragChange={this.handleHsvDragChange}  
+            handleDragMoveChange={this.handleHsvDragMoveChange}
             handleChange={this.handleHsvChange}
             handleDragChangeAlpha={this.handleDragChangeAlpha}
             handleChangeAlpha={this.handleChangeAlpha}
