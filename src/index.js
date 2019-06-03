@@ -22,7 +22,7 @@ export default class ColorPicker extends PureComponent {
   static propTypes = {
     color: PropTypes.string,
     onChange: PropTypes.func,
-    onContinouslyChange: PropTypes.func,
+    onConfirm: PropTypes.func,
     applyDidMountSideEffect: PropTypes.func,
     applyWillUnmountSideEffect: PropTypes.func,
     themeColors: PropTypes.array,
@@ -40,11 +40,6 @@ export default class ColorPicker extends PureComponent {
     headerText: 'Color Picker',
   }
 
-  state = {
-    hex: null,
-    alpha: null
-  }
-
   static getDerivedStateFromProps (props, state) {
     const { hex, alpha } = parseColor(props.color)
 
@@ -56,6 +51,11 @@ export default class ColorPicker extends PureComponent {
         alpha,
       }
     }
+  }
+
+  state = {
+    hex: null,
+    alpha: null
   }
 
   setContainerRef = ref => this.$container = ref
@@ -77,68 +77,55 @@ export default class ColorPicker extends PureComponent {
 
   handleClose = e => this.props.onClose(e)
 
-  handleChange = (hex, alpha) => {
-    const { hex: propsHex, alpha: propsAlpha } = parseColor(this.props.color)
-
-    if (hex === propsHex && alpha === propsAlpha) return // same color gets no pop up
-
-    if (hex === 'transparent') {
-      this.props.onChange('transparent')
-    } else {
-      this.props.onChange(hex2rgbaStr(hex, propsHex === 'transparent' ? 1 : alpha))
-    }
-  }
-
   handleColorChangeFromExternal = color => {
     const { hex, alpha } = parseColor(color)
-    this.handleChange(hex, alpha)
-  }
-
-  handleHsvChange = hex => {
-    this.handleChange(hex, this.state.alpha)
-  }
-
-  handleHsvDragChange = hex => {
-    const { onContinouslyChange } = this.props
-
-    if (!onContinouslyChange) {
-      this.handleHsvChange(hex)
-    } else {
-      const color = hex2rgbaStr(hex, this.state.alpha)
-      onContinouslyChange(color)
-    }
+    this.hsvConfirm({ hex, a: alpha })
   }
 
   handleRgbChange = rgb => {
     const hex = rgb2hex(rgb)
     const changeFromTransparent = this.state.hex === 'transparent'
-    this.handleChange(hex, changeFromTransparent ? 1 : this.state.alpha)
+    this.hsvConfirm({ hex, a: changeFromTransparent ? 1 : this.state.alpha })
   }
 
   handleHexChange = hexValue => {
     const hex = `#${hexValue}`
     const changeFromTransparent = this.state.hex === 'transparent'
-    this.handleChange(hex, changeFromTransparent ? 1 : this.state.alpha)
+    this.hsvConfirm({ hex, a: changeFromTransparent ? 1 : this.state.alpha })
   }
 
-  handleChangeAlpha = a => this.handleChange(this.state.hex, a)
+  hsvChange = ({hex, a}) => {
+    const { hex: propsHex } = parseColor(this.props.color)
+    if (!hex) hex = this.state.hex
+    if (!a) a = this.state.alpha
 
-  handleDragChangeAlpha = a => {
-    const { onContinouslyChange } = this.props
-
-    if (!onContinouslyChange) {
-      this.handleChangeAlpha(a)
+    if (hex === 'transparent') {
+      this.props.onChange('transparent')
     } else {
-      onContinouslyChange(hex2rgbaStr(this.state.hex, a))
+      this.props.onChange(hex2rgbaStr(hex, propsHex === 'transparent' ? 1 : a))
     }
   }
+
+  hsvConfirm = ({hex, a}) => {
+    const { hex: propsHex } = parseColor(this.props.color)
+    if (!hex) hex = this.state.hex
+    if (!a) a = this.state.alpha
+
+    if (hex === 'transparent') {
+      this.props.onConfirm('transparent')
+    } else {
+      this.props.onConfirm(hex2rgbaStr(hex, propsHex === 'transparent' ? 1 : a))
+    }
+  }
+
+  handleChangeAlpha = a => this.hsvConfirm({ hex: this.state.hex, a })
 
   genOutsideColorPicker = () => {
     const passedOutsideColorPicker = this.props.children
     return React.cloneElement(passedOutsideColorPicker, {
       hex: this.state.hex,
       alpha: this.state.alpha,
-      handleChange: this.handleChange
+      handleChange: this.hsvConfirm
     })
   }
 
@@ -176,10 +163,8 @@ export default class ColorPicker extends PureComponent {
           <HSVPicker
             hex={hex}
             alpha={alpha}
-            handleDragChange={this.handleHsvDragChange}
-            handleChange={this.handleHsvChange}
-            handleDragChangeAlpha={this.handleDragChangeAlpha}
-            handleChangeAlpha={this.handleChangeAlpha}
+            onChange={this.hsvChange}
+            onConfirm={this.hsvConfirm}
           >
             { outsideColorPicker }
           </HSVPicker>

@@ -1,28 +1,18 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
-import Icon from '@ibot/ibot/lib/icon'
-
 import { rgb2hsv, hex2rgb, hsv2rgb, rgb2hex, rgb2rgbaStr } from '../utils/color'
 import { stopReactEventPropagation } from '../utils/DOM'
 
 import './index.css'
 
-
 export default class HSVPicker extends PureComponent {
-  newEyedropperInQueue = false
-
-  state = {
-    h: null,
-    s: null,
-    v: null,
-    hex: null,
-    a: null,
-    // changingFromInside: this value indicates that color changes from inside
-    // component, which we choose not to accept changes from outside, cause when
-    // `v` in hsv is near 0, the output of converting hsv value to rgb, or vice versa,
-    // becomes unstable(`h` value and `s` value), which causing pointer to tremble
-    changingFromInside: false
+  static propTypes = {
+    hex: PropTypes.string,
+    alpha: PropTypes.number,
+    onChange: PropTypes.func,
+    onConfirm: PropTypes.func,
+    children: PropTypes.node,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -39,6 +29,19 @@ export default class HSVPicker extends PureComponent {
     if (props.alpha !== state.a) newState = { ...newState, a: props.alpha }
 
     return newState
+  }
+
+  state = {
+    h: null,
+    s: null,
+    v: null,
+    hex: null,
+    a: null,
+    // changingFromInside: this value indicates that color changes from inside
+    // component, which we choose not to accept changes from outside, cause when
+    // `v` in hsv is near 0, the output of converting hsv value to rgb, or vice versa,
+    // becomes unstable(`h` value and `s` value), which causing pointer to tremble
+    changingFromInside: false
   }
 
   setSVPlaneRef = ref => this.$SVPlane = ref
@@ -101,7 +104,7 @@ export default class HSVPicker extends PureComponent {
       changingFromInside: true
     })
 
-    this.props.handleChange(hex)
+    this.props.onChange({ hex })
 
     const onMouseMove = e => {
       e.stopPropagation()
@@ -116,7 +119,7 @@ export default class HSVPicker extends PureComponent {
 
       this.setState({ h, s, v, hex })
 
-      this.props.handleDragChange(hex)
+      this.props.onChange({ hex })
     }
 
     const onMouseUp = e => {
@@ -130,7 +133,7 @@ export default class HSVPicker extends PureComponent {
       const hex = rgb2hex(hsv2rgb({ h, s, v }))
 
       this.setState({ h, s, v, hex })
-      this.props.handleDragChange(hex)
+      this.props.onConfirm({ hex })
 
       this.setState({ changingFromInside: false })
     }
@@ -152,7 +155,7 @@ export default class HSVPicker extends PureComponent {
       changingFromInside: true
     })
 
-    this.props.handleChange(hex)
+    this.props.onChange({ hex })
 
     const onMouseMove = e => {
       e.stopPropagation()
@@ -167,7 +170,7 @@ export default class HSVPicker extends PureComponent {
 
       this.setState({ h, s, v, hex })
 
-      this.props.handleDragChange(hex)
+      this.props.onChange({ hex })
     }
 
     const onMouseUp = e => {
@@ -181,7 +184,7 @@ export default class HSVPicker extends PureComponent {
       const hex = rgb2hex(hsv2rgb({ h, s, v }))
 
       this.setState({ h, s, v, hex })
-      this.props.handleDragChange(hex)
+      this.props.onConfirm({ hex })
 
       this.setState({ changingFromInside: false })
     }
@@ -198,7 +201,7 @@ export default class HSVPicker extends PureComponent {
 
     this.setState({ changingFromInside: true })
 
-    this.props.handleChangeAlpha(a)
+    this.props.onChange({ a })
 
     const onMouseMove = e => {
       e.stopPropagation()
@@ -209,7 +212,7 @@ export default class HSVPicker extends PureComponent {
 
       const { a } = this._getAValue(e.clientX)
 
-      this.props.handleDragChangeAlpha(a)
+      this.props.onChange({ a })
     }
 
     const onMouseUp = e => {
@@ -221,7 +224,7 @@ export default class HSVPicker extends PureComponent {
       const { a } = this._getAValue(e.clientX)
 
       this.setState({ a })
-      this.props.handleDragChangeAlpha(a)
+      this.props.onConfirm({ a })
 
       this.setState({ changingFromInside: false })
     }
@@ -231,7 +234,7 @@ export default class HSVPicker extends PureComponent {
   }
 
   render() {
-    const { hex, h, s, v, a } = this.state
+    const { h, s, v, a } = this.state
     const baseHue = this._getBaseHue(h)
     const SVPointerStyle = this._getSVPointerStyle(s, v)
     const HPointerStyle = this._getHPointerStyle(h)
@@ -291,14 +294,4 @@ export default class HSVPicker extends PureComponent {
       </div>
     )
   }
-}
-
-HSVPicker.propTypes = {
-  alpha: PropTypes.number,
-  hex: PropTypes.string,
-  handleChange: PropTypes.func,
-  handleDragChange: PropTypes.func,
-  handleChangeAlpha: PropTypes.func,
-  handleDragChangeAlpha: PropTypes.func,
-  children: PropTypes.node,
 }
