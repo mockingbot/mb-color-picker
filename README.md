@@ -26,13 +26,13 @@ class ColorPicker extends React.component {
        */
     onChange: PropTypes.func,
       /*
-        get called when a color is picked. The color, formatted to rgba pattern,
-        like 'rgba(255, 255, 255, 1)', is passed in as the first and only param.
-      */
-    onContinouslyChange: PropTypes.func,
-      /*
-        get called when a color is picked through dragging(hsv), the color is
+       get called when a color is picked through dragging(hsv), the color is
         passed in as the first and only param. Useful for managing history.
+      */
+    onConfirm: PropTypes.func,
+      /*
+       get called when a color is picked. The color, formatted to rgba pattern,
+        like 'rgba(255, 255, 255, 1)', is passed in as the first and only param.
       */
     applyDidMountSideEffect: PropTypes.func,
       /*

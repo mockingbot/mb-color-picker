@@ -31,6 +31,8 @@ export default class App extends Component {
 
   handleChange = color => this.setState({ color })
 
+  handleConfirm = color => this.setState({ color })
+
   getHistoryColors = () => {
     return JSON.parse(localStorageDelegate.getItem('prevColors') || '[]')
   }
@@ -118,6 +120,7 @@ export default class App extends Component {
             <ColorPicker
               color={color}
               onChange={this.handleChange}
+              onConfirm={this.handleConfirm}
               onClose={this.hideColorPicker}
               themeColors={THEME_COLORS}
               customColors={historyColors}
@@ -136,7 +139,7 @@ export default class App extends Component {
 }
 
 class SystemColorPicker extends React.Component {
-  handleSystem = e => this.props.handleChange(e.target.value, this.props.alpha)
+  handleSystem = e => this.props.handleChange({ hex: e.target.value, a: this.props.alpha })
 
   render() {
     const { hex } = this.props
