@@ -97,7 +97,7 @@ export default class ColorPicker extends PureComponent {
   hsvChange = ({hex, a}) => {
     const { hex: propsHex } = parseColor(this.props.color)
     if (!hex) hex = this.state.hex
-    if (!a) a = this.state.alpha
+    if (!a && a !== 0) a = this.state.alpha
 
     if (hex === 'transparent') {
       this.props.onChange('transparent')
