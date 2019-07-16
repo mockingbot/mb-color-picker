@@ -102,13 +102,18 @@ export default class HexInput extends PureComponent {
   render() {
     const { hexValue } = this.state
 
+    let inputValue = hexValue
+    if (hexValue === 'TRANSPARENT' || hexValue === 'transparent') {
+      inputValue = 'FFFFFF'
+    }
+
     return (
       <label
         className="color-input"
         style={{ width: '58px' }}>
         <input
           ref={this.setInputRef}
-          value={hexValue}
+          value={inputValue}
           onClick={this.selectWhenClick}
           onKeyUp={this.handleEnter}
           onChange={this.handleChange}
