@@ -1,24 +1,13 @@
 import React, { Component } from 'react'
-
+import { uniqBy } from 'lodash'
+import { colorPanelList } from './constant'
 import ColorPicker, { parseColor } from 'mb-color-picker'
 
 // NOTE: if you need to use @ibot icons, you should import this file in your project
-import '@ibot/ibot/lib/icon/style/index.css'
-import { Icon } from '@ibot/ibot'
+import '@ibot/ibot/lib/icon/index.css'
+import Icon from '@ibot/ibot/lib/icon'
 
 const DEFAULT_COLOR = '#1D83BB'
-
-const THEME_COLORS = [
-  'transparent',
-  '#ffffff',
-  '#3f51b5',
-  '#ff4081',
-  '#e51c23',
-  '#009688',
-  '#259b24',
-  '#8bc34a',
-  '#ff9800',
-]
 
 const localStorageDelegate = window.localStorage
 
@@ -33,18 +22,19 @@ export default class App extends Component {
 
   handleConfirm = color => this.setState({ color })
 
-  getHistoryColors = () => {
-    return JSON.parse(localStorageDelegate.getItem('prevColors') || '[]')
+  addHistoryColors = () => {
+    colorPanelList.unshift({
+      name: '最近使用',
+      key: 'history',
+      colors: JSON.parse(window.localStorage.getItem('prevColors') || '[]')
+    })
   }
 
   addLastColorToHistory = () => {
     const { color } = this.state
-    const { hex, alpha } = parseColor(color)
     let history = JSON.parse(localStorageDelegate.getItem('prevColors') || '[]')
 
-    if (THEME_COLORS.includes(hex) && alpha === 1 || color === 'transparent') {
-      return
-    } else if (history.includes(color)) {
+    if (history.includes(color)) {
       history.splice(history.indexOf(color), 1)
     } else {
       history = history.slice(0, 17)
@@ -99,7 +89,7 @@ export default class App extends Component {
       showColorPicker,
       colorPickerPosition: [ colorPickerLeft, colorPickerTop ]
     } = this.state
-    const historyColors = this.getHistoryColors()
+    this.addHistoryColors()
 
     return (
       <div className="playground">
@@ -122,9 +112,8 @@ export default class App extends Component {
               onChange={this.handleChange}
               onConfirm={this.handleConfirm}
               onClose={this.hideColorPicker}
-              themeColors={THEME_COLORS}
-              customColors={historyColors}
-              customColorsHeaderText="History Colors"
+              colorPanelList={uniqBy(colorPanelList, 'key')}
+              defaultSelect={"最近使用"}
               applyDidMountSideEffect={this.centerColorPicker}
               applyWillUnmountSideEffect={this.addLastColorToHistory}
               onDragStart={this.handleDragStart}

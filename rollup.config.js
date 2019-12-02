@@ -50,7 +50,13 @@ export default [{
           'isBoolean',
           'isEqual',
           'isArray',
-          'isString'
+          'isString',
+          'isObject',
+          'isNumber',
+          'isElement',
+          'compact',
+          'get',
+          'omit'
         ]
       }
     })

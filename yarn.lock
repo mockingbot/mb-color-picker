@@ -92,9 +92,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@ibot/ibot@^0.5.3-beta26":
-  version "0.5.3-beta26"
-  resolved "https://registry.yarnpkg.com/@ibot/ibot/-/ibot-0.5.3-beta26.tgz#c18c1c4377159892e67b7efe6cee602d17b1e265"
+"@ibot/ibot@0.7.0-dev.13":
+  version "0.7.0-dev.13"
+  resolved "https://registry.yarnpkg.com/@ibot/ibot/-/ibot-0.7.0-dev.13.tgz#3b61f210cbfb2e0bff32996808e8fa28462b3014"
+  integrity sha512-bBD78YYTu5kWW+DSpBhT1dvFwfNYcWBmlcqml1twsCUutSeNNzpcAg0jXAB6akSv+pR1FwBkMMTJByGB1KwskQ==
 
 "@types/estree@0.0.39":
   version "0.0.39"
@@ -4820,6 +4821,11 @@ lodash.uniq@^4.5.0:
 "lodash@>=3.5 <5", lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
+
+lodash@^4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 loglevel@^1.4.1:
   version "1.6.1"

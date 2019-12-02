@@ -3,8 +3,7 @@ import React, { PureComponent } from 'react'
 
 import Icon from '@ibot/ibot/lib/icon'
 
-import Theme from './Theme'
-import CustomColors from './CustomColors'
+import DropDownColors from './DropDownColors'
 import HSVPicker from './HSVPicker'
 import RGBInput from './RGBInput'
 import HexInput from './HexInput'
@@ -17,7 +16,6 @@ import './index.css'
 
 const DUMB_FUNC = () => null
 
-
 export default class ColorPicker extends PureComponent {
   static propTypes = {
     color: PropTypes.string,
@@ -25,19 +23,18 @@ export default class ColorPicker extends PureComponent {
     onConfirm: PropTypes.func,
     applyDidMountSideEffect: PropTypes.func,
     applyWillUnmountSideEffect: PropTypes.func,
-    themeColors: PropTypes.array,
-    customColors: PropTypes.array,
-    customColorsHeaderText: PropTypes.string,
     onDragStart: PropTypes.func,
     onClose: PropTypes.func,
     headerText: PropTypes.string,
     children: PropTypes.node,
+    colorPanelList: PropTypes.array,
+    defaultSelect: PropTypes.string
   }
 
   static defaultProps = {
     applyDidMountSideEffect: DUMB_FUNC,
     applyWillUnmountSideEffect: DUMB_FUNC,
-    headerText: 'Color Picker',
+    headerText: '颜色设置',
   }
 
   static getDerivedStateFromProps (props, state) {
@@ -132,7 +129,7 @@ export default class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { themeColors, customColors, onClose, customColorsHeaderText } = this.props
+    const { onClose, colorPanelList, defaultSelect } = this.props
     const { hex, alpha } = this.state
 
     const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
@@ -157,11 +154,6 @@ export default class ColorPicker extends PureComponent {
         </header>
 
         <div className="color-picker-body">
-          {
-            themeColors &&
-            <Theme themes={themeColors} handleSelect={this.handleColorChangeFromExternal} />
-          }
-
           <HSVPicker
             hex={hex}
             alpha={alpha}
@@ -189,10 +181,10 @@ export default class ColorPicker extends PureComponent {
           </div>
 
           {
-            customColors &&
-            <CustomColors
-              customColors={customColors}
-              customColorsHeaderText={customColorsHeaderText}
+            colorPanelList &&
+            <DropDownColors
+              colorPanelList={colorPanelList}
+              defaultSelect={defaultSelect}
               handleSelect={this.handleColorChangeFromExternal}
             />
           }
