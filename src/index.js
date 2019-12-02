@@ -28,7 +28,8 @@ export default class ColorPicker extends PureComponent {
     headerText: PropTypes.string,
     children: PropTypes.node,
     colorPanelList: PropTypes.array,
-    defaultSelect: PropTypes.string
+    defaultSelect: PropTypes.string,
+    isExpandFeature: PropTypes.bool
   }
 
   static defaultProps = {
@@ -129,7 +130,7 @@ export default class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { onClose, colorPanelList, defaultSelect } = this.props
+    const { onClose, colorPanelList, isExpandFeature, onChangeSelect, currentSelect, onToogleExpand, isClickExpand } = this.props
     const { hex, alpha } = this.state
 
     const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
@@ -184,8 +185,12 @@ export default class ColorPicker extends PureComponent {
             colorPanelList &&
             <DropDownColors
               colorPanelList={colorPanelList}
-              defaultSelect={defaultSelect}
+              currentSelect={currentSelect}
               handleSelect={this.handleColorChangeFromExternal}
+              isExpandFeature={isExpandFeature}
+              onToogleExpand={onToogleExpand}
+              isClickExpand={isClickExpand}
+              onChangeSelect={onChangeSelect}
             />
           }
         </div>

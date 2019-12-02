@@ -104,7 +104,7 @@
         height: 12px;
         margin-left: calc(- var(--slider-width) / 2);
         background: #f6f7f8;
-        box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.34);
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
         border-radius: 3px;
         z-index: 2;
         pointer-events: none;

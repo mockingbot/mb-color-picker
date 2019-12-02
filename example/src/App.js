@@ -15,8 +15,12 @@ export default class App extends Component {
   state = {
     color: DEFAULT_COLOR,
     showColorPicker: true,
-    colorPickerPosition: [0, 0]
+    colorPickerPosition: [0, 0],
+    currentSelect: '最近使用',
+    isClickExpand: false
   }
+
+  handleChangeSelect = currentSelect => this.setState({ currentSelect })
 
   handleChange = color => this.setState({ color })
 
@@ -83,11 +87,17 @@ export default class App extends Component {
     document.addEventListener('mouseup', onMouseUp)
   }
 
+  handleToogleExpand = () => {
+    this.setState({ isClickExpand: !this.state.isClickExpand })
+  }
+
   render () {
     const {
       color,
       showColorPicker,
-      colorPickerPosition: [ colorPickerLeft, colorPickerTop ]
+      colorPickerPosition: [ colorPickerLeft, colorPickerTop ],
+      currentSelect,
+      isClickExpand
     } = this.state
     this.addHistoryColors()
 
@@ -113,7 +123,12 @@ export default class App extends Component {
               onConfirm={this.handleConfirm}
               onClose={this.hideColorPicker}
               colorPanelList={uniqBy(colorPanelList, 'key')}
-              defaultSelect={"最近使用"}
+              onChangeSelect={this.handleChangeSelect}
+              currentSelect={currentSelect}
+
+              isExpandFeature={true}
+              onToogleExpand={this.handleToogleExpand}
+              isClickExpand={isClickExpand}
               applyDidMountSideEffect={this.centerColorPicker}
               applyWillUnmountSideEffect={this.addLastColorToHistory}
               onDragStart={this.handleDragStart}

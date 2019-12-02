@@ -10,7 +10,7 @@ export const colorPanelList = [
     ]
   },
   {
-    name: 'Ant Desgin',
+    name: 'Ant Design',
     key: 'ant',
     colors: [
       '#fbfbfb', '#F7F7F7', '#F5F5F5', '#E9E9E9', '#D9D9D9', '#BFBFBF', '#919191', '#5A5A5A', '#404040',
@@ -25,7 +25,7 @@ export const colorPanelList = [
     ]
   },
   {
-    name: 'Apple ISO UI',
+    name: 'Apple IOS UI',
     key: 'apple',
     colors: [
       '#FF3A30', '#FF2D55', '#FF9502', '#FFCB01', '#34C758', '#5AC8FA', '#007AFF', '#5756D7', '#AF52DE',

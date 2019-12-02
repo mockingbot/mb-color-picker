@@ -1,7 +1,7 @@
 .--mb--color-picker {
   .panel-color-list {
     border-top: 1px solid #dedee4;
-    padding-bottom: 16px;
+    padding-bottom: 7px;
 
     .CoreSelect {
       border: none;
@@ -18,9 +18,17 @@
         padding: 0;
         height: auto;
 
+        span {
+          color: #415058;
+        }
+
         &:focus{
           outline: 0;
         }
+      }
+
+      .caret {
+        margin: 0 6px;
       }
     }
 
@@ -29,6 +37,13 @@
       flex-wrap: wrap;
       margin: 0;
       padding: 0;
+      margin-bottom: 10px;
+
+      &.is-expand {
+        overflow: hidden;
+        max-height: 112px;
+        transition: 0.3s ease-out;
+      }
     }
 
     .current-palette-color-imagback {
@@ -41,6 +56,14 @@
 
     .current-palette-color-li {
       height: 100%;
+
+      &.transparent {
+        position: relative;
+        overflow: hidden;
+        background-image: linear-gradient(45deg, #ccc 26%, transparent 26%), linear-gradient(-45deg, #ccc 26%, transparent 26%), linear-gradient(45deg, transparent 73%, #ccc 73%), linear-gradient(-45deg, transparent 73%, #ccc 73%);
+        background-size: 6px 6px;
+        background-position: 0 0, 0 3px, 3px -3px, -3px 0;
+      }
     }
 
     .current-palette-color {
@@ -59,13 +82,20 @@
         margin-right: 10px;
       }
     }
-  }
 
-  /* &.transparent {
-    position: relative;
-    overflow: hidden;
-    background-image: linear-gradient(45deg, #ccc 26%, transparent 26%), linear-gradient(-45deg, #ccc 26%, transparent 26%), linear-gradient(45deg, transparent 73%, #ccc 73%), linear-gradient(-45deg, transparent 73%, #ccc 73%);
-    background-size: 6px 6px;
-    background-position: 0 0, 0 3px, 3px -3px, -3px 0;
-  } */
+    .expand-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &.is-pack-up {
+        transform: rotate(180deg);
+      }
+
+      svg:hover path {
+        fill: #5B6B73;
+      }
+    }
+  }
 }
