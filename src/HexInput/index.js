@@ -109,8 +109,8 @@ export default class HexInput extends PureComponent {
 
     return (
       <label
-        className="color-input"
-        style={{ width: '58px' }}>
+        className="color-input hex-input"
+        style={{ width: '62px' }}>
         <input
           ref={this.setInputRef}
           value={inputValue}

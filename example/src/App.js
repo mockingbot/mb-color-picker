@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { uniqBy } from 'lodash'
+import uniqBy from 'lodash/unionBy'
 import { colorPanelList } from './constant'
 import ColorPicker, { parseColor } from 'mb-color-picker'
 
@@ -32,6 +32,7 @@ export default class App extends Component {
       key: 'history',
       colors: JSON.parse(window.localStorage.getItem('prevColors') || '[]')
     })
+    return colorPanelList
   }
 
   addLastColorToHistory = () => {
@@ -99,7 +100,7 @@ export default class App extends Component {
       currentSelect,
       isClickExpand
     } = this.state
-    this.addHistoryColors()
+    const colorsData = uniqBy(this.addHistoryColors(), 'key')
 
     return (
       <div className="playground">
@@ -122,16 +123,16 @@ export default class App extends Component {
               onChange={this.handleChange}
               onConfirm={this.handleConfirm}
               onClose={this.hideColorPicker}
-              colorPanelList={uniqBy(colorPanelList, 'key')}
-              onChangeSelect={this.handleChangeSelect}
-              currentSelect={currentSelect}
-
-              isExpandFeature={true}
-              onToogleExpand={this.handleToogleExpand}
-              isClickExpand={isClickExpand}
               applyDidMountSideEffect={this.centerColorPicker}
               applyWillUnmountSideEffect={this.addLastColorToHistory}
               onDragStart={this.handleDragStart}
+
+              colorPanelList={colorsData}
+              onChangeSelect={this.handleChangeSelect}
+              currentSelect={currentSelect}
+              isExpandFeature={true}
+              onToogleExpand={this.handleToogleExpand}
+              isClickExpand={isClickExpand}
             >
               <SystemColorPicker />
             </ColorPicker>

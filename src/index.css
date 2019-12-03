@@ -29,6 +29,23 @@
     padding-right: 1px;
     margin-top: 10px;
     margin-bottom: 12px;
+
+    .hex-input {
+
+      input {
+        padding-left: 11px;
+      }
+
+      &::before {
+        display: inline-block;
+        content: '#';
+        font-size: 10px;
+        position: absolute;
+        margin-top: 3px;
+        margin-left: 3px;
+        color: #8D9EA7;
+      }
+    }
   }
 
   .color-picker-header {
