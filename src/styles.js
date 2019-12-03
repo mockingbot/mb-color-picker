@@ -1,4 +1,6 @@
-.--mb--color-picker {
+import styled from 'styled-components'
+
+export const StyledColorPicker = styled.div`
   box-sizing: border-box;
   position: absolute;
   width: 262px;
@@ -72,4 +74,4 @@
   .color-picker-body {
     padding: 0 10px;
   }
-}
+`

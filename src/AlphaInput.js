@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
-import './RGBInput/index.css'
-
+import { StyledRGBInput } from './RGBInput/styles'
 
 export default class AlphaInput extends PureComponent {
 
@@ -50,7 +49,7 @@ export default class AlphaInput extends PureComponent {
     const { a } = this.state
 
     return (
-      <label className="color-input">
+      <StyledRGBInput className="color-input">
         <input
           value={a}
           onClick={this.selectWhenClick}
@@ -58,7 +57,7 @@ export default class AlphaInput extends PureComponent {
           onChange={this.handleChange}
           onBlur={this.handleBlur} />
         <span>A</span>
-      </label>
+      </StyledRGBInput>
     )
   }
 }

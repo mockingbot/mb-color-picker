@@ -57,6 +57,11 @@ export default [{
           'compact',
           'get',
           'omit'
+        ],
+        'node_modules/react-is/index.js': [
+          'isElement',
+          'isValidElementType',
+          'ForwardRef'
         ]
       }
     })

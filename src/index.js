@@ -12,7 +12,7 @@ import AlphaInput from './AlphaInput'
 import { hex2rgbaStr, rgb2hex, formatHex } from './utils/color'
 import { stopReactEventPropagation } from './utils/DOM'
 
-import './index.css'
+import { StyledColorPicker } from './styles'
 
 const DUMB_FUNC = () => null
 
@@ -28,8 +28,11 @@ export default class ColorPicker extends PureComponent {
     headerText: PropTypes.string,
     children: PropTypes.node,
     colorPanelList: PropTypes.array,
-    defaultSelect: PropTypes.string,
-    isExpandFeature: PropTypes.bool
+    isExpandFeature: PropTypes.bool,
+    onChangeSelect: PropTypes.func,
+    currentSelect: PropTypes.string,
+    onToogleExpand: PropTypes.func,
+    isClickExpand: PropTypes.bool
   }
 
   static defaultProps = {
@@ -139,7 +142,7 @@ export default class ColorPicker extends PureComponent {
     if (this.props.children) outsideColorPicker = this.genOutsideColorPicker()
 
     return (
-      <div
+      <StyledColorPicker
         className="--mb--color-picker"
         ref={this.setContainerRef}
         onMouseDown={stopReactEventPropagation}
@@ -194,7 +197,7 @@ export default class ColorPicker extends PureComponent {
             />
           }
         </div>
-      </div>
+      </StyledColorPicker>
     )
   }
 }
