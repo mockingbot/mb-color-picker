@@ -4,8 +4,8 @@ export const StyledColorPicker = styled.div`
   box-sizing: border-box;
   position: absolute;
   width: 262px;
-  color: #415058;
-  background: white;
+  color: ${props => props.theme.tc};
+  background: ${props => props.theme.bgColor};
   border-radius: 4px;
   box-shadow: 0 -2px 20px 0 rgba(39, 54, 78, 0.11);
   font-size: 12px;
@@ -43,9 +43,9 @@ export const StyledColorPicker = styled.div`
         content: '#';
         font-size: 10px;
         position: absolute;
-        margin-top: 3px;
+        margin-top: 2px;
         margin-left: 3px;
-        color: #8D9EA7;
+        color: ${props => props.theme.darkTc};
       }
     }
   }
@@ -61,12 +61,12 @@ export const StyledColorPicker = styled.div`
       padding: 3px;
       margin-right: -3px;
       box-sizing: content-box;
-      color: #8d9ea7;
+      color: ${props => props.theme.darkTc};
       font-size: 12px;
       cursor: pointer;
 
       &:hover {
-        color: #415058;
+        color: ${props => props.theme.icon.close.hover};
       }
     }
   }

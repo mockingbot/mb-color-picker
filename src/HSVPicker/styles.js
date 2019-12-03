@@ -63,12 +63,17 @@ export const StyledHSVPicker = styled.div`
     height: 24px;
     margin-right: 8px;
     cursor: pointer;
-    border: 1px solid #8d9ea7;
+    background-color: ${props => props.theme.icon.piker.bg};
+    border: 1px solid ${props => props.theme.icon.piker.border};
     border-radius: 2px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .system-color-picker-wrapper {
+      color: ${props => props.theme.lightTc};
+    }
   }
 
   .h-a-bands {
@@ -125,7 +130,7 @@ export const StyledHSVPicker = styled.div`
   .preview-container {
     width: 24px;
     height: 24px;
-    border: 1px solid #dedede;
+    border: 1px solid ${props => props.theme.borderColor};
     border-radius: 2px;
     background-image: linear-gradient(45deg,#ccc 25%,transparent 0),linear-gradient(-45deg,#ccc 25%,transparent 0),linear-gradient(45deg,transparent 75%,#ccc 0),linear-gradient(-45deg,transparent 75%,#ccc 0);
     background-size: 12px 12px;

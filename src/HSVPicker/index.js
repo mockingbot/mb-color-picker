@@ -13,6 +13,7 @@ export default class HSVPicker extends PureComponent {
     onChange: PropTypes.func,
     onConfirm: PropTypes.func,
     children: PropTypes.node,
+    theme: PropTypes.object
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -235,13 +236,14 @@ export default class HSVPicker extends PureComponent {
 
   render() {
     const { h, s, v, a } = this.state
+    const { theme } = this.props
     const baseHue = this._getBaseHue(h)
     const SVPointerStyle = this._getSVPointerStyle(s, v)
     const HPointerStyle = this._getHPointerStyle(h)
     const APointerStyle = this._getAPointerStyle(a)
 
     return (
-      <StyledHSVPicker className="hsv-picker">
+      <StyledHSVPicker className="hsv-picker" theme={theme}>
         <section
           className="s-v-plane"
           ref={this.setSVPlaneRef}

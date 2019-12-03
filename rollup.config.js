@@ -62,7 +62,14 @@ export default [{
           'isElement',
           'isValidElementType',
           'ForwardRef'
-        ]
+        ],
+        'node_modules/react/index.js': [
+          'cloneElement',
+          'createContext',
+          'Component',
+          'createElement'
+        ],
+        'node_modules/react-dom/index.js': ['render', 'hydrate'],
       }
     })
   ]

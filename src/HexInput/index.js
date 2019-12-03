@@ -101,6 +101,7 @@ export default class HexInput extends PureComponent {
 
   render() {
     const { hexValue } = this.state
+    const { theme } = this.props
 
     let inputValue = hexValue
     if (hexValue === 'TRANSPARENT' || hexValue === 'transparent') {
@@ -110,6 +111,7 @@ export default class HexInput extends PureComponent {
     return (
       <StyledRGBInput
         className="color-input hex-input"
+        theme={theme}
         style={{ width: '62px' }}>
         <input
           ref={this.setInputRef}
@@ -127,4 +129,5 @@ export default class HexInput extends PureComponent {
 HexInput.propTypes = {
   hexValue: PropTypes.string,
   handleChange: PropTypes.func,
+  theme: PropTypes.object
 }

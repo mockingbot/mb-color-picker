@@ -16,6 +16,47 @@ import { StyledColorPicker } from './styles'
 
 const DUMB_FUNC = () => null
 
+const defaultPalette = {
+  light : {
+    bgColor: '#fff',
+    tc: '#415058',
+    lightTc: '#415058',
+    darkTc: '#8d9ea7',
+    borderColor: '#dedee4',
+    colorBlock: {
+      border: 'rgba(0, 0, 0, 0.08)'
+    },
+    icon: {
+      close: {
+        hover: '#415058'
+      },
+      piker: {
+        bg: '#fff',
+        border: '#8d9ea7'
+      },
+      drop: {
+        tc: '#8D9EA7',
+        hover: '#5B6B73'
+      },
+      select: '#8D9EA7'
+    },
+    input: {
+      bg: '#f6f7f8',
+      border: '#f2f2f3',
+      hover: {
+        border: '#1e98ea'
+      }
+    },
+    menu: {
+      bg: '#fff',
+      shadow: '0 2px 10px 0 rgba(39,54,78,0.08), 4px 12px 40px 0 rgba(39,54,78,0.1)',
+      hover: {
+        optionBg: '#f6f7f8',
+        tc: '#298df8'
+      }
+    }
+  }
+}
 export default class ColorPicker extends PureComponent {
   static propTypes = {
     color: PropTypes.string,
@@ -32,13 +73,16 @@ export default class ColorPicker extends PureComponent {
     onChangeSelect: PropTypes.func,
     currentSelect: PropTypes.string,
     onToogleExpand: PropTypes.func,
-    isClickExpand: PropTypes.bool
+    isClickExpand: PropTypes.bool,
+    palette: PropTypes.object,
+    theme: PropTypes.string
   }
 
   static defaultProps = {
     applyDidMountSideEffect: DUMB_FUNC,
     applyWillUnmountSideEffect: DUMB_FUNC,
     headerText: '颜色设置',
+    palette: defaultPalette['light']
   }
 
   static getDerivedStateFromProps (props, state) {
@@ -133,7 +177,7 @@ export default class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { onClose, colorPanelList, isExpandFeature, onChangeSelect, currentSelect, onToogleExpand, isClickExpand } = this.props
+    const { onClose, colorPanelList, isExpandFeature, onChangeSelect, currentSelect, onToogleExpand, isClickExpand, palette } = this.props
     const { hex, alpha } = this.state
 
     const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
@@ -147,6 +191,7 @@ export default class ColorPicker extends PureComponent {
         ref={this.setContainerRef}
         onMouseDown={stopReactEventPropagation}
         onClick={stopReactEventPropagation}
+        theme={palette}
       >
 
         <header className="color-picker-header" onMouseDown={this.handleDragStart}>
@@ -163,6 +208,7 @@ export default class ColorPicker extends PureComponent {
             alpha={alpha}
             onChange={this.hsvChange}
             onConfirm={this.hsvConfirm}
+            theme={palette}
           >
             { outsideColorPicker }
           </HSVPicker>
@@ -171,16 +217,19 @@ export default class ColorPicker extends PureComponent {
             <HexInput
               hexValue={hexValue}
               handleChange={this.handleHexChange}
+              theme={palette}
             />
 
             <RGBInput
               hex={hex}
               handleChange={this.handleRgbChange}
+              theme={palette}
             />
 
             <AlphaInput
               a={parseInt(alpha*100)}
               handleChangeAlpha={this.handleChangeAlpha}
+              theme={palette}
             />
           </div>
 
@@ -194,6 +243,7 @@ export default class ColorPicker extends PureComponent {
               onToogleExpand={onToogleExpand}
               isClickExpand={isClickExpand}
               onChangeSelect={onChangeSelect}
+              theme={palette}
             />
           }
         </div>

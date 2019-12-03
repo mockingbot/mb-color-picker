@@ -133,6 +133,8 @@ export default class App extends Component {
               isExpandFeature={true}
               onToogleExpand={this.handleToogleExpand}
               isClickExpand={isClickExpand}
+
+              // palette={palette['dark']}
             >
               <SystemColorPicker />
             </ColorPicker>

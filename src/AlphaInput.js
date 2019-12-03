@@ -47,9 +47,10 @@ export default class AlphaInput extends PureComponent {
 
   render() {
     const { a } = this.state
+    const { theme } = this.props
 
     return (
-      <StyledRGBInput className="color-input">
+      <StyledRGBInput className="color-input" theme={theme}>
         <input
           value={a}
           onClick={this.selectWhenClick}
@@ -64,5 +65,6 @@ export default class AlphaInput extends PureComponent {
 
 AlphaInput.propTypes = {
   a: PropTypes.number,
-  handleChangeAlpha: PropTypes.func
+  handleChangeAlpha: PropTypes.func,
+  theme: PropTypes.object
 }

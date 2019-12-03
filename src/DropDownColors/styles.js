@@ -1,13 +1,14 @@
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const StyledDropDownColors = styled.div`
-  border-top: 1px solid #dedee4;
+  border-top: 1px solid ${props => props.theme.borderColor};
   padding-bottom: 7px;
 
   .CoreSelect {
-    border: none;
-    padding: 10px 0 0;
+    border: none !important;
+    padding: 10px 0 0 !important;
     height: auto;
+    background-color: ${props => props.theme.bgColor} !important;
 
     &.is-open:not(.unstyled) {
       background: none;
@@ -18,9 +19,10 @@ export const StyledDropDownColors = styled.div`
       border: none;
       padding: 0;
       height: auto;
+      background-color: ${props => props.theme.bgColor};
 
       span {
-        color: #415058;
+        color: ${props => props.theme.tc};
       }
 
       &:focus{
@@ -30,6 +32,7 @@ export const StyledDropDownColors = styled.div`
 
     .caret {
       margin: 0 6px;
+      color: ${props => props.theme.icon.select};
     }
   }
 
@@ -50,6 +53,7 @@ export const StyledDropDownColors = styled.div`
   .current-palette-color-imagback {
     background-image: linear-gradient(45deg, #ccc 26%, transparent 26%), linear-gradient(-45deg, #ccc 26%, transparent 26%), linear-gradient(45deg, transparent 73%, #ccc 73%), linear-gradient(-45deg, transparent 73%, #ccc 73%);
     background-size: 6px 6px;
+    border-radius: 2px;
     background-position: 0 0, 0 3px, 3px -3px, -3px 0;
     background-clip: padding-box;
     overflow: hidden;
@@ -76,7 +80,7 @@ export const StyledDropDownColors = styled.div`
 
     li {
       border-radius: 2px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid ${props => props.theme.colorBlock.border};
     }
 
     &:not(:nth-child(9n)) {
@@ -90,12 +94,29 @@ export const StyledDropDownColors = styled.div`
     justify-content: center;
     cursor: pointer;
 
+    path {
+      fill: ${props => props.theme.icon.drop.tc};
+    }
+
     &.is-pack-up {
       transform: rotate(180deg);
     }
 
     svg:hover path {
-      fill: #5B6B73;
+      fill: ${props => props.theme.icon.drop.hover};
+    }
+  }
+`
+
+export const GlobalStyledSelect = createGlobalStyle`
+  .mb-color-selectMenu {
+    background-color: ${props => props.theme.menu.bg} !important;
+    color: ${props => props.theme.lightTc} !important;
+    box-shadow: ${props => props.theme.menu.shadow} !important;
+
+    .SelectOption:hover {
+      background-color: ${props => props.theme.menu.hover.optionBg} !important;
+      color: ${props => props.theme.menu.hover.tc} !important;
     }
   }
 `

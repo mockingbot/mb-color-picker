@@ -8,7 +8,7 @@ export const StyledRGBInput = styled.label`
       display: block;
       line-height: 12px;
       margin-top: 4px;
-      color: #8d9ea7;
+      color: ${props => props.theme.darkTc};
       text-align: center;
     }
 
@@ -16,10 +16,10 @@ export const StyledRGBInput = styled.label`
       width: 100%;
       height: 22px;
       padding: 0 4px;
-      background: #f6f7f8;
-      border: 1px solid #f2f2f3;
+      background: ${props => props.theme.input.bg};
+      border: 1px solid ${props => props.theme.input.border};
       border-radius: 2px;
-      color: #415058;
+      color: ${props => props.theme.lightTc};
       align-self: stretch;
       line-height: 1;
       overflow: hidden;
@@ -27,11 +27,11 @@ export const StyledRGBInput = styled.label`
       transition-property: border, box-shadow;
 
       &:hover {
-        border-color: #1e98ea;
+        border-color: ${props => props.theme.input.hover.border};
       }
 
       &:focus {
-        border-color: #1e98ea;
+        border-color: ${props => props.theme.input.hover.border};
         box-shadow: 0 0 6px 0 rgba(30, 152, 234, 0.5);
       }
 
