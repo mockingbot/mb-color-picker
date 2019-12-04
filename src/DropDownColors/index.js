@@ -4,13 +4,22 @@ import PropTypes from 'prop-types'
 import '@ibot/ibot/lib/select/index.css'
 import '@ibot/ibot/lib/ellipsis/index.css'
 import Select from '@ibot/ibot/lib/select'
+import Icon from '@ibot/ibot/lib/icon'
+import { hex2rgb, rgb2hsv } from '../utils/color'
+import { parseColor } from '../index'
 import { StyledDropDownColors, GlobalStyledSelect } from './styles'
 
 const EXPAND_SVG = <svg width="14" height="9" xmlns="http://www.w3.org/2000/svg"><path d="M13.263 3.56a.5.5 0 1 1 .474.88L6.99 8.073.748 4.432a.5.5 0 0 1 .504-.864L7.01 6.927zm0-3a.5.5 0 1 1 .474.88L6.99 5.073.748 1.432a.5.5 0 0 1 .504-.864L7.01 3.927z" fill="#8D9EA7" fillRule="nonzero"/></svg>
 
 export default class DropDownColors extends PureComponent {
+  state = {
+    currentColor: '',
+    activeBorderColor: ''
+  }
+
   handleChangeSelect = (select) => {
     this.props.onChangeSelect(select)
+    this.setState({ currentColor: '' })
   }
 
   getOpacityPerc = (value) => {
@@ -20,12 +29,17 @@ export default class DropDownColors extends PureComponent {
     return showBg
   }
 
-  handleSelect = e => {
+  handleSelect = (e, i) => {
     const { color } = e.target.dataset
+    const { hex } = parseColor(color)
+    const { v } = rgb2hsv(hex2rgb(hex))
+    const activeBorderColor = (v > 0.7) ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.95)'
     this.props.handleSelect(color)
+    this.setState({ currentColor: i, activeBorderColor })
   }
 
   render() {
+    const { currentColor, activeBorderColor } = this.state
     const { colorPanelList, isExpandFeature, isClickExpand, currentSelect, onToogleExpand, theme } = this.props
     const optionList = colorPanelList.map(c => c.name)
     const { colors: paletteList } = colorPanelList.find(c => c.name === currentSelect) || {}
@@ -52,11 +66,12 @@ export default class DropDownColors extends PureComponent {
                 className={`current-palette-color ${this.getOpacityPerc(color) ? 'current-palette-color-imagback' : ''}`}
               >
                 <li
-                  className={`current-palette-color-li${color === 'transparent' ? ' transparent' : ''}`}
+                  className={`current-palette-color-li${color === 'transparent' ? ' transparent' : ''}${currentColor === i ? ' active' : ''}`}
                   style={{ backgroundColor: color }}
                   data-color={color}
-                  onClick={this.handleSelect}
+                  onClick={(e) => this.handleSelect(e, i)}
                 />
+                { currentColor === i && <Icon type="dora" name="check" style={{ color: activeBorderColor }} /> }
               </div>
             ))
           }

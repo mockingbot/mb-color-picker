@@ -77,6 +77,7 @@ export const StyledDropDownColors = styled.div`
     height: 18px;
     cursor: pointer;
     margin-top: 10px;
+    position: relative;
 
     li {
       border-radius: 2px;
@@ -85,6 +86,13 @@ export const StyledDropDownColors = styled.div`
 
     &:not(:nth-child(9n)) {
       margin-right: 10px;
+    }
+
+    .icon {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      font-size: 10px;
     }
   }
 

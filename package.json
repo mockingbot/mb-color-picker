@@ -1,6 +1,6 @@
 {
   "name": "mb-react-color-picker",
-  "version": "1.2.0-dev.8",
+  "version": "1.2.0-dev.9",
   "description": "A React component that enables to pick color through HSV/HEX/RGBA.",
   "author": "Xdudu",
   "license": "MIT",
