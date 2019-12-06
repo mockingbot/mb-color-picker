@@ -41,12 +41,13 @@ export const StyledColorPicker = styled.div`
       &::before {
         display: inline-block;
         content: '#';
-        font-size: 10px;
+        font-size: 22px;
         position: absolute;
-        width: 11px;
+        width: 14px;
         line-height: 22px;
         text-align: center;
         color: ${props => props.theme.darkTc};
+        transform: scale(0.5);
       }
     }
   }

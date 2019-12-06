@@ -21,7 +21,7 @@ export const StyledRGBInput = styled.label`
       border-radius: 2px;
       color: ${props => props.theme.lightTc};
       align-self: stretch;
-      line-height: 1;
+      line-height: 22px;
       overflow: hidden;
       transition: 0.2s ease-out;
       transition-property: border, box-shadow;
