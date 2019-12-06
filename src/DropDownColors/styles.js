@@ -88,7 +88,7 @@ export const StyledDropDownColors = styled.div`
       margin-right: 10px;
     }
 
-    .icon {
+    svg {
       position: absolute;
       top: 4px;
       left: 4px;
