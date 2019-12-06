@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
-import '../RGBInput/index.css'
+import { StyledRGBInput } from '../RGBInput/styles'
 
 
 export default class HexInput extends PureComponent {
@@ -101,6 +101,7 @@ export default class HexInput extends PureComponent {
 
   render() {
     const { hexValue } = this.state
+    const { theme } = this.props
 
     let inputValue = hexValue
     if (hexValue === 'TRANSPARENT' || hexValue === 'transparent') {
@@ -108,9 +109,10 @@ export default class HexInput extends PureComponent {
     }
 
     return (
-      <label
-        className="color-input"
-        style={{ width: '58px' }}>
+      <StyledRGBInput
+        className="color-input hex-input"
+        theme={theme}
+        style={{ width: '62px' }}>
         <input
           ref={this.setInputRef}
           value={inputValue}
@@ -119,7 +121,7 @@ export default class HexInput extends PureComponent {
           onChange={this.handleChange}
           onBlur={this.handleBlur} />
         <span>Hex</span>
-      </label>
+      </StyledRGBInput>
     )
   }
 }
@@ -127,4 +129,5 @@ export default class HexInput extends PureComponent {
 HexInput.propTypes = {
   hexValue: PropTypes.string,
   handleChange: PropTypes.func,
+  theme: PropTypes.object
 }

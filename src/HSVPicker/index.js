@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { rgb2hsv, hex2rgb, hsv2rgb, rgb2hex, rgb2rgbaStr } from '../utils/color'
 import { stopReactEventPropagation } from '../utils/DOM'
 
-import './index.css'
+import { StyledHSVPicker } from './styles'
 
 export default class HSVPicker extends PureComponent {
   static propTypes = {
@@ -13,6 +13,7 @@ export default class HSVPicker extends PureComponent {
     onChange: PropTypes.func,
     onConfirm: PropTypes.func,
     children: PropTypes.node,
+    theme: PropTypes.object
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -235,13 +236,14 @@ export default class HSVPicker extends PureComponent {
 
   render() {
     const { h, s, v, a } = this.state
+    const { theme } = this.props
     const baseHue = this._getBaseHue(h)
     const SVPointerStyle = this._getSVPointerStyle(s, v)
     const HPointerStyle = this._getHPointerStyle(h)
     const APointerStyle = this._getAPointerStyle(a)
 
     return (
-      <div className="hsv-picker">
+      <StyledHSVPicker className="hsv-picker" theme={theme}>
         <section
           className="s-v-plane"
           ref={this.setSVPlaneRef}
@@ -291,7 +293,7 @@ export default class HSVPicker extends PureComponent {
             <div style={{ height: '100%', background: rgb2rgbaStr({ ...hsv2rgb({ h, s, v }), a }) }} />
           </div>
         </div>
-      </div>
+      </StyledHSVPicker>
     )
   }
 }

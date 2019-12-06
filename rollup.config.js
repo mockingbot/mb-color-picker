@@ -44,15 +44,6 @@ export default [{
       plugins: [ 'external-helpers' ]
     }),
     resolve(),
-    commonjs({
-      namedExports: {
-        'node_modules/lodash/lodash.js': [
-          'isBoolean',
-          'isEqual',
-          'isArray',
-          'isString'
-        ]
-      }
-    })
+    commonjs()
   ]
 }]

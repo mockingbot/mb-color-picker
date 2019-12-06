@@ -1,23 +1,60 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
-import Icon from '@ibot/ibot/lib/icon'
-
-import Theme from './Theme'
-import CustomColors from './CustomColors'
+import DropDownColors from './DropDownColors'
 import HSVPicker from './HSVPicker'
 import RGBInput from './RGBInput'
 import HexInput from './HexInput'
 import AlphaInput from './AlphaInput'
-
 import { hex2rgbaStr, rgb2hex, formatHex } from './utils/color'
 import { stopReactEventPropagation } from './utils/DOM'
 
-import './index.css'
+import { StyledColorPicker } from './styles'
+const CLOSE_SVG = <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M5.95 4.536l2.828 2.828a1 1 0 0 1-1.414 1.414L4.536 5.95 1.707 8.778A1 1 0 0 1 .293 7.364L3.12 4.536.293 1.707A1 1 0 0 1 1.707.293L4.536 3.12 7.364.293a1 1 0 0 1 1.414 1.414L5.95 4.536z" fill="#B8BCBF" fillRule="evenodd"/></svg>
 
 const DUMB_FUNC = () => null
 
-
+const defaultPalette = {
+  light : {
+    bgColor: '#fff',
+    tc: '#415058',
+    lightTc: '#415058',
+    darkTc: '#8d9ea7',
+    borderColor: '#dedee4',
+    colorBlock: {
+      border: 'rgba(0, 0, 0, 0.08)'
+    },
+    icon: {
+      close: {
+        hover: '#415058'
+      },
+      piker: {
+        bg: '#fff',
+        border: '#8d9ea7'
+      },
+      drop: {
+        tc: '#8D9EA7',
+        hover: '#5B6B73'
+      },
+      select: '#8D9EA7'
+    },
+    input: {
+      bg: '#f6f7f8',
+      border: '#f2f2f3',
+      hover: {
+        border: '#1e98ea'
+      }
+    },
+    menu: {
+      bg: '#fff',
+      shadow: '0 2px 10px 0 rgba(39,54,78,0.08), 4px 12px 40px 0 rgba(39,54,78,0.1)',
+      hover: {
+        optionBg: '#f6f7f8',
+        tc: '#298df8'
+      }
+    }
+  }
+}
 export default class ColorPicker extends PureComponent {
   static propTypes = {
     color: PropTypes.string,
@@ -25,19 +62,25 @@ export default class ColorPicker extends PureComponent {
     onConfirm: PropTypes.func,
     applyDidMountSideEffect: PropTypes.func,
     applyWillUnmountSideEffect: PropTypes.func,
-    themeColors: PropTypes.array,
-    customColors: PropTypes.array,
-    customColorsHeaderText: PropTypes.string,
     onDragStart: PropTypes.func,
     onClose: PropTypes.func,
     headerText: PropTypes.string,
     children: PropTypes.node,
+    colorPanelList: PropTypes.array,
+    isExpandFeature: PropTypes.bool,
+    onChangeSelect: PropTypes.func,
+    currentSelect: PropTypes.string,
+    onToogleExpand: PropTypes.func,
+    isClickExpand: PropTypes.bool,
+    palette: PropTypes.object,
+    theme: PropTypes.string
   }
 
   static defaultProps = {
     applyDidMountSideEffect: DUMB_FUNC,
     applyWillUnmountSideEffect: DUMB_FUNC,
-    headerText: 'Color Picker',
+    headerText: '颜色设置',
+    palette: defaultPalette['light']
   }
 
   static getDerivedStateFromProps (props, state) {
@@ -132,7 +175,7 @@ export default class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { themeColors, customColors, onClose, customColorsHeaderText } = this.props
+    const { onClose, colorPanelList, isExpandFeature, onChangeSelect, currentSelect, onToogleExpand, isClickExpand, palette } = this.props
     const { hex, alpha } = this.state
 
     const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
@@ -141,32 +184,29 @@ export default class ColorPicker extends PureComponent {
     if (this.props.children) outsideColorPicker = this.genOutsideColorPicker()
 
     return (
-      <div
+      <StyledColorPicker
         className="--mb--color-picker"
         ref={this.setContainerRef}
         onMouseDown={stopReactEventPropagation}
         onClick={stopReactEventPropagation}
+        theme={palette}
       >
 
         <header className="color-picker-header" onMouseDown={this.handleDragStart}>
           <div className="header-text">{this.props.headerText}</div>
           {
             onClose &&
-            <Icon type="dora" name="times" onMouseDown={this.handleClose} />
+            <span className="icon" onMouseDown={this.handleClose}>{CLOSE_SVG}</span>
           }
         </header>
 
         <div className="color-picker-body">
-          {
-            themeColors &&
-            <Theme themes={themeColors} handleSelect={this.handleColorChangeFromExternal} />
-          }
-
           <HSVPicker
             hex={hex}
             alpha={alpha}
             onChange={this.hsvChange}
             onConfirm={this.hsvConfirm}
+            theme={palette}
           >
             { outsideColorPicker }
           </HSVPicker>
@@ -175,29 +215,37 @@ export default class ColorPicker extends PureComponent {
             <HexInput
               hexValue={hexValue}
               handleChange={this.handleHexChange}
+              theme={palette}
             />
 
             <RGBInput
               hex={hex}
               handleChange={this.handleRgbChange}
+              theme={palette}
             />
 
             <AlphaInput
               a={parseInt(alpha*100)}
               handleChangeAlpha={this.handleChangeAlpha}
+              theme={palette}
             />
           </div>
 
           {
-            customColors &&
-            <CustomColors
-              customColors={customColors}
-              customColorsHeaderText={customColorsHeaderText}
+            colorPanelList &&
+            <DropDownColors
+              colorPanelList={colorPanelList}
+              currentSelect={currentSelect}
               handleSelect={this.handleColorChangeFromExternal}
+              isExpandFeature={isExpandFeature}
+              onToogleExpand={onToogleExpand}
+              isClickExpand={isClickExpand}
+              onChangeSelect={onChangeSelect}
+              theme={palette}
             />
           }
         </div>
-      </div>
+      </StyledColorPicker>
     )
   }
 }

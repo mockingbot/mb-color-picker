@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react'
 
 import { hex2rgb } from '../utils/color'
 
-import './index.css'
-
+import { StyledRGBInput } from './styles'
+// import './index.css'
 
 export default class RGBInput extends PureComponent {
 
@@ -104,10 +104,11 @@ export default class RGBInput extends PureComponent {
 
   render() {
     const { r, g, b } = this.state
+    const { theme } = this.props
 
     return (
       <React.Fragment>
-        <label className="color-input">
+        <StyledRGBInput className="color-input" theme={theme}>
           <input
             className={this._invalidFace === 'r' ? 'invalid' : ''}
             data-face="r"
@@ -118,9 +119,9 @@ export default class RGBInput extends PureComponent {
             onBlur={this.handleBlur}
           />
           <span>R</span>
-        </label>
+        </StyledRGBInput>
 
-        <label className="color-input">
+        <StyledRGBInput className="color-input" theme={theme}>
           <input
             className={this._invalidFace === 'g' ? 'invalid' : ''}
             data-face="g"
@@ -131,9 +132,9 @@ export default class RGBInput extends PureComponent {
             onBlur={this.handleBlur}
           />
           <span>G</span>
-        </label>
+        </StyledRGBInput>
 
-        <label className="color-input">
+        <StyledRGBInput className="color-input" theme={theme}>
           <input
             className={this._invalidFace === 'b' ? 'invalid' : ''}
             data-face="b"
@@ -144,7 +145,7 @@ export default class RGBInput extends PureComponent {
             onBlur={this.handleBlur}
           />
           <span>B</span>
-        </label>
+        </StyledRGBInput>
       </React.Fragment>
     )
   }
@@ -153,4 +154,5 @@ export default class RGBInput extends PureComponent {
 RGBInput.propTypes = {
   hex: PropTypes.string,
   handleChange: PropTypes.func,
+  theme: PropTypes.object
 }

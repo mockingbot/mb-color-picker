@@ -1,24 +1,12 @@
 import React, { Component } from 'react'
-
-import ColorPicker, { parseColor } from 'mb-color-picker'
+import { colorPanelList } from './constant'
+import ColorPicker from 'mb-color-picker'
 
 // NOTE: if you need to use @ibot icons, you should import this file in your project
-import '@ibot/ibot/lib/icon/style/index.css'
-import { Icon } from '@ibot/ibot'
+import '@ibot/ibot/lib/icon/index.css'
 
+const TUBE_SVG = <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M10.751.934l-2.2 2.2-.89-.89a.935.935 0 0 0-1.322 0l-.413.413a.935.935 0 0 0 0 1.322l.7.7L.59 10.714a.458.458 0 0 0-.132.377l-.003 2.045c0 .226.183.41.409.41H2.96c.122 0 .239-.049.325-.136l6.036-6.035.7.699a.935.935 0 0 0 1.321 0l.413-.413a.935.935 0 0 0 0-1.322l-.89-.89 2.2-2.2A1.636 1.636 0 0 0 10.751.933zM4.739 10.74l-2.414-.485L7.432 5.13 8.87 6.575 4.74 10.74z" fill="#415058" fillRule="nonzero"/></svg>
 const DEFAULT_COLOR = '#1D83BB'
-
-const THEME_COLORS = [
-  'transparent',
-  '#ffffff',
-  '#3f51b5',
-  '#ff4081',
-  '#e51c23',
-  '#009688',
-  '#259b24',
-  '#8bc34a',
-  '#ff9800',
-]
 
 const localStorageDelegate = window.localStorage
 
@@ -26,25 +14,36 @@ export default class App extends Component {
   state = {
     color: DEFAULT_COLOR,
     showColorPicker: true,
-    colorPickerPosition: [0, 0]
+    colorPickerPosition: [0, 0],
+    currentSelect: '最近使用',
+    isClickExpand: false,
+    colorPanelList: []
   }
+
+  componentDidMount() {
+    this.addHistoryColors()
+  }
+
+  handleChangeSelect = currentSelect => this.setState({ currentSelect })
 
   handleChange = color => this.setState({ color })
 
   handleConfirm = color => this.setState({ color })
 
-  getHistoryColors = () => {
-    return JSON.parse(localStorageDelegate.getItem('prevColors') || '[]')
+  addHistoryColors = () => {
+    colorPanelList.unshift({
+      name: '最近使用',
+      key: 'history',
+      colors: JSON.parse(window.localStorage.getItem('prevColors') || '[]')
+    })
+    this.setState({ colorPanelList })
   }
 
   addLastColorToHistory = () => {
     const { color } = this.state
-    const { hex, alpha } = parseColor(color)
     let history = JSON.parse(localStorageDelegate.getItem('prevColors') || '[]')
 
-    if (THEME_COLORS.includes(hex) && alpha === 1 || color === 'transparent') {
-      return
-    } else if (history.includes(color)) {
+    if (history.includes(color)) {
       history.splice(history.indexOf(color), 1)
     } else {
       history = history.slice(0, 17)
@@ -93,13 +92,19 @@ export default class App extends Component {
     document.addEventListener('mouseup', onMouseUp)
   }
 
+  handleToogleExpand = () => {
+    this.setState({ isClickExpand: !this.state.isClickExpand })
+  }
+
   render () {
     const {
       color,
       showColorPicker,
-      colorPickerPosition: [ colorPickerLeft, colorPickerTop ]
+      colorPickerPosition: [ colorPickerLeft, colorPickerTop ],
+      currentSelect,
+      isClickExpand,
+      colorPanelList
     } = this.state
-    const historyColors = this.getHistoryColors()
 
     return (
       <div className="playground">
@@ -122,12 +127,17 @@ export default class App extends Component {
               onChange={this.handleChange}
               onConfirm={this.handleConfirm}
               onClose={this.hideColorPicker}
-              themeColors={THEME_COLORS}
-              customColors={historyColors}
-              customColorsHeaderText="History Colors"
               applyDidMountSideEffect={this.centerColorPicker}
               applyWillUnmountSideEffect={this.addLastColorToHistory}
               onDragStart={this.handleDragStart}
+
+              colorPanelList={colorPanelList}
+              onChangeSelect={this.handleChangeSelect}
+              currentSelect={currentSelect}
+              isExpandFeature={true}
+              onToogleExpand={this.handleToogleExpand}
+              isClickExpand={isClickExpand}
+              // palette={palette['dark']}
             >
               <SystemColorPicker />
             </ColorPicker>
@@ -145,7 +155,7 @@ class SystemColorPicker extends React.Component {
     const { hex } = this.props
     return (
       <div className="system-color-picker-wrapper">
-        <Icon type="dora" name="tube" />
+        {TUBE_SVG}
         <input
           className="system-color-picker"
           type="color"

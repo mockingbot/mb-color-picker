@@ -1,9 +1,11 @@
-.--mb--color-picker {
+import styled from 'styled-components'
+
+export const StyledColorPicker = styled.div`
   box-sizing: border-box;
   position: absolute;
   width: 262px;
-  color: #415058;
-  background: white;
+  color: ${props => props.theme.tc};
+  background: ${props => props.theme.bgColor};
   border-radius: 4px;
   box-shadow: 0 -2px 20px 0 rgba(39, 54, 78, 0.11);
   font-size: 12px;
@@ -29,26 +31,45 @@
     padding-right: 1px;
     margin-top: 10px;
     margin-bottom: 12px;
+
+    .hex-input {
+
+      input {
+        padding-left: 11px;
+      }
+
+      &::before {
+        display: inline-block;
+        content: '#';
+        font-size: 22px;
+        position: absolute;
+        width: 14px;
+        line-height: 22px;
+        text-align: center;
+        color: ${props => props.theme.darkTc};
+        transform: scale(0.5);
+      }
+    }
   }
 
   .color-picker-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 30px;
-    padding: 0 10px;
+    padding: 10px 10px 14px;
     cursor: move;
 
     .icon {
-      padding: 3px;
-      margin-right: -3px;
       box-sizing: content-box;
-      color: #8d9ea7;
-      font-size: 12px;
+      width: 10px;
       cursor: pointer;
 
-      &:hover {
-        color: #415058;
+      path {
+        fill: ${props => props.theme.darkTc};
+      }
+
+      &:hover path {
+        fill: ${props => props.theme.icon.close.hover};
       }
     }
   }
@@ -56,4 +77,4 @@
   .color-picker-body {
     padding: 0 10px;
   }
-}
+`
