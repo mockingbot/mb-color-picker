@@ -1,18 +1,16 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 
-import Icon from '@ibot/ibot/lib/icon'
-
 import DropDownColors from './DropDownColors'
 import HSVPicker from './HSVPicker'
 import RGBInput from './RGBInput'
 import HexInput from './HexInput'
 import AlphaInput from './AlphaInput'
-
 import { hex2rgbaStr, rgb2hex, formatHex } from './utils/color'
 import { stopReactEventPropagation } from './utils/DOM'
 
 import { StyledColorPicker } from './styles'
+const CLOSE_SVG = <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><path d="M5.95 4.536l2.828 2.828a1 1 0 0 1-1.414 1.414L4.536 5.95 1.707 8.778A1 1 0 0 1 .293 7.364L3.12 4.536.293 1.707A1 1 0 0 1 1.707.293L4.536 3.12 7.364.293a1 1 0 0 1 1.414 1.414L5.95 4.536z" fill="#B8BCBF" fillRule="evenodd"/></svg>
 
 const DUMB_FUNC = () => null
 
@@ -198,7 +196,7 @@ export default class ColorPicker extends PureComponent {
           <div className="header-text">{this.props.headerText}</div>
           {
             onClose &&
-            <Icon type="dora" name="times" onMouseDown={this.handleClose} />
+            <span className="icon" onMouseDown={this.handleClose}>{CLOSE_SVG}</span>
           }
         </header>
 

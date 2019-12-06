@@ -72,7 +72,9 @@ export const StyledHSVPicker = styled.div`
     align-items: center;
 
     .system-color-picker-wrapper {
-      color: ${props => props.theme.lightTc};
+      path {
+        fill: ${props => props.theme.lightTc};
+      }
     }
   }
 

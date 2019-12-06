@@ -91,8 +91,12 @@ export const StyledDropDownColors = styled.div`
     .icon {
       position: absolute;
       top: 4px;
-      left: 3px;
-      font-size: 10px;
+      left: 4px;
+      width: 10px;
+
+      path {
+        fill: ${props => props.activeBorderColor};
+      }
     }
   }
 

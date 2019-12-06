@@ -2,7 +2,7 @@
   "name": "mb-react-color-picker",
   "version": "1.2.0-dev.11",
   "description": "A React component that enables to pick color through HSV/HEX/RGBA.",
-  "author": "Xdudu",
+  "author": "MockingBot",
   "license": "MIT",
   "repository": "https://github.com/mockingbot/mb-color-picker",
   "main": "dist/index.js",
@@ -17,19 +17,19 @@
     "test:watch": "react-scripts test --env=jsdom",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "yarn run build",
-    "predeploy": "cd example && yarn install && yarn run build",
+    "prepare": "npm run build",
+    "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-router-dom": "^5.1.2",
     "styled-components": "^4"
   },
   "devDependencies": {
-    "@ibot/ibot": "0.7.0-dev.13",
+    "@ibot/ibot": "0.7.0-dev.14",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -61,7 +61,6 @@
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-url": "^1.4.0",
-    "lodash": "^4.17.15",
     "styled-components": "^4.1.3"
   },
   "files": [

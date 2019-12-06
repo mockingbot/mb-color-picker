@@ -44,33 +44,6 @@ export default [{
       plugins: [ 'external-helpers' ]
     }),
     resolve(),
-    commonjs({
-      namedExports: {
-        'node_modules/lodash/lodash.js': [
-          'isBoolean',
-          'isEqual',
-          'isArray',
-          'isString',
-          'isObject',
-          'isNumber',
-          'isElement',
-          'compact',
-          'get',
-          'omit'
-        ],
-        'node_modules/react-is/index.js': [
-          'isElement',
-          'isValidElementType',
-          'ForwardRef'
-        ],
-        'node_modules/react/index.js': [
-          'cloneElement',
-          'createContext',
-          'Component',
-          'createElement'
-        ],
-        'node_modules/react-dom/index.js': ['render', 'hydrate'],
-      }
-    })
+    commonjs()
   ]
 }]

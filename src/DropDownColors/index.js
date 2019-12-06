@@ -4,13 +4,12 @@ import PropTypes from 'prop-types'
 import '@ibot/ibot/lib/select/index.css'
 import '@ibot/ibot/lib/ellipsis/index.css'
 import Select from '@ibot/ibot/lib/select'
-import Icon from '@ibot/ibot/lib/icon'
 import { hex2rgb, rgb2hsv } from '../utils/color'
 import { parseColor } from '../index'
 import { StyledDropDownColors, GlobalStyledSelect } from './styles'
 
 const EXPAND_SVG = <svg width="14" height="9" xmlns="http://www.w3.org/2000/svg"><path d="M13.263 3.56a.5.5 0 1 1 .474.88L6.99 8.073.748 4.432a.5.5 0 0 1 .504-.864L7.01 6.927zm0-3a.5.5 0 1 1 .474.88L6.99 5.073.748 1.432a.5.5 0 0 1 .504-.864L7.01 3.927z" fill="#8D9EA7" fillRule="nonzero"/></svg>
-
+const CHECK_SVG = <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon icon" viewBox="0 0 10 10" ariaHidden="true"><path d="M1 5.1C1 5.3 1.1 5.5 1.2 5.6L3.3 7.8C3.5 7.9 3.7 8 3.9 8 4.1 8 4.2 7.9 4.4 7.8L8.8 3.3C8.9 3.1 9 3 9 2.8 9 2.5 8.9 2.4 8.8 2.2 8.6 2.1 8.5 2 8.3 2 8.1 2 7.9 2.1 7.7 2.2L3.9 6.2 2.3 4.5C2.1 4.4 1.9 4.3 1.7 4.3 1.5 4.3 1.4 4.4 1.2 4.5 1.1 4.7 1 4.9 1 5.1Z"></path></svg>
 export default class DropDownColors extends PureComponent {
   state = {
     currentColor: '',
@@ -46,7 +45,7 @@ export default class DropDownColors extends PureComponent {
     const hasExpand = isExpandFeature && (paletteList && paletteList.length > 4 * 9)
 
     return (
-      <StyledDropDownColors className="panel-color-list" theme={theme}>
+      <StyledDropDownColors className="panel-color-list" theme={theme} activeBorderColor={activeBorderColor}>
         <header>
           <Select
             optionList={optionList}
@@ -71,7 +70,7 @@ export default class DropDownColors extends PureComponent {
                   data-color={color}
                   onClick={(e) => this.handleSelect(e, i)}
                 />
-                { currentColor === i && <Icon type="dora" name="check" style={{ color: activeBorderColor }} /> }
+                { currentColor === i && CHECK_SVG}
               </div>
             ))
           }

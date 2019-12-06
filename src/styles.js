@@ -43,8 +43,9 @@ export const StyledColorPicker = styled.div`
         content: '#';
         font-size: 10px;
         position: absolute;
-        margin-top: 2px;
-        margin-left: 3px;
+        width: 11px;
+        line-height: 22px;
+        text-align: center;
         color: ${props => props.theme.darkTc};
       }
     }
@@ -58,15 +59,16 @@ export const StyledColorPicker = styled.div`
     cursor: move;
 
     .icon {
-      padding: 3px;
-      margin-right: -3px;
       box-sizing: content-box;
-      color: ${props => props.theme.darkTc};
-      font-size: 12px;
+      width: 10px;
       cursor: pointer;
 
-      &:hover {
-        color: ${props => props.theme.icon.close.hover};
+      path {
+        fill: ${props => props.theme.darkTc};
+      }
+
+      &:hover path {
+        fill: ${props => props.theme.icon.close.hover};
       }
     }
   }
