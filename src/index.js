@@ -175,7 +175,7 @@ export default class ColorPicker extends PureComponent {
   }
 
   render() {
-    const { onClose, colorPanelList, isExpandFeature, onChangeSelect, currentSelect, onToogleExpand, isClickExpand, palette } = this.props
+    const { onClose, colorPanelList, isExpandFeature, onChangeSelect, currentSelect, onToogleExpand, isClickExpand, palette, className, ...rest } = this.props
     const { hex, alpha } = this.state
 
     const hexValue = hex === 'transparent' ? 'TRANSPARENT' : hex.slice(1)
@@ -185,7 +185,8 @@ export default class ColorPicker extends PureComponent {
 
     return (
       <StyledColorPicker
-        className="--mb--color-picker"
+        {...rest}
+        className={!!className ? className + " --mb--color-picker" : "--mb--color-picker"}
         ref={this.setContainerRef}
         onMouseDown={stopReactEventPropagation}
         onClick={stopReactEventPropagation}
