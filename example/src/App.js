@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { colorPanelList } from './constant'
 import ColorPicker from 'mb-color-picker'
 
-// NOTE: if you need to use @ibot icons, you should import this file in your project
-import '@ibot/ibot/lib/icon/index.css'
-
 const TUBE_SVG = <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M10.751.934l-2.2 2.2-.89-.89a.935.935 0 0 0-1.322 0l-.413.413a.935.935 0 0 0 0 1.322l.7.7L.59 10.714a.458.458 0 0 0-.132.377l-.003 2.045c0 .226.183.41.409.41H2.96c.122 0 .239-.049.325-.136l6.036-6.035.7.699a.935.935 0 0 0 1.321 0l.413-.413a.935.935 0 0 0 0-1.322l-.89-.89 2.2-2.2A1.636 1.636 0 0 0 10.751.933zM4.739 10.74l-2.414-.485L7.432 5.13 8.87 6.575 4.74 10.74z" fill="#415058" fillRule="nonzero"/></svg>
 const DEFAULT_COLOR = '#1D83BB'
 

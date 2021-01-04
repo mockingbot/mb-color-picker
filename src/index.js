@@ -58,6 +58,7 @@ const defaultPalette = {
 export default class ColorPicker extends PureComponent {
   static propTypes = {
     color: PropTypes.string,
+    className: PropTypes.string,
     onChange: PropTypes.func,
     onConfirm: PropTypes.func,
     applyDidMountSideEffect: PropTypes.func,
@@ -186,7 +187,7 @@ export default class ColorPicker extends PureComponent {
     return (
       <StyledColorPicker
         {...rest}
-        className={!!className ? className + " --mb--color-picker" : "--mb--color-picker"}
+        className={'--mb--color-picker' + (className ? ` ${className}` : '')}
         ref={this.setContainerRef}
         onMouseDown={stopReactEventPropagation}
         onClick={stopReactEventPropagation}

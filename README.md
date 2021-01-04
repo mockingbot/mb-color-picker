@@ -10,7 +10,7 @@
 ## Install
 
 ```bash
-yarn add mb-react-color-picker
+npm i mb-react-color-picker
 ```
 
 ## About
