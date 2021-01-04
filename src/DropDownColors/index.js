@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import '@ibot/ibot/lib/select/index.css'
-import '@ibot/ibot/lib/ellipsis/index.css'
 import Select from '@ibot/ibot/lib/select'
 import { hex2rgb, rgb2hsv } from '../utils/color'
 import { parseColor } from '../index'

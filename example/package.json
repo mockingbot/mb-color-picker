@@ -8,7 +8,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "mb-color-picker": "link:.."
+    "mb-color-picker": "file:.."
   },
   "scripts": {
     "start": "react-scripts start",
